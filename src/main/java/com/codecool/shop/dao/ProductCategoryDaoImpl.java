@@ -61,7 +61,8 @@ public class ProductCategoryDaoImpl implements ProductCategoryDao {
                 listCategories.add(productCategory);
             }
         } catch (Exception e) {
-            System.err.println(e.getClass().getName() + " in SupplierDaoImpl :" + e.getMessage());
+            System.err
+                .println(e.getClass().getName() + " in ProductCategoryDao :" + e.getMessage());
             System.exit(0);
         }
         return listCategories;

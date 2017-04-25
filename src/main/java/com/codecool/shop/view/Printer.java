@@ -12,7 +12,7 @@ import java.util.Iterator;
 public class Printer {
 
     private static final ArrayList<String> options = new ArrayList<>(Arrays.asList("Choose option",
-        "1 to to show product categories.", "2 to show suppliers.",
+        "1 to show suppliers.", "2 to to show product categories.",
         "3 to see all available products.",
         "4 to see all products in the basket.",
         "0 to exit."));

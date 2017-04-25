@@ -41,9 +41,4 @@ public class Basket {
         return new ProductIterator(productList).Iterator();
     }
 
-    public void throughBasket() {
-        for (Iterator<Product> iter = this.getIterator(productList); iter.hasNext(); ) {
-            Product product = iter.next();
-        }
-    }
 }

@@ -9,7 +9,7 @@ import java.util.Iterator;
  */
 public class Basket {
 
-    final ArrayList<Product> productList;
+    private final ArrayList<Product> productList;
     private final Iterator<Product> iterator;
 
     public ArrayList<Product> getProductList() {
@@ -44,7 +44,6 @@ public class Basket {
     public void throughBasket() {
         for (Iterator<Product> iter = this.getIterator(productList); iter.hasNext(); ) {
             Product product = iter.next();
-            System.out.println("Product : " + product.getName());
         }
     }
 }

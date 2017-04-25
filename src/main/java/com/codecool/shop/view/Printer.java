@@ -17,7 +17,7 @@ public class Printer {
         "4 to see all products in the basket.",
         "0 to exit."));
 
-    public static void printProduct(String productToString) {
+    public static void printObject(String productToString) {
         System.out.println(productToString);
     }
 

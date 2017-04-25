@@ -2,8 +2,10 @@ package com.codecool.shop.dao;
 
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,7 +46,24 @@ public class ProductCategoryDaoImpl implements ProductCategoryDao {
     }
 
     @Override
-    public List<ProductCategory> getAll() {
-        return null;
+    public ArrayList<ProductCategory> getAll() {
+        ArrayList<ProductCategory> listCategories = new ArrayList<>();
+        String query = "SELECT * from ProductCategories";
+        ResultSet resultSet = Connector.getQueryResult(query);
+        try {
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String department = resultSet.getString("department");
+                String description = resultSet.getString("description");
+                ProductCategory productCategory = new ProductCategory(id, name, department,
+                    description);
+                listCategories.add(productCategory);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + " in SupplierDaoImpl :" + e.getMessage());
+            System.exit(0);
+        }
+        return listCategories;
     }
 }

@@ -23,7 +23,7 @@ public class Main {
             } else if (option == 3) {
                 ProductController.showAvailableProducts();
             } else if (option == 4) {
-                basket.throughBasket();
+                Printer.printBasket(basket.getProductList());
             } else if (option == 0) {
                 System.exit(0);
             }

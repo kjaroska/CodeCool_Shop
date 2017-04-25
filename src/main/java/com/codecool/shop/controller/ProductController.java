@@ -3,6 +3,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductDaoImpl;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -17,7 +18,7 @@ public class ProductController {
         Iterator<Product> productIterator = ProductController.getIterator(products);
         while (productIterator.hasNext()) {
             Product product = productIterator.next();
-            System.out.println(product.toString());
+            Printer.printObject(product.toString());
         }
     }
 

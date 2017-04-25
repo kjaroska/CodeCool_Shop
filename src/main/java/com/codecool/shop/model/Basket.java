@@ -12,6 +12,10 @@ public class Basket {
     final ArrayList<Product> productList;
     private final Iterator<Product> iterator;
 
+    public ArrayList<Product> getProductList() {
+        return this.productList;
+    }
+
     public Basket(ArrayList<Product> productList) {
         this.productList = productList;
         this.iterator = getIterator(this.productList);

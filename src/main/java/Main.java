@@ -18,23 +18,25 @@ public class Main {
         Basket basket = new Basket(newBasket);
         Menu menu = new Menu();
         while (true) {
-            Printer.printMenu();
+            Printer.printMenu(menu.getMainMenu());
             Integer option = InputGetter.getIntegerInput();
             if (option == 1) {
                 ProductCategoryController.showAvailableCategories();
+                ProductCategoryController.showProductsFromCategory();
                 basket = BasketController.addToBasket(basket);
-                inputGetter.waitForEnter();
+                InputGetter.waitForEnter();
             } else if (option == 2) {
                 SupplierController.showAvailableSuppliers();
-                inputGetter.waitForEnter();
+                SupplierController.productBySuppliers();
+                InputGetter.waitForEnter();
                 basket = BasketController.addToBasket(basket);
             } else if (option == 3) {
                 ProductController.showAvailableProducts();
-                inputGetter.waitForEnter();
+                InputGetter.waitForEnter();
                 basket = BasketController.addToBasket(basket);
             } else if (option == 4) {
                 Printer.printBasket(basket.getItemList());
-                inputGetter.waitForEnter();
+                InputGetter.waitForEnter();
             } else if (option == 0) {
                 break;
             }

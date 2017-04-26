@@ -4,14 +4,15 @@ import java.util.Currency;
 
 public class Product extends BaseModel {
 
-    private float defaultPrice;
+    private Float defaultPrice;
     private Currency defaultCurrency;
     private ProductCategory productCategory;
     private Supplier supplier;
 
 
-    public Product(String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
-        super(name, description);
+    public Product(Integer id, String name, Float defaultPrice, String description,
+        String currencyString, ProductCategory productCategory, Supplier supplier) {
+        super(id, name, description);
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);

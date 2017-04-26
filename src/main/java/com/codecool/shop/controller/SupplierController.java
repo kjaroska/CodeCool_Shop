@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import com.codecool.shop.ui.InputGetter;
 
-public class SupplierController {
+public abstract class SupplierController {
 
     public static void showAvailableSuppliers() {
         ArrayList<Supplier> suppliers = new SupplierDaoImpl().getAll();

@@ -7,7 +7,7 @@ import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ProductController {
+public abstract class ProductController {
 
     public static java.util.Iterator<Product> getIterator(ArrayList<Product> productList) {
         return new ProductIterator(productList).Iterator();

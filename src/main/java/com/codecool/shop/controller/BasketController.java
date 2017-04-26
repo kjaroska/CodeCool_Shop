@@ -8,7 +8,7 @@ import com.codecool.shop.view.Printer;
 import com.codecool.shop.ui.InputGetter;
 
 
-public class BasketController {
+public abstract class BasketController {
 
     public static Basket addToBasket(Basket basket) {
         Printer.printObject("Which product you want to add? ");

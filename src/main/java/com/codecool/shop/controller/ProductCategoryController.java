@@ -9,7 +9,7 @@ import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
 
 
-public class ProductCategoryController {
+public abstract class ProductCategoryController {
 
     public static void showAvailableCategories() {
         ArrayList<ProductCategory> productCategories = new ProductCategoryDaoImpl().getAll();

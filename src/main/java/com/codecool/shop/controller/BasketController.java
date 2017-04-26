@@ -27,7 +27,16 @@ public class BasketController {
                 productId = InputGetter.getIntegerInput();
             }
         }
-        Integer quantity = InputGetter.getIntegerInput();
+        Integer quantity;
+        while (true) {
+            quantity = InputGetter.getIntegerInput();
+            if (quantity <= 0) {
+                Printer.printObject("Quantity have to above 0");
+                Printer.printObject("Provide proper quantity of item: ");
+            } else {
+                break;
+            }
+        }
         Item item = new Item(product, quantity);
         basket.addProduct(item);
         return basket;

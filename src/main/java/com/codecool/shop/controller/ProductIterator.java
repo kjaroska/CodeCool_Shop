@@ -4,9 +4,7 @@ import com.codecool.shop.model.Product;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/**
- * Created by marek on 17.04.17.
- */
+
 public class ProductIterator implements com.codecool.shop.controller.Iterator {
 
     private final ArrayList<Product> products;

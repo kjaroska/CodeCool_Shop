@@ -1,15 +1,15 @@
 package com.codecool.shop.model;
 
-/**
- * Created by marek on 26.04.17.
- */
 public class Item {
 
-    private Product product;
+    private static Integer nextId = 1;
+    private final Integer id;
+    private final Product product;
     private Integer quantity;
     private Float totalPrice;
 
     public Item(Product product, Integer quantity) {
+        this.id = Item.nextId++;
         this.product = product;
         this.quantity = quantity;
         this.totalPrice = product.getDefaultPrice() * quantity;
@@ -23,13 +23,27 @@ public class Item {
         return this.quantity;
     }
 
-    public Float getTotalPrice() {
-        return this.totalPrice;
+    public void setTotalPrice(Float totalPrice) {
+        this.totalPrice = totalPrice;
     }
+
+    public Float getTotalPrice() {
+        return this.product.getDefaultPrice() * this.quantity;
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
 
     @Override
     public String toString() {
         return "Item: " +
+            "id=" + id +
             "product=" + product.getName() +
             ", quantity=" + quantity +
             ", totalPrice=" + totalPrice;

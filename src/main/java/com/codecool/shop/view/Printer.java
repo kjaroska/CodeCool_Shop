@@ -30,7 +30,7 @@ public class Printer {
         }
     }
 
-    private static void printEmpty() {
+    public static void printEmpty() {
         System.out.println("");
         System.out.println("");
         System.out.println("");

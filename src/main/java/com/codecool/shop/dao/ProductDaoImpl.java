@@ -5,11 +5,7 @@ import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
 
-/**
- * Created by marek on 25.04.17.
- */
 public class ProductDaoImpl implements ProductDao {
 
     @Override
@@ -56,12 +52,35 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<Product> getBy(Supplier supplier) {
+    public ArrayList<Product> getBy(Supplier supplier) {
         return null;
     }
 
     @Override
-    public List<Product> getBy(ProductCategory productCategory) {
-        return null;
+    public ArrayList<Product> getBy(ProductCategory productCategory) {
+      ArrayList<Product> listProducts = new ArrayList<>();
+      Integer productCategoryId = productCategory.getId();
+      String query =
+          "SELECT * from Products WHERE id_productCategory = '" + productCategoryId + "'";
+
+      ResultSet resultSet = Connector.getQueryResult(query);
+      try {
+        while (resultSet.next()) {
+          Integer id = resultSet.getInt("id");
+          String name = resultSet.getString("name");
+          Float price = resultSet.getFloat("price");
+          String description = resultSet.getString("description");
+          String currency = resultSet.getString("currency");
+          Integer idSupplier = resultSet.getInt("id_supplier");
+          Supplier supplier = new SupplierDaoImpl().find(idSupplier);
+          Product newProduct = new Product(id, name, price, description, currency,
+              productCategory, supplier);
+          listProducts.add(newProduct);
+        }
+      } catch (Exception e) {
+        System.err.println(e.getClass().getName() + " in product :" + e.getMessage());
+        System.exit(0);
+      }
+      return listProducts;
     }
 }

@@ -42,7 +42,7 @@ public class SummaryController {
             Printer.printObject("You are having fun!");
           break loop;
         case 0:
-          break;
+            break loop;
         default:
             Printer.printObject("Invalid Input. Try again.\n");
       }

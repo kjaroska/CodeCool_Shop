@@ -24,6 +24,7 @@ public class Supplier extends BaseModel {
         this.products.add(product);
     }
 
+
     public String toString() {
         return String.format("id: %1$d, " +
                         "name: %2$s, " +

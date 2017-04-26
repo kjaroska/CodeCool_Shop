@@ -9,7 +9,6 @@ public class Product extends BaseModel {
     private ProductCategory productCategory;
     private Supplier supplier;
 
-
     public Product(Integer id, String name, Float defaultPrice, String description,
         String currencyString, ProductCategory productCategory, Supplier supplier) {
         super(id, name, description);

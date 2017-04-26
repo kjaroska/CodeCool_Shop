@@ -2,21 +2,9 @@ package com.codecool.shop.view;
 
 import com.codecool.shop.model.Item;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 
-/**
- * Created by marek on 25.04.17.
- */
 public class Printer {
-
-    private static final ArrayList<String> options = new ArrayList<>(
-        Arrays.asList("Choose option:\n",
-            "[1] PRODUCT CATEGORIES", "[2] SUPPLIERS",
-            "[3] ALL PRODUCTS",
-            "[4] MY BASKET",
-            "\n[0] EXIT"));
-
     public static void printObject(String stringObject) {
         System.out.println(stringObject);
     }
@@ -35,9 +23,9 @@ public class Printer {
         System.out.println("");
     }
 
-    public static void printMenu() {
+    public static void printMenu(ArrayList<String> options) {
         Printer.printEmpty();
-        for (String option : Printer.options) {
+        for (String option : options) {
             System.out.println(option);
         }
     }

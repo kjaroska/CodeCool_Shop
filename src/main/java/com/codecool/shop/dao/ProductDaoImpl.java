@@ -118,7 +118,7 @@ public class ProductDaoImpl implements ProductDao {
         listProducts.add(newProduct);
       }
     } catch (Exception e) {
-      System.err.println(e.getClass().getName() + " in product :" + e.getMessage());
+        System.err.println(e.getClass().getName() + " in productDaoimpl :" + e.getMessage());
       System.exit(0);
     }
     return listProducts;

@@ -8,9 +8,7 @@ import com.codecool.shop.ui.InputGetter;
 import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
 
-/**
- * Created by marek on 25.04.17.
- */
+
 public class ProductCategoryController {
 
     public static void showAvailableCategories() {

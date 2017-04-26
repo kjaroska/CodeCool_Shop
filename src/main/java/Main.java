@@ -38,6 +38,8 @@ public class Main {
                 InputGetter.waitForEnter();
             } else if (option == 5) {
                 basket = BasketController.removeFromBasket(basket);
+            } else if (option == 6) {
+                basket = BasketController.editBasket(basket);
             } else if (option == 0) {
                 break;
             }

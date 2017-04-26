@@ -3,19 +3,9 @@ package com.codecool.shop.view;
 import com.codecool.shop.controller.ProductIterator;
 import com.codecool.shop.model.Product;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 
-/**
- * Created by marek on 25.04.17.
- */
 public class Printer {
-
-    private static final ArrayList<String> options = new ArrayList<>(Arrays.asList("Choose option",
-        "1 to show suppliers.", "2 to to show product categories.",
-        "3 to see all available products.",
-        "4 to see all products in the basket.",
-        "0 to exit."));
 
     public static void printObject(String stringObject) {
         System.out.println(stringObject);
@@ -35,9 +25,9 @@ public class Printer {
         System.out.println("");
     }
 
-    public static void printMenu() {
+    public static void printMenu(ArrayList<String> options) {
         Printer.printEmpty();
-        for (String option : Printer.options) {
+        for (String option : options) {
             System.out.println(option);
         }
     }

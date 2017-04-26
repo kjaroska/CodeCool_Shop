@@ -1,5 +1,6 @@
 
 import com.codecool.shop.controller.BasketController;
+import com.codecool.shop.controller.SummaryController;
 import com.codecool.shop.model.Item;
 import com.codecool.shop.view.Menu;
 import com.codecool.shop.model.Basket;
@@ -16,40 +17,45 @@ public class Main {
         ArrayList<Item> newBasket = new ArrayList<>();
         Basket basket = new Basket(newBasket);
         Menu menu = new Menu();
-        while (true) {
+      mainLoop:
+      while (true) { // "mainLoop" is a label, that is later used to stop the while loop
             Printer.printMenu(menu.getMainMenu());
             Integer option = InputGetter.getIntegerInput();
-            if (option == 1) {
-                ProductCategoryController.showAvailableCategories();
-                ProductCategoryController.showProductsFromCategory();
-                basket = BasketController.addToBasket(basket);
-                InputGetter.waitForEnter();
-            } else if (option == 2) {
-                SupplierController.showAvailableSuppliers();
-                SupplierController.productBySuppliers();
-                InputGetter.waitForEnter();
-                basket = BasketController.addToBasket(basket);
-            } else if (option == 3) {
-                ProductController.showAvailableProducts();
-                InputGetter.waitForEnter();
-                basket = BasketController.addToBasket(basket);
-            } else if (option == 4) {
-                Printer.printBasket(basket.getItemList());
-                InputGetter.waitForEnter();
-            } else if (option == 5) {
-                basket = BasketController.removeFromBasket(basket);
-            } else if (option == 6) {
-              basket = BasketController.editBasket(basket);
-            } else if (option == 7) {
-              Printer.printOrderSummary(basket);
-              InputGetter.waitForEnter();
-              Printer.printFakePayment();
-              System.out.println("Choose payment method:");
-              Integer paymentMethod = InputGetter.getIntegerInput();
-              System.out.printf("You choose:" + paymentMethod);
-
-            } else if (option == 0) {
-              break;
+        switch (option) {
+          case 1:
+            ProductCategoryController.showAvailableCategories();
+            ProductCategoryController.showProductsFromCategory();
+            basket = BasketController.addToBasket(basket);
+            InputGetter.waitForEnter();
+            continue;
+          case 2:
+            SupplierController.showAvailableSuppliers();
+            SupplierController.productBySuppliers();
+            InputGetter.waitForEnter();
+            basket = BasketController.addToBasket(basket);
+            continue;
+          case 3:
+            ProductController.showAvailableProducts();
+            InputGetter.waitForEnter();
+            basket = BasketController.addToBasket(basket);
+            continue;
+          case 4:
+            Printer.printBasket(basket.getItemList());
+            InputGetter.waitForEnter();
+            continue;
+          case 5:
+            basket = BasketController.removeFromBasket(basket);
+            continue;
+          case 6:
+            basket = BasketController.editBasket(basket);
+            continue;
+          case 7:
+            SummaryController.summary(basket);
+            continue;
+          case 0:
+            break mainLoop;
+          default:
+            System.out.println("Invalid input. Try again.");
             }
         }
     }

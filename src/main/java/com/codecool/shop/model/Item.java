@@ -6,8 +6,6 @@ package com.codecool.shop.model;
 public class Item {
 
     private Product product;
-
-
     private Integer quantity;
     private Float totalPrice;
 
@@ -27,5 +25,13 @@ public class Item {
 
     public Float getTotalPrice() {
         return this.totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Item: " +
+            "product=" + product.getName() +
+            ", quantity=" + quantity +
+            ", totalPrice=" + totalPrice;
     }
 }

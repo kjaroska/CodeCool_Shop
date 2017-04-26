@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 public class Supplier extends BaseModel {
+
     private ArrayList<Product> products;
 
     public Supplier(Integer id, String name, String description) {

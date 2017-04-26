@@ -1,4 +1,6 @@
 
+import com.codecool.shop.controller.BasketController;
+import com.codecool.shop.model.Item;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Basket;
 import com.codecool.shop.ui.inputGetter;
@@ -11,19 +13,26 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList<Product> newBasket = new ArrayList<>();
+        ArrayList<Item> newBasket = new ArrayList<>();
         Basket basket = new Basket(newBasket);
         while (true) {
             Printer.printMenu();
             Integer option = inputGetter.getIntegerInput();
             if (option == 1) {
-                SupplierController.showAvailableSuppliers();
-            } else if (option == 2) {
                 ProductCategoryController.showAvailableCategories();
+                basket = BasketController.addToBasket(basket);
+                inputGetter.waitForEnter();
+            } else if (option == 2) {
+                SupplierController.showAvailableSuppliers();
+                inputGetter.waitForEnter();
+                basket = BasketController.addToBasket(basket);
             } else if (option == 3) {
                 ProductController.showAvailableProducts();
+                inputGetter.waitForEnter();
+                basket = BasketController.addToBasket(basket);
             } else if (option == 4) {
-                Printer.printBasket(basket.getProductList());
+                Printer.printBasket(basket.getItemList());
+                inputGetter.waitForEnter();
             } else if (option == 0) {
                 System.exit(0);
             }

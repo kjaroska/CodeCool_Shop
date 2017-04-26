@@ -10,9 +10,7 @@ public class Printer {
     }
 
     public static void printBasket(ArrayList<Item> basket) {
-        Iterator<Item> iter = basket.iterator();
-        while (iter.hasNext()) {
-            Object product = iter.next();
+        for (Item product : basket) {
             System.out.println(product.toString());
         }
     }

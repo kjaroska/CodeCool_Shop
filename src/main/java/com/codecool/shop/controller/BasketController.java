@@ -6,7 +6,6 @@ import com.codecool.shop.model.Item;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.view.Printer;
 import com.codecool.shop.ui.InputGetter;
-import java.util.Iterator;
 
 /**
  * Created by marek on 26.04.17.
@@ -16,7 +15,7 @@ public class BasketController {
     public static Basket addToBasket(Basket basket) {
         Printer.printObject("Which product you want to add? ");
         Integer productId = InputGetter.getIntegerInput();
-        Product product = null;
+        Product product;
         while (true) {
             try {
                 product = new ProductDaoImpl().find(productId);
@@ -28,7 +27,6 @@ public class BasketController {
                 Printer.printObject(e + ", No product with given id");
                 Printer.printObject("Insert proper id: ");
                 productId = InputGetter.getIntegerInput();
-                continue;
             }
         }
         Integer quantity = InputGetter.getIntegerInput();

@@ -2,7 +2,6 @@
 import com.codecool.shop.controller.BasketController;
 import com.codecool.shop.model.Item;
 import com.codecool.shop.view.Menu;
-import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Basket;
 import com.codecool.shop.ui.InputGetter;
 import com.codecool.shop.view.Printer;

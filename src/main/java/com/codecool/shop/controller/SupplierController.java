@@ -20,8 +20,8 @@ public class SupplierController {
     public static void productBySuppliers() {
         Printer.printObject("\nEnter Supplier's Id");
         Integer supplierId = InputGetter.getIntegerInput();
-        Supplier supplier = null;
-        ArrayList<Product> productsFromSupplier = null;
+        Supplier supplier;
+        ArrayList<Product> productsFromSupplier;
         while (true) {
             try {
                 supplier = new SupplierDaoImpl().find(supplierId);
@@ -33,7 +33,6 @@ public class SupplierController {
                 Printer.printObject(e + ", No Supplier with given id");
                 Printer.printObject("Insert proper id: ");
                 supplierId = InputGetter.getIntegerInput();
-                continue;
             }
         }
         Iterator<Product> iterProducts = productsFromSupplier.iterator();

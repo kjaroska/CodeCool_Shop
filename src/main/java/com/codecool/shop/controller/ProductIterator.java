@@ -1,9 +1,5 @@
 package com.codecool.shop.controller;
 
-/**
- * Created by marek on 25.04.17.
- */
-
 import com.codecool.shop.model.Product;
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,6 +1,6 @@
 package com.codecool.shop.dao;
 
-import com.codecool.shop.model.Product;
+import com.codecool.shop.model.T;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import java.sql.ResultSet;
@@ -13,12 +13,12 @@ import java.util.List;
 public class ProductDaoImpl implements ProductDao {
 
     @Override
-    public void add(Product product) {
+    public void add(T product) {
 
     }
 
     @Override
-    public Product find(int id) {
+    public T find(int id) {
         return null;
     }
 
@@ -28,8 +28,8 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public ArrayList<Product> getAll() {
-        ArrayList<Product> listProducts = new ArrayList<>();
+    public ArrayList<T> getAll() {
+        ArrayList<T> listProducts = new ArrayList<>();
         String query = "SELECT * from Products";
         ResultSet resultSet = Connector.getQueryResult(query);
         try {
@@ -44,7 +44,7 @@ public class ProductDaoImpl implements ProductDao {
                     .find(idProductCategory);
                 Integer idSupplier = resultSet.getInt("id_supplier");
                 Supplier supplier = new SupplierDaoImpl().find(idSupplier);
-                Product newProduct = new Product(id, name, price, description, currency,
+                T newProduct = new T(id, name, price, description, currency,
                     productCategory, supplier);
                 listProducts.add(newProduct);
             }
@@ -56,35 +56,12 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public ArrayList <Product> getBy(Supplier supplier) {
-        ArrayList<Product> listProducts = new ArrayList<>();
-        Integer supplierId = supplier.getId();
-        String query = "SELECT * FROM Products WHERE id_supplier = '" + supplierId + "'";
-        ResultSet resultSet = Connector.getQueryResult(query);
-        try {
-            while (resultSet.next()) {
-                Integer id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                Float price = resultSet.getFloat("price");
-                String description = resultSet.getString("description");
-                String currency = resultSet.getString("currency");
-                Integer idProductCategory = resultSet.getInt("id_productCategory");
-                ProductCategory productCategory = new ProductCategoryDaoImpl()
-                    .find(idProductCategory);
-                Product newProduct = new Product(id, name, price, description, currency,
-                    productCategory, supplier);
-                listProducts.add(newProduct);
-            }
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + " in product :" + e.getMessage());
-            System.exit(0);
-        }
-        return listProducts;
-
+    public List<T> getBy(Supplier supplier) {
+        return null;
     }
 
     @Override
-    public List<Product> getBy(ProductCategory productCategory) {
+    public List<T> getBy(ProductCategory productCategory) {
         return null;
     }
 }

@@ -1,4 +1,4 @@
-
+import com.codecool.shop.view.Menu;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Basket;
 import com.codecool.shop.ui.inputGetter;
@@ -13,8 +13,9 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<Product> newBasket = new ArrayList<>();
         Basket basket = new Basket(newBasket);
+        Menu menu = new Menu();
         while (true) {
-            Printer.printMenu();
+            Printer.printMenu(menu.getMainMenu());
             Integer option = inputGetter.getIntegerInput();
             if (option == 1) {
                 SupplierController.showAvailableSuppliers();

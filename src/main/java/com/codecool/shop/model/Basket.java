@@ -35,8 +35,8 @@ public class Basket {
         return found;
     }
 
-    private Iterator<Item> getIterator(ArrayList<Item> items) {
-        return items.iterator();
+    public Iterator<Item> getIterator() {
+        return this.itemsList.iterator();
     }
 
 }

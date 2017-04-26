@@ -13,11 +13,6 @@ import java.util.Iterator;
  */
 public class BasketController {
 
-    public static void showOrder(Basket basket) {
-        Iterator<Item> itemIterator = basket.getIterator();
-
-    }
-
     public static Basket addToBasket(Basket basket) {
         Printer.printObject("Which product you want to add? ");
         Integer productId = InputGetter.getIntegerInput();

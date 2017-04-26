@@ -30,7 +30,7 @@ public abstract class SupplierController {
                     break;
                 }
             } catch (Exception e) {
-                Printer.printObject(e + ", No Supplier with given id");
+                Printer.printObject("No Supplier with given id");
                 Printer.printObject("Insert proper id: ");
                 supplierId = InputGetter.getIntegerInput();
             }

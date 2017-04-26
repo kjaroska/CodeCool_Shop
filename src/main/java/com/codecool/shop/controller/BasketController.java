@@ -7,10 +7,7 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.view.Printer;
 import com.codecool.shop.ui.InputGetter;
 
-/**
- * Created by marek on 26.04.17.
- */
-@SuppressWarnings("ALL")
+
 public class BasketController {
 
     public static Basket addToBasket(Basket basket) {
@@ -45,6 +42,23 @@ public class BasketController {
             Item item = itemIter.next();
             if (item.getId().equals(itemId)) {
                 itemIter.remove();
+            }
+        }
+        return basket;
+    }
+
+    public static Basket editBasket(Basket basket) {
+        Printer.printBasket(basket.getItemList());
+        Printer.printObject("Which product you want to edit? ");
+        Integer itemId = InputGetter.getIntegerInput();
+        java.util.Iterator<Item> itemIter = basket.getIterator();
+        while (itemIter.hasNext()) {
+            Item item = itemIter.next();
+            if (item.getId().equals(itemId)) {
+                Printer.printObject("Insert new quantity of item in basket: ");
+                Integer newQuantity = InputGetter.getIntegerInput();
+                item.setQuantity(newQuantity);
+                item.setTotalPrice(newQuantity * item.getProduct().getDefaultPrice());
             }
         }
         return basket;

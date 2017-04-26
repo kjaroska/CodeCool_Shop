@@ -5,8 +5,8 @@ public class Item {
     private static Integer nextId = 1;
     private final Integer id;
     private final Product product;
-    private final Integer quantity;
-    private final Float totalPrice;
+    private Integer quantity;
+    private Float totalPrice;
 
     public Item(Product product, Integer quantity) {
         this.id = Item.nextId++;
@@ -23,13 +23,22 @@ public class Item {
         return this.quantity;
     }
 
+    public void setTotalPrice(Float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     public Float getTotalPrice() {
-        return this.totalPrice;
+        return this.product.getDefaultPrice() * this.quantity;
     }
 
     public Integer getId() {
         return this.id;
     }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
 
     @Override
     public String toString() {

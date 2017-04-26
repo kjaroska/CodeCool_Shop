@@ -25,7 +25,7 @@ public class SummaryController {
         "[0] EXIT."));
     Integer userInput = 666;
     loop:
-    while (userInput != 0) { // "loop" is a label, that is later used to stop the while loop
+    while (userInput != 0) {
       for (String option : paymentOptions) {
         System.out.println(option);
       }

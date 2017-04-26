@@ -56,8 +56,31 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<Product> getBy(Supplier supplier) {
-        return null;
+    public ArrayList <Product> getBy(Supplier supplier) {
+        ArrayList<Product> listProducts = new ArrayList<>();
+        Integer supplierId = supplier.getId();
+        String query = "SELECT * FROM Products WHERE id_supplier = '" + supplierId + "'";
+        ResultSet resultSet = Connector.getQueryResult(query);
+        try {
+            while (resultSet.next()) {
+                Integer id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                Float price = resultSet.getFloat("price");
+                String description = resultSet.getString("description");
+                String currency = resultSet.getString("currency");
+                Integer idProductCategory = resultSet.getInt("id_productCategory");
+                ProductCategory productCategory = new ProductCategoryDaoImpl()
+                    .find(idProductCategory);
+                Product newProduct = new Product(id, name, price, description, currency,
+                    productCategory, supplier);
+                listProducts.add(newProduct);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + " in product :" + e.getMessage());
+            System.exit(0);
+        }
+        return listProducts;
+
     }
 
     @Override

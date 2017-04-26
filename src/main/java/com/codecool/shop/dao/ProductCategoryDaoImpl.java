@@ -1,8 +1,12 @@
 package com.codecool.shop.dao;
 
+import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by marek on 25.04.17.
@@ -57,7 +61,8 @@ public class ProductCategoryDaoImpl implements ProductCategoryDao {
                 listCategories.add(productCategory);
             }
         } catch (Exception e) {
-            System.err.println(e.getClass().getName() + " in SupplierDaoImpl :" + e.getMessage());
+            System.err
+                .println(e.getClass().getName() + " in ProductCategoryDao :" + e.getMessage());
             System.exit(0);
         }
         return listCategories;

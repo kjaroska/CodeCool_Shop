@@ -12,6 +12,7 @@ public class Menu {
       "[4] SHOW MY BASKET.",
       "[5] REMOVE ITEM FROM BASKET.",
       "[6] EDIT ITEM QUANTITY IN BASKET",
+      "[7] ORDER SUMMARY",
       "[0] EXIT."));
 
   public ArrayList<String> getMainMenu() {

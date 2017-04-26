@@ -10,7 +10,6 @@ public class ProductDaoImpl implements ProductDao {
 
   @Override
   public void add(Product product) {
-
   }
 
   @Override
@@ -20,7 +19,6 @@ public class ProductDaoImpl implements ProductDao {
 
   @Override
   public void remove(int id) {
-
   }
 
   @Override
@@ -51,12 +49,6 @@ public class ProductDaoImpl implements ProductDao {
     return listProducts;
   }
 
-  @Override
-  public ArrayList<Product> getBy(Supplier supplier) {
-    return null;
-  }
-
-  @Override
   public ArrayList<Product> getBy(ProductCategory productCategory) {
     ArrayList<Product> listProducts = new ArrayList<>();
     Integer productCategoryId = productCategory.getId();

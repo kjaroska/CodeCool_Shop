@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ProductCategory extends BaseModel {
     private String department;
-    private ArrayList<Product> products;
+    private ArrayList<T> products;
 
     public ProductCategory(Integer id, String name, String department, String description) {
         super(id, name, description);
@@ -20,7 +20,7 @@ public class ProductCategory extends BaseModel {
         this.department = department;
     }
 
-    public void setProducts(ArrayList<Product> products) {
+    public void setProducts(ArrayList<T> products) {
         this.products = products;
     }
 
@@ -28,7 +28,7 @@ public class ProductCategory extends BaseModel {
         return this.products;
     }
 
-    public void addProduct(Product product) {
+    public void addProduct(T product) {
         this.products.add(product);
     }
 

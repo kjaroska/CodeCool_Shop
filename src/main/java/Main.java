@@ -18,6 +18,7 @@ public class Main {
             Integer option = inputGetter.getIntegerInput();
             if (option == 1) {
                 SupplierController.showAvailableSuppliers();
+                SupplierController.productBySuppliers();
             } else if (option == 2) {
                 ProductCategoryController.showAvailableCategories();
             } else if (option == 3) {

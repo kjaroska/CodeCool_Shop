@@ -29,5 +29,4 @@ public class SupplierController {
             Printer.printObject(singleProduct.toString());
         }
     }
-
 }

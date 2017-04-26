@@ -19,7 +19,7 @@ public class ProductCategoryController {
     }
 
     public static void showProductsFromCategory() {
-        System.out.println("Enter Product's Category ID:");
+        Printer.printObject("Enter Product's Category ID:");
         Integer categoryId = InputGetter.getIntegerInput();
         ProductCategory productCategory;
         ArrayList<Product> productsFromCategory;

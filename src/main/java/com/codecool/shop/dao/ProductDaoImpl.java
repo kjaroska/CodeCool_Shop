@@ -1,6 +1,6 @@
 package com.codecool.shop.dao;
 
-import com.codecool.shop.model.T;
+import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import java.sql.ResultSet;
@@ -13,13 +13,34 @@ import java.util.List;
 public class ProductDaoImpl implements ProductDao {
 
     @Override
-    public void add(T product) {
+    public void add(Product product) {
 
     }
 
     @Override
-    public T find(int id) {
-        return null;
+    public Product find(int id) {
+        Product newProduct = null;
+        String query = "SELECT * from Products where id='" + id + "'";
+        ResultSet resultSet = Connector.getQueryResult(query);
+        try {
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                Float price = resultSet.getFloat("price");
+                String description = resultSet.getString("description");
+                String currency = resultSet.getString("currency");
+                Integer idProductCategory = resultSet.getInt("id_productCategory");
+                ProductCategory productCategory = new ProductCategoryDaoImpl()
+                    .find(idProductCategory);
+                Integer idSupplier = resultSet.getInt("id_supplier");
+                Supplier supplier = new SupplierDaoImpl().find(idSupplier);
+                newProduct = new Product(id, name, price, description, currency,
+                    productCategory, supplier);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + " in product :" + e.getMessage());
+            System.exit(0);
+        }
+        return newProduct;
     }
 
     @Override
@@ -28,8 +49,8 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public ArrayList<T> getAll() {
-        ArrayList<T> listProducts = new ArrayList<>();
+    public ArrayList<Product> getAll() {
+        ArrayList<Product> listProducts = new ArrayList<>();
         String query = "SELECT * from Products";
         ResultSet resultSet = Connector.getQueryResult(query);
         try {
@@ -44,7 +65,7 @@ public class ProductDaoImpl implements ProductDao {
                     .find(idProductCategory);
                 Integer idSupplier = resultSet.getInt("id_supplier");
                 Supplier supplier = new SupplierDaoImpl().find(idSupplier);
-                T newProduct = new T(id, name, price, description, currency,
+                Product newProduct = new Product(id, name, price, description, currency,
                     productCategory, supplier);
                 listProducts.add(newProduct);
             }
@@ -56,12 +77,12 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<T> getBy(Supplier supplier) {
+    public List<Product> getBy(Supplier supplier) {
         return null;
     }
 
     @Override
-    public List<T> getBy(ProductCategory productCategory) {
+    public List<Product> getBy(ProductCategory productCategory) {
         return null;
     }
 }

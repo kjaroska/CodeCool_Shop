@@ -1,8 +1,6 @@
 package com.codecool.shop.view;
 
-import com.codecool.shop.controller.ProductIterator;
 import com.codecool.shop.model.Item;
-import com.codecool.shop.model.Product;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;

@@ -24,9 +24,9 @@ public class SummaryController {
     ArrayList<String> paymentOptions = new ArrayList<>(Arrays.asList("Choose option",
         "[1] PAY IN CASH.", "[2] PAY BY CARD.", "[3] OTHER.",
         "[0] EXIT."));
-    Integer userInput = 666;
+      Integer userInput;
     loop:
-    while (userInput != 0) {
+    while (true) {
       for (String option : paymentOptions) {
           Printer.printObject(option);
       }

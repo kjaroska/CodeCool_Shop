@@ -1,5 +1,5 @@
-
-import com.codecool.shop.model.T;
+import com.codecool.shop.view.Menu;
+import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Basket;
 import com.codecool.shop.ui.InputGetter;
 import com.codecool.shop.view.Printer;
@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<T> newBasket = new ArrayList<>();
         Basket basket = new Basket(newBasket);
+        Menu menu = new Menu();
         while (true) {
             Printer.printMenu();
             Integer option = InputGetter.getIntegerInput();
@@ -29,7 +30,7 @@ public class Main {
                 Printer.printBasket(basket.getProductList());
                 inputGetter.waitForEnter();
             } else if (option == 0) {
-                System.exit(0);
+                break;
             }
         }
     }

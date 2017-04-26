@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 
 public class Supplier extends BaseModel {
-    private ArrayList<Product> products;
+
+    private ArrayList<T> products;
 
     public Supplier(Integer id, String name, String description) {
         super(id, name, description);
         this.products = new ArrayList<>();
     }
 
-    public void setProducts(ArrayList<Product> products) {
+    public void setProducts(ArrayList<T> products) {
         this.products = products;
     }
 
@@ -19,9 +20,10 @@ public class Supplier extends BaseModel {
         return this.products;
     }
 
-    public void addProduct(Product product) {
+    public void addProduct(T product) {
         this.products.add(product);
     }
+
 
     public String toString() {
         return String.format("id: %1$d, " +

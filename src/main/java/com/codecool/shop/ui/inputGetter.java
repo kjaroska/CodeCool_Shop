@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
+import com.codecool.shop.view.Printer;
 
 /**
  * Created by marek on 17.04.17.
@@ -86,9 +87,7 @@ public class inputGetter {
     public static void waitForEnter() {
         Scanner scanner = getScanner();
         System.out.print("\nPress ENTER to continue");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
+        Printer.printEmpty();
         scanner.nextLine();
     }
 }

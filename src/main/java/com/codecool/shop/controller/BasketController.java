@@ -31,6 +31,7 @@ public class BasketController {
                 }
             } catch (Exception e) {
                 Printer.printObject(e + ", No product with given id");
+                Printer.printObject("Insert proper id: ");
                 productId = InputGetter.getIntegerInput();
                 continue;
             }

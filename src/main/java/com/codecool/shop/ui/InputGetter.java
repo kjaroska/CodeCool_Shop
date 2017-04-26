@@ -7,10 +7,7 @@ import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
-/**
- * Created by marek on 17.04.17.
- */
-public class inputGetter {
+public class InputGetter {
 
     private static Scanner getScanner() {
         return new Scanner(System.in);
@@ -21,7 +18,7 @@ public class inputGetter {
         return scanner.next();
     }
 
-    public static String getLineInput() {
+  private static String getLineInput() {
         Scanner scanner = getScanner();
         return scanner.nextLine();
     }
@@ -66,7 +63,7 @@ public class inputGetter {
     }
 
     public static Date getDate() {
-        String date = inputGetter.getLineInput();
+      String date = InputGetter.getLineInput();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date2 = null;
         Boolean search = true;
@@ -77,7 +74,7 @@ public class inputGetter {
                 search = false;
             } catch (ParseException e) {
                 System.out.println("Bad format try (DD-MM-YYYY)");
-                date = inputGetter.getLineInput();
+              date = InputGetter.getLineInput();
             }
         }
         return date2;

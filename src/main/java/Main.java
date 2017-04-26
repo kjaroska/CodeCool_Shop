@@ -17,13 +17,17 @@ public class Main {
             Printer.printMenu();
             Integer option = InputGetter.getIntegerInput();
             if (option == 1) {
-                SupplierController.showAvailableSuppliers();
-            } else if (option == 2) {
                 ProductCategoryController.showAvailableCategories();
+                inputGetter.waitForEnter();
+            } else if (option == 2) {
+                SupplierController.showAvailableSuppliers();
+                inputGetter.waitForEnter();
             } else if (option == 3) {
                 ProductController.showAvailableProducts();
+                inputGetter.waitForEnter();
             } else if (option == 4) {
                 Printer.printBasket(basket.getProductList());
+                inputGetter.waitForEnter();
             } else if (option == 0) {
                 System.exit(0);
             }

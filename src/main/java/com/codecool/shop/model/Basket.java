@@ -16,11 +16,9 @@ public class Basket {
         this.itemsList = items;
     }
 
-
     public void addProduct(Item item) {
         itemsList.add(item);
     }
-
 
     public Iterator<Item> getIterator() {
         return this.itemsList.iterator();

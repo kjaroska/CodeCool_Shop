@@ -3,23 +3,23 @@ package com.codecool.shop.controller;
 /**
  * Created by marek on 25.04.17.
  */
-import com.codecool.shop.model.Product;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
  * Created by marek on 17.04.17.
  */
-public class ProductIterator implements com.codecool.shop.controller.Iterator {
-    private final ArrayList<Product> products;
+public class ProductIterator<T> implements com.codecool.shop.controller.Iterator {
+
+    private final ArrayList<T> products;
     private Integer index;
 
-    public ProductIterator(ArrayList<Product> products) {
+    public ProductIterator(ArrayList<T> products) {
         this.products = products;
     }
 
     @Override
-    public Iterator<Product> Iterator() {
+    public Iterator<T> Iterator() {
         return products.iterator();
     }
 

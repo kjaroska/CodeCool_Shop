@@ -39,9 +39,17 @@ public class Main {
             } else if (option == 5) {
                 basket = BasketController.removeFromBasket(basket);
             } else if (option == 6) {
-                basket = BasketController.editBasket(basket);
+              basket = BasketController.editBasket(basket);
+            } else if (option == 7) {
+              Printer.printOrderSummary(basket);
+              InputGetter.waitForEnter();
+              Printer.printFakePayment();
+              System.out.println("Choose payment method:");
+              Integer paymentMethod = InputGetter.getIntegerInput();
+              System.out.printf("You choose:" + paymentMethod);
+
             } else if (option == 0) {
-                break;
+              break;
             }
         }
     }

@@ -56,7 +56,16 @@ public class BasketController {
             Item item = itemIter.next();
             if (item.getId().equals(itemId)) {
                 Printer.printObject("Insert new quantity of item in basket: ");
-                Integer newQuantity = InputGetter.getIntegerInput();
+                Integer newQuantity;
+                while (true) {
+                    newQuantity = InputGetter.getIntegerInput();
+                    if (newQuantity <= 0) {
+                        Printer.printObject("Quantity have to above 0");
+                        Printer.printObject("Provide proper quantity of item: ");
+                    } else {
+                        break;
+                    }
+                }
                 item.setQuantity(newQuantity);
                 item.setTotalPrice(newQuantity * item.getProduct().getDefaultPrice());
             }

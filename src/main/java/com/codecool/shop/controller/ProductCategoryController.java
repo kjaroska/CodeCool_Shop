@@ -23,8 +23,22 @@ public class ProductCategoryController {
     public static void showProductsFromCategory() {
         System.out.println("Enter Product's Category ID:");
         Integer categoryId = InputGetter.getIntegerInput();
-        ProductCategory productCategory = new ProductCategoryDaoImpl().find(categoryId);
-        ArrayList<Product> productsFromCategory = new ProductDaoImpl().getBy(productCategory);
+        ProductCategory productCategory = null;
+        ArrayList<Product> productsFromCategory = null;
+        while (true) {
+            try {
+                productCategory = new ProductCategoryDaoImpl().find(categoryId);
+                productsFromCategory = new ProductDaoImpl().getBy(productCategory);
+                if (productCategory != null) {
+                    break;
+                }
+            } catch (Exception e) {
+                Printer.printObject(e + ", No Supplier with given id");
+                Printer.printObject("Insert proper id: ");
+                categoryId = InputGetter.getIntegerInput();
+                continue;
+            }
+        }
         java.util.Iterator<Product> iterProducts = new ProductIterator(productsFromCategory).Iterator();
         while (iterProducts.hasNext()) {
             Product singleProduct = iterProducts.next();

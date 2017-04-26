@@ -18,15 +18,39 @@ public class Main {
             Printer.printMenu(menu.getMainMenu());
             Integer option = inputGetter.getIntegerInput();
             if (option == 1) {
-                SupplierController.showAvailableSuppliers();
+                while (true){
+                  ProductCategoryController.showAvailableCategories();
+                  Integer option1 = inputGetter.getIntegerInput();
+                  if (option1 == 0){
+                      break;
+                  }
+                }
             } else if (option == 2) {
-                ProductCategoryController.showAvailableCategories();
+                while (true) {
+                  SupplierController.showAvailableSuppliers();
+                  Integer option2 = inputGetter.getIntegerInput();
+                  if (option2 == 0){
+                      break;
+                  }
+                }
             } else if (option == 3) {
-                ProductController.showAvailableProducts();
+                while (true) {
+                  ProductController.showAvailableProducts();
+                  Integer option3 = inputGetter.getIntegerInput();
+                  if (option3 == 0){
+                    break;
+                  }
+                }
             } else if (option == 4) {
-                Printer.printBasket(basket.getProductList());
+                while (true) {
+                  Printer.printBasket(basket.getProductList());
+                  Integer option4 = inputGetter.getIntegerInput();
+                  if (option4 == 0) {
+                    break;
+                  }
+                }
             } else if (option == 0) {
-                System.exit(0);
+                break;
             }
         }
     }

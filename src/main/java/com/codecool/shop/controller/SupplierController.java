@@ -7,7 +7,7 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
 import java.util.Iterator;
-import com.codecool.shop.ui.inputGetter;
+import com.codecool.shop.ui.InputGetter;
 
 public class SupplierController {
 
@@ -19,9 +19,23 @@ public class SupplierController {
     }
     public static void productBySuppliers() {
         Printer.printObject("\nEnter Supplier's Id");
-        Integer supplierId = inputGetter.getIntegerInput();
-        Supplier supplier = new SupplierDaoImpl().find(supplierId);
-        ArrayList<Product> productsFromSupplier = new ProductDaoImpl().getBy(supplier);
+        Integer supplierId = InputGetter.getIntegerInput();
+        Supplier supplier = null;
+        ArrayList<Product> productsFromSupplier = null;
+        while (true) {
+            try {
+                supplier = new SupplierDaoImpl().find(supplierId);
+                productsFromSupplier = new ProductDaoImpl().getBy(supplier);
+                if (supplier != null) {
+                    break;
+                }
+            } catch (Exception e) {
+                Printer.printObject(e + ", No Supplier with given id");
+                Printer.printObject("Insert proper id: ");
+                supplierId = InputGetter.getIntegerInput();
+                continue;
+            }
+        }
         Iterator<Product> iterProducts = productsFromSupplier.iterator();
         Printer.printObject("\n'"+ supplier.getName() +"' products:\n");
         while (iterProducts.hasNext()) {

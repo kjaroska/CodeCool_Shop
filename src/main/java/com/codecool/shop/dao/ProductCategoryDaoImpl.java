@@ -1,8 +1,12 @@
 package com.codecool.shop.dao;
 
+import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by marek on 25.04.17.

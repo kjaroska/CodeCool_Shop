@@ -82,5 +82,14 @@ public class inputGetter {
         }
         return date2;
     }
+
+    public static void waitForEnter() {
+        Scanner scanner = getScanner();
+        System.out.print("\nPress ENTER to continue");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        scanner.nextLine();
+    }
 }
 

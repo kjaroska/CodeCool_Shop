@@ -23,16 +23,6 @@ public class Basket {
         itemsList.add(item);
     }
 
-    public boolean removeProduct(Item item) {
-        boolean found;
-        if (itemsList.contains(item)) {
-            itemsList.remove(item);
-            found = true;
-        } else {
-            found = false;
-        }
-        return found;
-    }
 
     public Iterator<Item> getIterator() {
         return this.itemsList.iterator();

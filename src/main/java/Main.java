@@ -36,6 +36,8 @@ public class Main {
             } else if (option == 4) {
                 Printer.printBasket(basket.getItemList());
                 InputGetter.waitForEnter();
+            } else if (option == 5) {
+                basket = BasketController.removeFromBasket(basket);
             } else if (option == 0) {
                 break;
             }

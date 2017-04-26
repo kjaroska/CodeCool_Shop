@@ -10,6 +10,7 @@ import com.codecool.shop.ui.InputGetter;
 /**
  * Created by marek on 26.04.17.
  */
+@SuppressWarnings("ALL")
 public class BasketController {
 
     public static Basket addToBasket(Basket basket) {
@@ -32,6 +33,20 @@ public class BasketController {
         Integer quantity = InputGetter.getIntegerInput();
         Item item = new Item(product, quantity);
         basket.addProduct(item);
+        return basket;
+    }
+
+    public static Basket removeFromBasket(Basket basket) {
+        Printer.printBasket(basket.getItemList());
+        Printer.printObject("Which product you want to remove? ");
+        Integer itemId = InputGetter.getIntegerInput();
+        java.util.Iterator<Item> itemIter = basket.getIterator();
+        while (itemIter.hasNext()) {
+            Item item = itemIter.next();
+            if (item.getId().equals(itemId)) {
+                itemIter.remove();
+            }
+        }
         return basket;
     }
 }

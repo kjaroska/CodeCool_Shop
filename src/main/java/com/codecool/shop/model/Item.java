@@ -5,11 +5,14 @@ package com.codecool.shop.model;
  */
 public class Item {
 
-    private Product product;
-    private Integer quantity;
-    private Float totalPrice;
+    private static Integer nextId = 1;
+    private final Integer id;
+    private final Product product;
+    private final Integer quantity;
+    private final Float totalPrice;
 
     public Item(Product product, Integer quantity) {
+        this.id = Item.nextId++;
         this.product = product;
         this.quantity = quantity;
         this.totalPrice = product.getDefaultPrice() * quantity;
@@ -27,9 +30,14 @@ public class Item {
         return this.totalPrice;
     }
 
+    public Integer getId() {
+        return this.id;
+    }
+
     @Override
     public String toString() {
         return "Item: " +
+            "id=" + id +
             "product=" + product.getName() +
             ", quantity=" + quantity +
             ", totalPrice=" + totalPrice;

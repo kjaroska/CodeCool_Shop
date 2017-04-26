@@ -1,7 +1,7 @@
 package com.codecool.shop.view;
 
 import com.codecool.shop.controller.ProductIterator;
-import com.codecool.shop.model.Product;
+import com.codecool.shop.model.T;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -22,8 +22,8 @@ public class Printer {
         System.out.println(stringObject);
     }
 
-    public static void printBasket(ArrayList<Product> basket) {
-        Iterator<Product> iter = new ProductIterator(basket).Iterator();
+    public static void printBasket(ArrayList<T> basket) {
+        Iterator<T> iter = new ProductIterator(basket).Iterator();
         while (iter.hasNext()) {
             Object product = iter.next();
             System.out.print(product.toString());

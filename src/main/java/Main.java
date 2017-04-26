@@ -1,5 +1,5 @@
 
-import com.codecool.shop.model.Product;
+import com.codecool.shop.model.T;
 import com.codecool.shop.model.Basket;
 import com.codecool.shop.ui.inputGetter;
 import com.codecool.shop.view.Printer;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList<Product> newBasket = new ArrayList<>();
+        ArrayList<T> newBasket = new ArrayList<>();
         Basket basket = new Basket(newBasket);
         while (true) {
             Printer.printMenu();

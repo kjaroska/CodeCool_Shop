@@ -9,27 +9,25 @@ import java.util.Iterator;
  */
 public class Basket {
 
-    private final ArrayList<T> productList;
-    private final Iterator<T> iterator;
+    private final ArrayList<Item> itemsList;
 
-    public ArrayList<T> getProductList() {
-        return this.productList;
+    public ArrayList<Item> getItemList() {
+        return this.itemsList;
     }
 
-    public Basket(ArrayList<T> productList) {
-        this.productList = productList;
-        this.iterator = getIterator(this.productList);
+    public Basket(ArrayList<Item> items) {
+        this.itemsList = items;
     }
 
 
-    public void addProduct(T product) {
-        productList.add(product);
+    public void addProduct(Item item) {
+        itemsList.add(item);
     }
 
-    public boolean removeProduct(T product) {
+    public boolean removeProduct(Item item) {
         boolean found;
-        if (productList.contains(product)) {
-            productList.remove(product);
+        if (itemsList.contains(item)) {
+            itemsList.remove(item);
             found = true;
         } else {
             found = false;
@@ -37,8 +35,8 @@ public class Basket {
         return found;
     }
 
-    private Iterator<T> getIterator(ArrayList<T> productList) {
-        return new ProductIterator(productList).Iterator();
+    private Iterator<Item> getIterator(ArrayList<Item> items) {
+        return items.iterator();
     }
 
 }

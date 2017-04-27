@@ -1,13 +1,13 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.dao.SupplierDaoImpl;
 import com.codecool.shop.dao.ProductDaoImpl;
-import com.codecool.shop.model.Supplier;
+import com.codecool.shop.dao.SupplierDaoImpl;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.Supplier;
+import com.codecool.shop.ui.InputGetter;
 import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
 import java.util.Iterator;
-import com.codecool.shop.ui.InputGetter;
 
 public abstract class SupplierController {
 
@@ -17,7 +17,8 @@ public abstract class SupplierController {
             Printer.printObject(supplier.toString());
         }
     }
-    public static void productBySuppliers() {
+
+  public static ArrayList<Integer> productBySuppliers() {
         Printer.printObject("\nEnter Supplier's Id");
         Integer supplierId = InputGetter.getIntegerInput();
         Supplier supplier;
@@ -36,10 +37,13 @@ public abstract class SupplierController {
             }
         }
         Iterator<Product> iterProducts = productsFromSupplier.iterator();
+    ArrayList<Integer> productsIDs = new ArrayList<>();
         Printer.printObject("\n'"+ supplier.getName() +"' products:\n");
         while (iterProducts.hasNext()) {
             Product singleProduct = iterProducts.next();
             Printer.printObject(singleProduct.toString());
+          productsIDs.add(singleProduct.getId());
         }
+    return productsIDs;
     }
 }

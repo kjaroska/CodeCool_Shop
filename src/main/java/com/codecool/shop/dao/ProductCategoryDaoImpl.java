@@ -4,9 +4,6 @@ import com.codecool.shop.model.ProductCategory;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-/**
- * Created by marek on 25.04.17.
- */
 public class ProductCategoryDaoImpl implements ProductCategoryDao {
 
     @Override

@@ -14,7 +14,7 @@ public class Item {
         this.product = product;
         this.quantity = quantity;
         this.idBasket = idBasket;
-        this.totalPrice = product.getDefaultPrice() * quantity;
+        this.totalPrice = this.product.getDefaultPrice() * quantity;
     }
 
     public Item(Integer id, Product product, Integer quantity, Integer idBasket) {
@@ -22,7 +22,12 @@ public class Item {
         this.product = product;
         this.quantity = quantity;
         this.idBasket = idBasket;
-        this.totalPrice = product.getDefaultPrice() * quantity;
+        this.totalPrice = this.product.getDefaultPrice() * quantity;
+    }
+
+
+    public Integer getIdBasket() {
+        return this.idBasket;
     }
 
     public Product getProduct() {
@@ -38,7 +43,7 @@ public class Item {
     }
 
     public Float getTotalPrice() {
-        return this.product.getDefaultPrice() * this.quantity;
+        return this.totalPrice;
     }
 
     public Integer getId() {

@@ -19,4 +19,6 @@ public interface ProductDao {
 
     List<Product> getBy(ProductCategory productCategory);
 
+  List<Product> getByName(String name);
+
 }

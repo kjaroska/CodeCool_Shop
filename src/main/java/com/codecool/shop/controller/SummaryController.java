@@ -9,7 +9,7 @@ import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SummaryController {
+class SummaryController {
 
   private static void printOrderSummary(Basket basket) {
 

@@ -4,9 +4,6 @@ import com.codecool.shop.model.Basket;
 import com.codecool.shop.model.Item;
 import java.util.Iterator;
 
-/**
- * Created by marek on 27.04.17.
- */
 public class BasketDaoImpl implements BasketDao {
 
     @Override

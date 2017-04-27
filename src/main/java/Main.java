@@ -11,7 +11,10 @@ import com.codecool.shop.view.Menu;
 import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
 
-public class Main {
+/**
+ * 'O for a muse of fire!'
+ **/
+class Main {
 
   public static void main(String[] args) {
     try {

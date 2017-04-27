@@ -4,7 +4,7 @@ public class Item {
 
     private static Integer nextId = 1;
     private final Integer id;
-    private Integer idBasket;
+    private final Integer idBasket;
     private final Product product;
     private Integer quantity;
     private Float totalPrice;

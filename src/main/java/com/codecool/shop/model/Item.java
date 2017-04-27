@@ -42,10 +42,11 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item: " +
-            "id=" + id +
-            " product=" + product.getName() +
-            ", quantity=" + quantity +
-            ", totalPrice=" + totalPrice;
+        return String.format("Item: " +
+                "id=%1$d" +
+                " product=%2$s" +
+                ", quantity=%3$d" +
+                ", totalPrice=%4$.2f ",
+            id, product.getName(), quantity, totalPrice);
     }
 }

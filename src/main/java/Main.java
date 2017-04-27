@@ -56,10 +56,11 @@ public class Main {
             SummaryController.summary(basket);
             continue;
           case 8:
-            ProductController.showProductByName();
+            ArrayList<Integer> productByNameID;
+            productByNameID = ProductController.showProductByName();
+            basket = BasketController.productExist(basket, productByNameID);
             InputGetter.waitForEnter();
-            basket = BasketController.addToBasket(basket);
-              continue;
+            continue;
           case 0:
             break mainLoop;
           default:

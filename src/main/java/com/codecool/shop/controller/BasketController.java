@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public abstract class BasketController {
 
     public static Basket addToBasket(Basket basket, ArrayList<Integer> productFromCategoryIDs) {
-        Printer.printObject("Which product you want to add? ");
+      Printer.printObject("\nWhich product you want to add? ");
         Integer productId = idValidation(productFromCategoryIDs);
         Product product;
         while (true) {
@@ -44,30 +44,7 @@ public abstract class BasketController {
         return basket;
     }
 
-    public static Basket addToBasket(Basket basket) {
-        Printer.printObject("Which product you want to add? ");
-        Integer productId = InputGetter.getIntegerInput();
-        Product product;
-        while (true) {
-            try {
-                product = new ProductDaoImpl().find(productId);
-                Printer.printObject("How many " + product.getName() + " do you want? ");
-                if (product != null) {
-                    break;
-                }
-            } catch (Exception e) {
-                Printer.printObject(e + ", No product with given id");
-                Printer.printObject("Insert proper id: ");
-                productId = InputGetter.getIntegerInput();
-            }
-        }
-        Integer quantity = quantityCheck();
-        Item item = new Item(product, quantity, basket.getId());
-        basket.addProduct(item);
-        return basket;
-    }
-
-    public static Basket removeFromBasket(Basket basket) {
+  private static Basket removeFromBasket(Basket basket) {
         Printer.printBasket(basket.getItemList());
         Printer.printObject("Which product you want to remove? ");
         Integer itemId = InputGetter.getIntegerInput();
@@ -81,7 +58,7 @@ public abstract class BasketController {
         return basket;
     }
 
-    public static Basket editBasket(Basket basket) {
+  private static Basket editBasket(Basket basket) {
         Printer.printBasket(basket.getItemList());
         Printer.printObject("Which product you want to edit? ");
         Integer itemId = InputGetter.getIntegerInput();
@@ -121,29 +98,38 @@ public abstract class BasketController {
         return productId;
     }
 
-    public static Basket basketOptions(Basket basket, Menu menu) {
-        basketLoop:
-        //loop for basket menu
-        while (true) {
-            Printer.printBasket(basket.getItemList());
-            Printer.printMenu(menu.getBasketMenu());
-            Integer basketOption = InputGetter.getIntegerInput();
-            switch (basketOption) {
-                case 1:
-                    basket = BasketController.removeFromBasket(basket);
-                    continue;
-                case 2:
-                    basket = BasketController.editBasket(basket);
-                    continue;
-                case 3:
-                    SummaryController.summary(basket);
-                    continue;
-                case 0:
-                    break basketLoop;
-                default:
-                    System.out.println("Invalid input. Try again.");
-            }
-        }
-        return basket;
+  public static Basket productExist(Basket basket, ArrayList<Integer> productByNameID) {
+    if (productByNameID.isEmpty()) {
+      System.out.println("No matches for your query");
+    } else {
+      basket = BasketController.addToBasket(basket, productByNameID);
     }
+    return basket;
+  }
+
+  public static Basket basketOptions(Basket basket, Menu menu) {
+    basketLoop:
+    //loop for basket menu
+    while (true) {
+      Printer.printBasket(basket.getItemList());
+      Printer.printMenu(menu.getBasketMenu());
+      Integer basketOption = InputGetter.getIntegerInput();
+      switch (basketOption) {
+        case 1:
+          basket = BasketController.removeFromBasket(basket);
+          continue;
+        case 2:
+          basket = BasketController.editBasket(basket);
+          continue;
+        case 3:
+          SummaryController.summary(basket);
+          continue;
+        case 0:
+          break basketLoop;
+        default:
+          System.out.println("Invalid input. Try again.");
+      }
+    }
+    return basket;
+  }
 }

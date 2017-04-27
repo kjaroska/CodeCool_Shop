@@ -75,4 +75,31 @@ public class ProductDaoImpl implements ProductDao {
     }
     return listProducts;
   }
+
+  public ArrayList<Product> getByName(String searchName) {
+    ArrayList<Product> listProducts = new ArrayList<>();
+    String query = "SELECT * from Products WHERE name LIKE '%" + searchName + "%'";
+    ResultSet resultSet = Connector.getQueryResult(query);
+    try {
+      while (resultSet.next()) {
+        Integer id = resultSet.getInt("id");
+        String name = resultSet.getString("name");
+        Float price = resultSet.getFloat("price");
+        String description = resultSet.getString("description");
+        String currency = resultSet.getString("currency");
+        Integer idProductCategory = resultSet.getInt("id_productCategory");
+        Integer idSupplier = resultSet.getInt("id_supplier");
+        Supplier supplier = new SupplierDaoImpl().find(idSupplier);
+        ProductCategory productCategory = new ProductCategoryDaoImpl()
+            .find(idProductCategory);
+        Product newProduct = new Product(id, name, price, description, currency,
+            productCategory, supplier);
+        listProducts.add(newProduct);
+      }
+    } catch (Exception e) {
+      System.err.println(e.getClass().getName() + "in product :" + e.getMessage());
+      System.exit(0);
+    }
+    return listProducts;
+  }
 }

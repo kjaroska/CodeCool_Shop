@@ -59,6 +59,7 @@ public class Main {
             ProductController.showProductByName();
             InputGetter.waitForEnter();
             basket = BasketController.addToBasket(basket);
+              continue;
           case 0:
             break mainLoop;
           default:

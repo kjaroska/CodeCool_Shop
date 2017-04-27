@@ -1,20 +1,16 @@
 package com.codecool.shop.view;
 
-import com.codecool.shop.controller.ProductIterator;
-import com.codecool.shop.model.T;
+import com.codecool.shop.model.Item;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Printer {
     public static void printObject(String stringObject) {
         System.out.println(stringObject);
     }
 
-    public static void printBasket(ArrayList<T> basket) {
-        Iterator<T> iter = new ProductIterator(basket).Iterator();
-        while (iter.hasNext()) {
-            Object product = iter.next();
-            System.out.print(product.toString());
+    public static void printBasket(ArrayList<Item> basket) {
+        for (Item product : basket) {
+            System.out.println(product.toString());
         }
     }
 

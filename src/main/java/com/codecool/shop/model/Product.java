@@ -2,15 +2,14 @@ package com.codecool.shop.model;
 
 import java.util.Currency;
 
-public class T extends BaseModel {
+public class Product extends BaseModel {
 
     private Float defaultPrice;
     private Currency defaultCurrency;
     private ProductCategory productCategory;
     private Supplier supplier;
 
-
-    public T(Integer id, String name, Float defaultPrice, String description,
+    public Product(Integer id, String name, Float defaultPrice, String description,
         String currencyString, ProductCategory productCategory, Supplier supplier) {
         super(id, name, description);
         this.setPrice(defaultPrice, currencyString);

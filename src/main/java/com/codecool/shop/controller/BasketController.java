@@ -6,14 +6,33 @@ import com.codecool.shop.model.Item;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.view.Printer;
 import com.codecool.shop.ui.InputGetter;
-import com.codecool.shop.view.Menu;
-import com.codecool.shop.controller.BasketController;
-import com.codecool.shop.controller.SummaryController;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public abstract class BasketController {
+
+    public static Basket addToBasket(Basket basket, ArrayList<Integer> productFromCategoryIDs) {
+        Printer.printObject("Which product you want to add? ");
+        Integer productId = idValidation(productFromCategoryIDs);
+        Product product;
+        while (true) {
+            try {
+                product = new ProductDaoImpl().find(productId);
+                Printer.printObject("How many " + product.getName() + " do you want? ");
+                if (product != null) {
+                    break;
+                }
+            } catch (Exception e) {
+                Printer.printObject(e + ", No product with given id");
+                Printer.printObject("Insert proper id: ");
+                productId = InputGetter.getIntegerInput();
+            }
+        }
+        Integer quantity = quantityCheck();
+        Item item = new Item(product, quantity, basket.getId());
+        basket.addProduct(item);
+        return basket;
+    }
 
     public static Basket addToBasket(Basket basket) {
         Printer.printObject("Which product you want to add? ");
@@ -32,17 +51,8 @@ public abstract class BasketController {
                 productId = InputGetter.getIntegerInput();
             }
         }
-        Integer quantity;
-        while (true) {
-            quantity = InputGetter.getIntegerInput();
-            if (quantity <= 0) {
-                Printer.printObject("Quantity have to above 0");
-                Printer.printObject("Provide proper quantity of item: ");
-            } else {
-                break;
-            }
-        }
-        Item item = new Item(product, quantity);
+        Integer quantity = quantityCheck();
+        Item item = new Item(product, quantity, basket.getId());
         basket.addProduct(item);
         return basket;
     }
@@ -70,21 +80,34 @@ public abstract class BasketController {
             Item item = itemIter.next();
             if (item.getId().equals(itemId)) {
                 Printer.printObject("Insert new quantity of item in basket: ");
-                Integer newQuantity;
-                while (true) {
-                    newQuantity = InputGetter.getIntegerInput();
-                    if (newQuantity <= 0) {
-                        Printer.printObject("Quantity have to above 0");
-                        Printer.printObject("Provide proper quantity of item: ");
-                    } else {
-                        break;
-                    }
-                }
+                Integer newQuantity = quantityCheck();
                 item.setQuantity(newQuantity);
                 item.setTotalPrice(newQuantity * item.getProduct().getDefaultPrice());
             }
         }
         return basket;
     }
-}
 
+    private static Integer quantityCheck() {
+        Integer newQuantity;
+        while (true) {
+            newQuantity = InputGetter.getIntegerInput();
+            if (newQuantity <= 0) {
+                Printer.printObject("Quantity have to above 0");
+                Printer.printObject("Provide proper quantity of item: ");
+            } else {
+                break;
+            }
+        }
+        return newQuantity;
+    }
+
+    private static Integer idValidation(ArrayList<Integer> productFromCategoryIDs) {
+        Integer productId;
+        do {
+            System.out.println("Make sure you enter id from the list above.");
+            productId = InputGetter.getIntegerInput();
+        } while (!productFromCategoryIDs.contains(productId));
+        return productId;
+    }
+}

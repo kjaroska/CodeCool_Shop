@@ -1,14 +1,14 @@
 
 import com.codecool.shop.controller.BasketController;
-import com.codecool.shop.controller.SummaryController;
-import com.codecool.shop.model.Item;
-import com.codecool.shop.view.Menu;
-import com.codecool.shop.model.Basket;
-import com.codecool.shop.ui.InputGetter;
-import com.codecool.shop.view.Printer;
-import com.codecool.shop.controller.SupplierController;
 import com.codecool.shop.controller.ProductCategoryController;
 import com.codecool.shop.controller.ProductController;
+import com.codecool.shop.controller.SummaryController;
+import com.codecool.shop.controller.SupplierController;
+import com.codecool.shop.model.Basket;
+import com.codecool.shop.model.Item;
+import com.codecool.shop.ui.InputGetter;
+import com.codecool.shop.view.Menu;
+import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
 
 public class Main {
@@ -23,21 +23,24 @@ public class Main {
             Integer option = InputGetter.getIntegerInput();
         switch (option) {
           case 1:
+            ProductCategoryController.showAvailableCategories();
+            ArrayList<Integer> productFromCategoryIDs;
+            productFromCategoryIDs = ProductCategoryController.showProductsFromCategory();
+            basket = BasketController.addToBasket(basket, productFromCategoryIDs);
+            InputGetter.waitForEnter();
             continue;
           case 2:
-            ProductCategoryController.showAvailableCategories();
-            ProductCategoryController.showProductsFromCategory();
-            basket = BasketController.addToBasket(basket);
+            SupplierController.showAvailableSuppliers();
+            ArrayList<Integer> productFromSupplierIDs;
+            productFromSupplierIDs = SupplierController.productBySuppliers();
+            basket = BasketController.addToBasket(basket, productFromSupplierIDs);
             InputGetter.waitForEnter();
             continue;
           case 3:
-            SupplierController.showAvailableSuppliers();
-            SupplierController.productBySuppliers();
-            basket = BasketController.addToBasket(basket);
-            continue;
-          case 4:
-            ProductController.showAvailableProducts();
-            basket = BasketController.addToBasket(basket);
+            ArrayList<Integer> productFromAllIDs;
+            productFromAllIDs = ProductController.showAvailableProducts();
+            basket = BasketController.addToBasket(basket, productFromAllIDs);
+            InputGetter.waitForEnter();
             continue;
           case 0:
             break mainLoop;

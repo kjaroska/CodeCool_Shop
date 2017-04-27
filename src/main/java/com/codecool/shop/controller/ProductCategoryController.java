@@ -18,7 +18,7 @@ public abstract class ProductCategoryController {
         }
     }
 
-    public static void showProductsFromCategory() {
+  public static ArrayList<Integer> showProductsFromCategory() {
         Printer.printObject("Enter Product's Category ID:");
         Integer categoryId = InputGetter.getIntegerInput();
         ProductCategory productCategory;
@@ -37,10 +37,13 @@ public abstract class ProductCategoryController {
             }
         }
         java.util.Iterator<Product> iterProducts = new ProductIterator(productsFromCategory).Iterator();
+    ArrayList<Integer> productsIDs = new ArrayList<>();
         while (iterProducts.hasNext()) {
-            Product singleProduct = iterProducts.next();
-            Printer.printObject(singleProduct.toString());
+          Product singleProduct = iterProducts.next();
+          Printer.printObject(singleProduct.toString());
+          productsIDs.add(singleProduct.getId());
         }
+    return productsIDs;
     }
 
 }

@@ -11,11 +11,11 @@ import java.util.ArrayList;
 
 public abstract class BasketController {
 
-  public static Basket addToBasket(Basket basket, ArrayList<Integer> productFromCategoryIDs) {
-    Printer.printObject("\nWhich product you want to add?");
-    Integer productId = idValidation(productFromCategoryIDs);
+    public static Basket addToBasket(Basket basket, ArrayList<Integer> productFromCategoryIDs) {
+        Printer.printObject("Which product you want to add? ");
+        Integer productId = idValidation(productFromCategoryIDs);
         Product product;
-    while (true) {
+        while (true) {
             try {
                 product = new ProductDaoImpl().find(productId);
                 Printer.printObject("How many " + product.getName() + " do you want? ");
@@ -23,68 +23,91 @@ public abstract class BasketController {
                     break;
                 }
             } catch (Exception e) {
-              Printer.printObject(e + ", No product with given id.");
+                Printer.printObject(e + ", No product with given id");
                 Printer.printObject("Insert proper id: ");
                 productId = InputGetter.getIntegerInput();
             }
         }
-    Integer quantity = newQuantityCheck();
-        Item item = new Item(product, quantity);
+        Integer quantity = quantityCheck();
+        Item item = new Item(product, quantity, basket.getId());
         basket.addProduct(item);
         return basket;
     }
 
-  public static Basket editBasket(Basket basket) {
-    Printer.printBasket(basket.getItemList());
-    Printer.printObject("Which product you want to edit? ");
-    Integer itemId = InputGetter.getIntegerInput();
-    java.util.Iterator<Item> itemIter = basket.getIterator();
-    while (itemIter.hasNext()) {
-      Item item = itemIter.next();
-      if (item.getId().equals(itemId)) {
-        Printer.printObject("Insert new quantity of item in basket: ");
-        Integer newQuantity = newQuantityCheck();
-        item.setQuantity(newQuantity);
-        item.setTotalPrice(newQuantity * item.getProduct().getDefaultPrice());
-      }
+    public static Basket addToBasket(Basket basket) {
+        Printer.printObject("Which product you want to add? ");
+        Integer productId = InputGetter.getIntegerInput();
+        Product product;
+        while (true) {
+            try {
+                product = new ProductDaoImpl().find(productId);
+                Printer.printObject("How many " + product.getName() + " do you want? ");
+                if (product != null) {
+                    break;
+                }
+            } catch (Exception e) {
+                Printer.printObject(e + ", No product with given id");
+                Printer.printObject("Insert proper id: ");
+                productId = InputGetter.getIntegerInput();
+            }
+        }
+        Integer quantity = quantityCheck();
+        Item item = new Item(product, quantity, basket.getId());
+        basket.addProduct(item);
+        return basket;
     }
-    return basket;
-  }
 
-  public static Basket removeFromBasket(Basket basket) {
+    public static Basket removeFromBasket(Basket basket) {
         Printer.printBasket(basket.getItemList());
-    Printer.printObject("Which product you want to remove? ");
+        Printer.printObject("Which product you want to remove? ");
         Integer itemId = InputGetter.getIntegerInput();
         java.util.Iterator<Item> itemIter = basket.getIterator();
         while (itemIter.hasNext()) {
             Item item = itemIter.next();
             if (item.getId().equals(itemId)) {
-              itemIter.remove();
+                itemIter.remove();
             }
         }
-    return basket;
-  }
-
-  private static Integer newQuantityCheck() {
-    Integer newQuantity;
-    while (true) {
-      newQuantity = InputGetter.getIntegerInput();
-      if (newQuantity <= 0) {
-        Printer.printObject("Quantity have to above 0");
-        Printer.printObject("Provide proper quantity of item: ");
-      } else {
-        break;
-      }
+        return basket;
     }
-    return newQuantity;
-  }
 
-  private static Integer idValidation(ArrayList<Integer> productFromCategoryIDs) {
-    Integer productId;
-    do {
-      System.out.println("Make sure you enter id from the list above.");
-      productId = InputGetter.getIntegerInput();
-    } while (!productFromCategoryIDs.contains(productId));
-    return productId;
+    public static Basket editBasket(Basket basket) {
+        Printer.printBasket(basket.getItemList());
+        Printer.printObject("Which product you want to edit? ");
+        Integer itemId = InputGetter.getIntegerInput();
+        java.util.Iterator<Item> itemIter = basket.getIterator();
+        while (itemIter.hasNext()) {
+            Item item = itemIter.next();
+            if (item.getId().equals(itemId)) {
+                Printer.printObject("Insert new quantity of item in basket: ");
+                Integer newQuantity = quantityCheck();
+                item.setQuantity(newQuantity);
+                item.setTotalPrice(newQuantity * item.getProduct().getDefaultPrice());
+            }
+        }
+        return basket;
+    }
+
+    private static Integer quantityCheck() {
+        Integer newQuantity;
+        while (true) {
+            newQuantity = InputGetter.getIntegerInput();
+            if (newQuantity <= 0) {
+                Printer.printObject("Quantity have to above 0");
+                Printer.printObject("Provide proper quantity of item: ");
+            } else {
+                break;
+            }
+        }
+        return newQuantity;
+    }
+
+    private static Integer idValidation(ArrayList<Integer> productFromCategoryIDs) {
+        Integer productId;
+        do {
+            System.out.println("Make sure you enter id from the list above.");
+            productId = InputGetter.getIntegerInput();
+        } while (!productFromCategoryIDs.contains(productId));
+        return productId;
     }
 }

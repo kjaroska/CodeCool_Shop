@@ -48,6 +48,7 @@ public class Main {
             continue;
           case 5:
             basket = BasketController.basketOptions(basket, menu);
+              continue;
           case 0:
             break mainLoop;
           default:

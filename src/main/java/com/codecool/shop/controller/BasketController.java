@@ -79,7 +79,9 @@ public abstract class BasketController {
         Integer newQuantity;
         while (true) {
             newQuantity = InputGetter.getIntegerInput();
-            if (newQuantity <= 0) {
+            if (newQuantity > 1000) {
+                Printer.printObject("You are asking for too much. Try again: ");
+            } else if (newQuantity <= 0) {
                 Printer.printObject("Quantity have to above 0");
                 Printer.printObject("Provide proper quantity of item: ");
             } else {

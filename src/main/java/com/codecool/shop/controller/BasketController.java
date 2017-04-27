@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.view.Menu;
 import com.codecool.shop.dao.ProductDaoImpl;
 import com.codecool.shop.model.Basket;
 import com.codecool.shop.model.Item;
@@ -109,5 +110,31 @@ public abstract class BasketController {
             productId = InputGetter.getIntegerInput();
         } while (!productFromCategoryIDs.contains(productId));
         return productId;
+    }
+
+    public static Basket basketOptions(Basket basket, Menu menu) {
+        basketLoop:
+        //loop for basket menu
+        while (true) {
+            Printer.printBasket(basket.getItemList());
+            Printer.printMenu(menu.getBasketMenu());
+            Integer basketOption = InputGetter.getIntegerInput();
+            switch (basketOption) {
+                case 1:
+                    basket = BasketController.removeFromBasket(basket);
+                    continue;
+                case 2:
+                    basket = BasketController.editBasket(basket);
+                    continue;
+                case 3:
+                    SummaryController.summary(basket);
+                    continue;
+                case 0:
+                    break basketLoop;
+                default:
+                    System.out.println("Invalid input. Try again.");
+            }
+        }
+        return basket;
     }
 }

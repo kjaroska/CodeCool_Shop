@@ -13,7 +13,7 @@ public class Menu {
       "[4] SHOW ALL AVAILABLE PRODUCTS.",
       "[5] SHOW MY BASKET.",
 
-      "[Any other key] EXIT."));
+      "[Any other char] EXIT."));
 
   private final ArrayList<String> basketMenu = new ArrayList<>(Arrays.asList("Choose option",
       "[1] REMOVE ITEM FROM BASKET.",

@@ -23,52 +23,32 @@ public class Main {
             Integer option = InputGetter.getIntegerInput();
         switch (option) {
           case 1:
+              ProductController.showProductByName();
+              basket = BasketController.addToBasket(basket);
+              continue;
+            case 2:
             ProductCategoryController.showAvailableCategories();
             ArrayList<Integer> productFromCategoryIDs;
             productFromCategoryIDs = ProductCategoryController.showProductsFromCategory();
             basket = BasketController.addToBasket(basket, productFromCategoryIDs);
-            InputGetter.waitForEnter();
             continue;
-          case 2:
+            case 3:
             SupplierController.showAvailableSuppliers();
             ArrayList<Integer> productFromSupplierIDs;
             productFromSupplierIDs = SupplierController.productBySuppliers();
             basket = BasketController.addToBasket(basket, productFromSupplierIDs);
-            InputGetter.waitForEnter();
             continue;
-          case 3:
+            case 4:
             ArrayList<Integer> productFromAllIDs;
             productFromAllIDs = ProductController.showAvailableProducts();
             basket = BasketController.addToBasket(basket, productFromAllIDs);
-            InputGetter.waitForEnter();
             continue;
           case 0:
             break mainLoop;
           case 5:
-            basketLoop:
-            //loop for basket menu
-            while (true) {
-              Printer.printBasket(basket.getItemList());
-              Printer.printMenu(menu.getBasketMenu());
-              Integer basketOption = InputGetter.getIntegerInput();
-              switch (basketOption) {
-                case 1:
-                  basket = BasketController.removeFromBasket(basket);
-                  continue;
-                case 2:
-                  basket = BasketController.editBasket(basket);
-                  continue;
-                case 3:
-                  SummaryController.summary(basket);
-                  continue;
-                case 0:
-                  break basketLoop;
-                default:
-                  System.out.println("Invalid input. Try again.");
-              }
-            }
+              basket = BasketController.basketOptions(basket, menu);
           default:
-            System.out.println("Invalid input. Try again.");
+              System.out.println("Try again");
             }
         }
     }

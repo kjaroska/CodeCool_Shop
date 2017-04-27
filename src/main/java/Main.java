@@ -23,37 +23,47 @@ public class Main {
             Integer option = InputGetter.getIntegerInput();
         switch (option) {
           case 1:
+            continue;
+          case 2:
             ProductCategoryController.showAvailableCategories();
             ProductCategoryController.showProductsFromCategory();
             basket = BasketController.addToBasket(basket);
             InputGetter.waitForEnter();
             continue;
-          case 2:
+          case 3:
             SupplierController.showAvailableSuppliers();
             SupplierController.productBySuppliers();
-            InputGetter.waitForEnter();
-            basket = BasketController.addToBasket(basket);
-            continue;
-          case 3:
-            ProductController.showAvailableProducts();
-            InputGetter.waitForEnter();
             basket = BasketController.addToBasket(basket);
             continue;
           case 4:
-            Printer.printBasket(basket.getItemList());
-            InputGetter.waitForEnter();
-            continue;
-          case 5:
-            basket = BasketController.removeFromBasket(basket);
-            continue;
-          case 6:
-            basket = BasketController.editBasket(basket);
-            continue;
-          case 7:
-            SummaryController.summary(basket);
+            ProductController.showAvailableProducts();
+            basket = BasketController.addToBasket(basket);
             continue;
           case 0:
             break mainLoop;
+          case 5:
+            basketLoop:
+            //loop for basket menu
+            while (true) {
+              Printer.printBasket(basket.getItemList());
+              Printer.printMenu(menu.getBasketMenu());
+              Integer basketOption = InputGetter.getIntegerInput();
+              switch (basketOption) {
+                case 1:
+                  basket = BasketController.removeFromBasket(basket);
+                  continue;
+                case 2:
+                  basket = BasketController.editBasket(basket);
+                  continue;
+                case 3:
+                  SummaryController.summary(basket);
+                  continue;
+                case 0:
+                  break basketLoop;
+                default:
+                  System.out.println("Invalid input. Try again.");
+              }
+            }
           default:
             System.out.println("Invalid input. Try again.");
             }

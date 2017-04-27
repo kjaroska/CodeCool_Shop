@@ -6,6 +6,11 @@ import com.codecool.shop.model.Item;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.view.Printer;
 import com.codecool.shop.ui.InputGetter;
+import com.codecool.shop.view.Menu;
+import com.codecool.shop.controller.BasketController;
+import com.codecool.shop.controller.SummaryController;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public abstract class BasketController {
@@ -82,3 +87,4 @@ public abstract class BasketController {
         return basket;
     }
 }
+

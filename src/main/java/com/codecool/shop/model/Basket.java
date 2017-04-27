@@ -33,13 +33,18 @@ public class Basket {
 
     public Float setTotalPrice() {
         Float orderPrice = 0.0f;
-        Iterator<Item> iterItems = this.getIterator();
+        Iterator<Item> iterItems = this.itemsList.iterator();
         while (iterItems.hasNext()) {
             Item item = iterItems.next();
             orderPrice = orderPrice + item.getTotalPrice();
+            System.out.println(item.getTotalPrice());
         }
 
-        return this.totalPrice = orderPrice;
+        return orderPrice;
+    }
+
+    public void setTotalPrice(Float totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public ArrayList<Item> getItemList() {

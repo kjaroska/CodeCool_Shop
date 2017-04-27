@@ -52,6 +52,10 @@ public class Main {
           case 7:
             SummaryController.summary(basket);
             continue;
+          case 8:
+            ProductController.showProductByName();
+            InputGetter.waitForEnter();
+            basket = BasketController.addToBasket(basket);
           case 0:
             break mainLoop;
           default:

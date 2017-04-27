@@ -15,26 +15,29 @@ public abstract class ProductController {
     }
 
   public static ArrayList<Integer> showAvailableProducts() {
-        ArrayList<Product> products = new ProductDaoImpl().getAll();
-        Iterator<Product> productIterator = ProductController.getIterator(products);
+    ArrayList<Product> products = new ProductDaoImpl().getAll();
+    Iterator<Product> productIterator = ProductController.getIterator(products);
     ArrayList<Integer> productsIDs = new ArrayList<>();
-        while (productIterator.hasNext()) {
-            Product product = productIterator.next();
-            Printer.printObject(product.toString());
-          productsIDs.add(product.getId());
-        }
-    return productsIDs;
+    while (productIterator.hasNext()) {
+      Product product = productIterator.next();
+      Printer.printObject(product.toString());
+      productsIDs.add(product.getId());
     }
+    return productsIDs;
+  }
 
-  public static void showProductByName() {
+  public static ArrayList<Integer> showProductByName() {
     Printer.printObject("Enter Product's name: ");
     String productName = InputGetter.getStringInput();
     ArrayList<Product> products = new ProductDaoImpl().getByName(productName);
     Iterator<Product> productIterator = ProductController.getIterator(products);
+    ArrayList<Integer> productsIDs = new ArrayList<>();
     while (productIterator.hasNext()) {
       Product product = productIterator.next();
       Printer.printObject(product.toString());
+      productsIDs.add(product.getId());
     }
+    return productsIDs;
   }
 
 }

@@ -13,31 +13,8 @@ import java.util.ArrayList;
 public abstract class BasketController {
 
     public static Basket addToBasket(Basket basket, ArrayList<Integer> productFromCategoryIDs) {
-        Printer.printObject("Which product you want to add? ");
+      Printer.printObject("\nWhich product you want to add? ");
         Integer productId = idValidation(productFromCategoryIDs);
-        Product product;
-        while (true) {
-            try {
-                product = new ProductDaoImpl().find(productId);
-                Printer.printObject("How many " + product.getName() + " do you want? ");
-                if (product != null) {
-                    break;
-                }
-            } catch (Exception e) {
-                Printer.printObject(e + ", No product with given id");
-                Printer.printObject("Insert proper id: ");
-                productId = InputGetter.getIntegerInput();
-            }
-        }
-        Integer quantity = quantityCheck();
-        Item item = new Item(product, quantity, basket.getId());
-        basket.addProduct(item);
-        return basket;
-    }
-
-    public static Basket addToBasket(Basket basket) {
-        Printer.printObject("Which product you want to add? ");
-        Integer productId = InputGetter.getIntegerInput();
         Product product;
         while (true) {
             try {
@@ -111,6 +88,15 @@ public abstract class BasketController {
         } while (!productFromCategoryIDs.contains(productId));
         return productId;
     }
+
+  public static Basket productExist(Basket basket, ArrayList<Integer> productByNameID) {
+    if (productByNameID.isEmpty()) {
+      System.out.println("No matches for your query");
+    } else {
+      basket = BasketController.addToBasket(basket, productByNameID);
+    }
+    return basket;
+  }
 
     public static Basket basketOptions(Basket basket, Menu menu) {
         basketLoop:

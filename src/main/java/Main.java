@@ -43,6 +43,25 @@ public class Main {
             productFromAllIDs = ProductController.showAvailableProducts();
             basket = BasketController.addToBasket(basket, productFromAllIDs);
             continue;
+          case 4:
+            Printer.printBasket(basket.getItemList());
+            InputGetter.waitForEnter();
+            continue;
+          case 5:
+            basket = BasketController.removeFromBasket(basket);
+            continue;
+          case 6:
+            basket = BasketController.editBasket(basket);
+            continue;
+          case 7:
+            SummaryController.summary(basket);
+            continue;
+          case 8:
+            ArrayList<Integer> productByNameID;
+            productByNameID = ProductController.showProductByName();
+            basket = BasketController.productExist(basket, productByNameID);
+            InputGetter.waitForEnter();
+            continue;
           case 0:
             break mainLoop;
           case 5:

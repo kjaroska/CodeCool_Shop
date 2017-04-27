@@ -4,15 +4,30 @@ public class Item {
 
     private static Integer nextId = 1;
     private final Integer id;
+    private Integer idBasket;
     private final Product product;
     private Integer quantity;
     private Float totalPrice;
 
-    public Item(Product product, Integer quantity) {
+    public Item(Product product, Integer quantity, Integer idBasket) {
         this.id = Item.nextId++;
         this.product = product;
         this.quantity = quantity;
-        this.totalPrice = product.getDefaultPrice() * quantity;
+        this.idBasket = idBasket;
+        this.totalPrice = this.product.getDefaultPrice() * quantity;
+    }
+
+    public Item(Integer id, Product product, Integer quantity, Integer idBasket) {
+        this.id = id;
+        this.product = product;
+        this.quantity = quantity;
+        this.idBasket = idBasket;
+        this.totalPrice = this.product.getDefaultPrice() * quantity;
+    }
+
+
+    public Integer getIdBasket() {
+        return this.idBasket;
     }
 
     public Product getProduct() {
@@ -28,7 +43,7 @@ public class Item {
     }
 
     public Float getTotalPrice() {
-        return this.product.getDefaultPrice() * this.quantity;
+        return this.totalPrice;
     }
 
     public Integer getId() {
@@ -42,10 +57,11 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item: " +
-            "id=" + id +
-            " product=" + product.getName() +
-            ", quantity=" + quantity +
-            ", totalPrice=" + totalPrice;
+        return String.format("Item: " +
+                "id=%1$d" +
+                " product=%2$s" +
+                ", quantity=%3$d" +
+                ", totalPrice=%4$.2f ",
+            id, product.getName(), quantity, totalPrice);
     }
 }

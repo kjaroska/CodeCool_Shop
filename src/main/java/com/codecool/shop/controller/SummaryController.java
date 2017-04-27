@@ -1,6 +1,7 @@
 package com.codecool.shop.controller;
 
 
+import com.codecool.shop.dao.BasketDaoImpl;
 import com.codecool.shop.model.Basket;
 import com.codecool.shop.model.Item;
 import com.codecool.shop.ui.InputGetter;
@@ -11,16 +12,18 @@ import java.util.Arrays;
 public class SummaryController {
 
   private static void printOrderSummary(Basket basket) {
+
       Printer.printObject("Your order summary:");
-    Float orderPrice = 0.0f;
-    for (Item product : basket.getItemList()) {
-        Printer.printObject(product.toString());
-      orderPrice = orderPrice + product.getTotalPrice();
-    }
+      Float orderPrice = 0.0f;
+      for (Item product : basket.getItemList()) {
+          Printer.printObject(product.toString());
+          orderPrice = orderPrice + product.getTotalPrice();
+      }
       Printer.printObject("\nOrder overall price: " + orderPrice);
+      basket.setTotalPrice(orderPrice);
   }
 
-  private static void printFakePayment() {
+    private static void printFakePayment(Basket basket) {
     ArrayList<String> paymentOptions = new ArrayList<>(Arrays.asList("Choose option",
         "[1] PAY IN CASH.", "[2] PAY BY CARD.", "[3] OTHER.",
         "[0] EXIT."));
@@ -47,6 +50,7 @@ public class SummaryController {
             Printer.printObject("Invalid Input. Try again.\n");
       }
     }
+        new BasketDaoImpl().add(basket);
   }
 
   public static void summary(Basket basket) {
@@ -57,7 +61,7 @@ public class SummaryController {
       Integer userInput = InputGetter.getIntegerInput();
       switch (userInput) {
         case 1:
-          printFakePayment();
+            printFakePayment(basket);
         case 0:
           break loop;
         default:

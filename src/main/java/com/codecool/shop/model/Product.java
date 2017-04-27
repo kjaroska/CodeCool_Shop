@@ -37,7 +37,7 @@ public class Product extends BaseModel {
         return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency.toString();
     }
 
-    public void setPrice(float price, String currency) {
+    private void setPrice(float price, String currency) {
         this.defaultPrice = price;
         this.defaultCurrency = Currency.getInstance(currency);
     }
@@ -46,7 +46,7 @@ public class Product extends BaseModel {
         return productCategory;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
+    private void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
         this.productCategory.addProduct(this);
     }
@@ -55,7 +55,7 @@ public class Product extends BaseModel {
         return supplier;
     }
 
-    public void setSupplier(Supplier supplier) {
+    private void setSupplier(Supplier supplier) {
         this.supplier = supplier;
         this.supplier.addProduct(this);
     }
@@ -64,7 +64,7 @@ public class Product extends BaseModel {
     public String toString() {
         return String.format("id: %1$d, " +
                         "name: %2$s, " +
-                        "defaultPrice: %3$f, " +
+                "defaultPrice: %3$.2f, " +
                         "defaultCurrency: %4$s, " +
                         "productCategory: %5$s, " +
                         "supplier: %6$s",

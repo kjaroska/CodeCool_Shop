@@ -7,16 +7,25 @@ import java.util.Arrays;
 public class Menu {
 
   private final ArrayList<String> mainMenu = new ArrayList<>(Arrays.asList("Choose option",
-      "[1] SHOW PRODUCTS BY PRODUCT CATEGORY.", "[2] SHOW PRODUCTS BY SUPPLIER.",
-      "[3] SHOW ALL AVAILABLE PRODUCTS.",
-      "[4] SHOW MY BASKET.",
-      "[5] REMOVE ITEM FROM BASKET.",
-      "[6] EDIT ITEM QUANTITY IN BASKET",
-      "[7] ORDER SUMMARY",
-      "[8] SEARCH PRODUCT BY NAME",
-      "[0] EXIT."));
+      "[1] FIND PRODUCT BY NAME.",
+      "[2] SHOW PRODUCTS BY PRODUCT CATEGORY.",
+      "[3] SHOW PRODUCTS BY SUPPLIER.",
+      "[4] SHOW ALL AVAILABLE PRODUCTS.",
+      "[5] SHOW MY BASKET.",
+
+      "[Any other char] EXIT."));
+
+  private final ArrayList<String> basketMenu = new ArrayList<>(Arrays.asList("Choose option",
+      "[1] REMOVE ITEM FROM BASKET.",
+      "[2] EDIT ITEM QUANTITY IN BASKET",
+      "[3] ORDER SUMMARY",
+      "[0] BACK TO MAIN MENU"));
 
   public ArrayList<String> getMainMenu() {
     return mainMenu;
+  }
+
+  public ArrayList<String> getBasketMenu() {
+    return basketMenu;
   }
 }

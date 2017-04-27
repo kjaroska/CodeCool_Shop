@@ -1,18 +1,20 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.view.Menu;
 import com.codecool.shop.dao.ProductDaoImpl;
 import com.codecool.shop.model.Basket;
 import com.codecool.shop.model.Item;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.view.Printer;
 import com.codecool.shop.ui.InputGetter;
+import java.util.ArrayList;
 
 
 public abstract class BasketController {
 
-    public static Basket addToBasket(Basket basket) {
-        Printer.printObject("Which product you want to add? ");
-        Integer productId = InputGetter.getIntegerInput();
+    public static Basket addToBasket(Basket basket, ArrayList<Integer> productFromCategoryIDs) {
+      Printer.printObject("\nWhich product you want to add? ");
+        Integer productId = idValidation(productFromCategoryIDs);
         Product product;
         while (true) {
             try {
@@ -27,22 +29,13 @@ public abstract class BasketController {
                 productId = InputGetter.getIntegerInput();
             }
         }
-        Integer quantity;
-        while (true) {
-            quantity = InputGetter.getIntegerInput();
-            if (quantity <= 0) {
-                Printer.printObject("Quantity have to above 0");
-                Printer.printObject("Provide proper quantity of item: ");
-            } else {
-                break;
-            }
-        }
-        Item item = new Item(product, quantity);
+        Integer quantity = quantityCheck();
+        Item item = new Item(product, quantity, basket.getId());
         basket.addProduct(item);
         return basket;
     }
 
-    public static Basket removeFromBasket(Basket basket) {
+  private static Basket removeFromBasket(Basket basket) {
         Printer.printBasket(basket.getItemList());
         Printer.printObject("Which product you want to remove? ");
         Integer itemId = InputGetter.getIntegerInput();
@@ -56,7 +49,7 @@ public abstract class BasketController {
         return basket;
     }
 
-    public static Basket editBasket(Basket basket) {
+  private static Basket editBasket(Basket basket) {
         Printer.printBasket(basket.getItemList());
         Printer.printObject("Which product you want to edit? ");
         Integer itemId = InputGetter.getIntegerInput();
@@ -65,20 +58,69 @@ public abstract class BasketController {
             Item item = itemIter.next();
             if (item.getId().equals(itemId)) {
                 Printer.printObject("Insert new quantity of item in basket: ");
-                Integer newQuantity;
-                while (true) {
-                    newQuantity = InputGetter.getIntegerInput();
-                    if (newQuantity <= 0) {
-                        Printer.printObject("Quantity have to above 0");
-                        Printer.printObject("Provide proper quantity of item: ");
-                    } else {
-                        break;
-                    }
-                }
+                Integer newQuantity = quantityCheck();
                 item.setQuantity(newQuantity);
                 item.setTotalPrice(newQuantity * item.getProduct().getDefaultPrice());
             }
         }
         return basket;
     }
+
+    private static Integer quantityCheck() {
+        Integer newQuantity;
+        while (true) {
+            newQuantity = InputGetter.getIntegerInput();
+            if (newQuantity <= 0) {
+                Printer.printObject("Quantity have to above 0");
+                Printer.printObject("Provide proper quantity of item: ");
+            } else {
+                break;
+            }
+        }
+        return newQuantity;
+    }
+
+    private static Integer idValidation(ArrayList<Integer> productFromCategoryIDs) {
+        Integer productId;
+        do {
+            System.out.println("Make sure you enter id from the list above.");
+            productId = InputGetter.getIntegerInput();
+        } while (!productFromCategoryIDs.contains(productId));
+        return productId;
+    }
+
+  public static Basket productExist(Basket basket, ArrayList<Integer> productByNameID) {
+    if (productByNameID.isEmpty()) {
+      System.out.println("No matches for your query");
+    } else {
+      basket = BasketController.addToBasket(basket, productByNameID);
+    }
+    return basket;
+  }
+
+  public static Basket basketOptions(Basket basket, Menu menu) {
+    basketLoop:
+    //loop for basket menu
+    while (true) {
+      Printer.printBasket(basket.getItemList());
+      Printer.printMenu(menu.getBasketMenu());
+      Integer basketOption = InputGetter.getIntegerInput();
+      switch (basketOption) {
+        case 1:
+          basket = BasketController.removeFromBasket(basket);
+          continue;
+        case 2:
+          basket = BasketController.editBasket(basket);
+          continue;
+        case 3:
+          SummaryController.summary(basket);
+          continue;
+        case 0:
+          break basketLoop;
+        default:
+          System.out.println("Invalid input. Try again.");
+      }
+    }
+    return basket;
+  }
 }

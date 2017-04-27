@@ -12,11 +12,7 @@ public class SummaryController {
 
   private static void printOrderSummary(Basket basket) {
       Printer.printObject("Your order summary:");
-    Float orderPrice = 0.0f;
-    for (Item product : basket.getItemList()) {
-        Printer.printObject(product.toString());
-      orderPrice = orderPrice + product.getTotalPrice();
-    }
+      Float orderPrice = basket.getTotalPrice();
       Printer.printObject("\nOrder overall price: " + orderPrice);
   }
 

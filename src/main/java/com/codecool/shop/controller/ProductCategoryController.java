@@ -31,7 +31,7 @@ public abstract class ProductCategoryController {
                     break;
                 }
             } catch (Exception e) {
-                Printer.printObject("No Supplier with given id");
+                Printer.printObject("No Product Category with given id");
                 Printer.printObject("Insert proper id: ");
                 categoryId = InputGetter.getIntegerInput();
             }

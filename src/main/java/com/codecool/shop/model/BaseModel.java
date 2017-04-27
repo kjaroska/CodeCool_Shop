@@ -5,15 +5,15 @@ import java.lang.reflect.Field;
 
 public class BaseModel {
 
-    protected Integer id;
-    protected String name;
-    protected String description;
+    Integer id;
+    String name;
+    String description;
 
     public BaseModel(String name) {
         this.name = name;
     }
 
-    public BaseModel(Integer id, String name, String description) {
+    BaseModel(Integer id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;

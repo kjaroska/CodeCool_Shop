@@ -31,11 +31,9 @@ public class Basket {
         return this.totalPrice;
     }
 
-    public Float setTotalPrice() {
+    private Float setTotalPrice() {
         Float orderPrice = 0.0f;
-        Iterator<Item> iterItems = this.itemsList.iterator();
-        while (iterItems.hasNext()) {
-            Item item = iterItems.next();
+        for (Item item : this.itemsList) {
             orderPrice = orderPrice + item.getTotalPrice();
             System.out.println(item.getTotalPrice());
         }

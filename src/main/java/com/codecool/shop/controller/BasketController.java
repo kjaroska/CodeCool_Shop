@@ -37,7 +37,7 @@ public abstract class BasketController {
                 break;
             }
         }
-        Item item = new Item(product, quantity);
+        Item item = new Item(product, quantity, basket.getId());
         basket.addProduct(item);
         return basket;
     }

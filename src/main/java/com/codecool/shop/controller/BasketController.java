@@ -30,8 +30,17 @@ public abstract class BasketController {
             }
         }
         Integer quantity = quantityCheck();
+        Boolean found = false;
         Item item = new Item(product, quantity, basket.getId());
-        basket.addProduct(item);
+        for (Item existingItem : basket.getItemList()) {
+            if (existingItem.getProduct().getName().equals(item.getProduct().getName())) {
+                found = true;
+                existingItem.setQuantity(existingItem.getQuantity() + item.getQuantity());
+            }
+        }
+        if (!found) {
+            basket.addProduct(item);
+        }
         return basket;
     }
 

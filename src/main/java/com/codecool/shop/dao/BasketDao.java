@@ -6,7 +6,7 @@ import com.codecool.shop.model.Item;
 
 interface BasketDao {
 
-    void add(Basket basket);
+    void add(Basket basket, String clientFullname, String clientAdress);
 
     Basket find(Integer id);
 

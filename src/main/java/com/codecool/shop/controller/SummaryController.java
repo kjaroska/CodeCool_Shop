@@ -54,7 +54,7 @@ class SummaryController {
             Printer.printObject("Invalid Input. Try again.\n");
       }
     }
-        new BasketDaoImpl().add(basket);
+      new BasketDaoImpl().add(basket, fullName, deliveryAdress);
   }
 
   public static void summary(Basket basket) {

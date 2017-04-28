@@ -7,8 +7,8 @@ import java.util.Iterator;
 public class BasketDaoImpl implements BasketDao {
 
     @Override
-    public void add(Basket basket) {
-        Connector.addBasketToDb(basket);
+    public void add(Basket basket, String FullName, String Adress) {
+        Connector.addBasketToDb(basket, FullName, Adress);
         Iterator<Item> iterBasket = basket.getIterator();
         while (iterBasket.hasNext()) {
             Item item = iterBasket.next();

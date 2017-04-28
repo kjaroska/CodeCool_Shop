@@ -6,6 +6,7 @@ import com.codecool.shop.model.Basket;
 import com.codecool.shop.model.Item;
 import com.codecool.shop.ui.InputGetter;
 import com.codecool.shop.view.Printer;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,11 +24,14 @@ class SummaryController {
       basket.setTotalPrice(orderPrice);
   }
 
-    private static void printFakePayment(Basket basket) {
-    ArrayList<String> paymentOptions = new ArrayList<>(Arrays.asList("Choose option",
+  private static void printFakePayment(Basket basket, String fullName, String deliveryAdress) {
+    ArrayList<String> paymentOptions = new ArrayList<>(Arrays.asList("\nChoose option",
         "[1] PAY IN CASH.", "[2] PAY BY CARD.", "[3] OTHER.",
         "[0] EXIT."));
-      Integer userInput;
+    Integer userInput;
+
+    Printer
+        .printObject("\nYour full name: " + fullName + "\nYour delivery adress: " + deliveryAdress);
     loop:
     while (true) {
       for (String option : paymentOptions) {
@@ -61,12 +65,25 @@ class SummaryController {
       Integer userInput = InputGetter.getIntegerInput();
       switch (userInput) {
         case 1:
-            printFakePayment(basket);
+          String fullName = getFullName();
+          String deliveryAddress = getDeliveryAddress();
+          printFakePayment(basket, fullName, deliveryAddress);
         case 0:
           break loop;
         default:
             Printer.printObject("Invalid input. Try again.\n");
       }
     }
+  }
+
+  public static String getFullName() {
+
+    Printer.printObject("Enter your full name: ");
+    return InputGetter.getLineInput();
+  }
+
+  public static String getDeliveryAddress() {
+    Printer.printObject("Enter your delivery address: ");
+    return InputGetter.getLineInput();
   }
 }

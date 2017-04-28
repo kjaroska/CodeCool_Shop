@@ -19,7 +19,7 @@ public class InputGetter {
         return scanner.next();
     }
 
-  private static String getLineInput() {
+  public static String getLineInput() {
         Scanner scanner = getScanner();
         return scanner.nextLine();
     }

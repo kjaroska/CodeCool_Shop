@@ -25,6 +25,7 @@ public class Application {
 
     public void run() {
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
+        staticFileLocation("/public");
 
         port(8888);
 

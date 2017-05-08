@@ -1,23 +1,24 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="copy">
+<div th:fragment="navcopy">
   <div class="panel panel-default">
     <div class="panel-body">
       <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">CodecoolShop</a>
+            <a class="navbar-brand" href="#"><i class="glyphicon glyphicon-grain"></i> CodecoolShop
+              <i class="glyphicon glyphicon-grain"></i> </a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="#">Home <i class="glyphicon glyphicon-home"></i> </a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Category
                 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#">Agd</a></li>
                 <li><a href="#">Clothing</a></li>
-                <li><a href="#">Home&Garden</a></li>
+                <li><a href="#">Garden</a></li>
                 <li><a href="#">Sport</a></li>
                 <li><a href="#">Rtv</a></li>
               </ul>
@@ -29,14 +30,14 @@
                 <li><a href="#">Apple</a></li>
                 <li><a href="#">Alfa</a></li>
                 <li><a href="#">Giant</a></li>
-                <li><a href="#">H&M</a></li>
+                <li><a href="#">HM</a></li>
                 <li><a href="#">Ikea</a></li>
                 <li><a href="#">Nike</a></li>
               </ul>
             </li>
             <form class="navbar-form navbar-left">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="search product">
+                <input type="text" class="form-control" placeholder="search product"/>
                 <div class="input-group-btn">
                   <button class="btn btn-default" type="submit">
                     <i class="glyphicon glyphicon-search"></i>
@@ -44,8 +45,9 @@
                 </div>
               </div>
             </form>
-            <li><a href="#">Your Basket</a></li>
-            <li><a href="#">Login</a></li>
+            <li><a href="#">Basket <i class="glyphicon glyphicon-calendar"></i> </a></li>
+
+            <li><a href="#">Login <i class="glyphicon glyphicon-user"></i> </a></li>
           </ul>
         </div>
       </nav>

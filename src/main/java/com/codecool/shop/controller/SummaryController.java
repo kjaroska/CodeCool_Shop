@@ -40,13 +40,15 @@ class SummaryController {
       userInput = InputGetter.getIntegerInput();
       switch (userInput) {
         case 1:
-            Printer.printObject("You are paying in cash.");
+            Printer.printObject("\nYou are paying in cash.");
           break loop;
         case 2:
-            Printer.printObject("You are paying by card.");
+            Printer.printObject("\nYou are paying by card.\n");
+            cardVerification();
+            Printer.printObject("\nPayment successful\n");
           break loop;
         case 3:
-            Printer.printObject("You are having fun!");
+            Printer.printObject("\nYou are having fun!");
           break loop;
         case 0:
             break loop;
@@ -57,7 +59,7 @@ class SummaryController {
       new BasketDaoImpl().add(basket, fullName, deliveryAdress);
   }
 
-  public static void summary(Basket basket) {
+    static void summary(Basket basket) {
     printOrderSummary(basket);
     loop:
     while (true) {
@@ -76,14 +78,32 @@ class SummaryController {
     }
   }
 
-  public static String getFullName() {
+    private static String getFullName() {
 
     Printer.printObject("Enter your full name: ");
     return InputGetter.getLineInput();
   }
 
-  public static String getDeliveryAddress() {
+    private static String getDeliveryAddress() {
     Printer.printObject("Enter your delivery address: ");
     return InputGetter.getLineInput();
   }
+
+    private static void cardVerification() {
+        ArrayList<String> cardData = new ArrayList<>();
+        String cardNumber = "";
+        String cardVerificationCode = "";
+        while (cardNumber.length() != 16 && (cardVerificationCode.length() != 4
+            || cardVerificationCode.length() != 3)) {
+            Printer.printObject("Enter your card number(16 digits): ");
+            cardNumber = InputGetter.getLineInput();
+            Printer.printObject("Enter CVC code(3 or 4 digits): ");
+            cardVerificationCode = InputGetter.getLineInput();
+        }
+        Printer.printObject("Enter card's expiration date(mm/yy): ");
+        String expirationDate = InputGetter.getLineInput();
+        cardData.add(cardNumber);
+        cardData.add(cardVerificationCode);
+        cardData.add(expirationDate);
+    }
 }

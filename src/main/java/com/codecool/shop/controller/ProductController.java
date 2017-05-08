@@ -6,7 +6,13 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.ui.InputGetter;
 import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
 
 public abstract class ProductController {
 
@@ -40,4 +46,11 @@ public abstract class ProductController {
     return productsIDs;
   }
 
+  public static Object renderProducts(Request req, Response res) {
+    Map<String, ArrayList<Product>> params = new HashMap<>();
+    List<Product> products = new ProductDaoImpl().getAll();
+    params.put("products", (ArrayList<Product>) products);
+    ModelAndView modelAndView = new ModelAndView(params, "product/index");
+    return modelAndView;
+  }
 }

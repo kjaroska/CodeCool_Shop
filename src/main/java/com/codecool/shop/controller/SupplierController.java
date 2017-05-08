@@ -8,6 +8,8 @@ import com.codecool.shop.ui.InputGetter;
 import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
 import java.util.Iterator;
+import spark.Request;
+import spark.Response;
 
 public abstract class SupplierController {
 
@@ -18,9 +20,8 @@ public abstract class SupplierController {
         }
     }
 
-  public static ArrayList<Integer> productBySuppliers() {
-        Printer.printObject("\nEnter Supplier's Id");
-        Integer supplierId = InputGetter.getIntegerInput();
+    public static ArrayList<Product> productBySuppliers(Request req, Response res) {
+        Integer supplierId = Integer.parseInt(req.params(":id"));
         Supplier supplier;
         ArrayList<Product> productsFromSupplier;
         while (true) {
@@ -31,19 +32,8 @@ public abstract class SupplierController {
                     break;
                 }
             } catch (Exception e) {
-                Printer.printObject("No Supplier with given id");
-                Printer.printObject("Insert proper id: ");
-                supplierId = InputGetter.getIntegerInput();
             }
         }
-        Iterator<Product> iterProducts = productsFromSupplier.iterator();
-    ArrayList<Integer> productsIDs = new ArrayList<>();
-        Printer.printObject("\n'"+ supplier.getName() +"' products:\n");
-        while (iterProducts.hasNext()) {
-            Product singleProduct = iterProducts.next();
-            Printer.printObject(singleProduct.toString());
-          productsIDs.add(singleProduct.getId());
-        }
-    return productsIDs;
+        return productsFromSupplier;
     }
 }

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="author" content="Codecool"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <title>Codecool Shop</title>
+
+  <!-- Latest compiled and minified Jquery -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+          integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+          crossorigin="anonymous"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous"/>
+
+  <!-- Optional theme -->
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous"/>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+          crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="/css/custom.css"/>
+</head>
+<body>
+<div th:fragment="copy">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">CodecoolShop</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Category
+                <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Agd</a></li>
+                <li><a href="#">Clothing</a></li>
+                <li><a href="#">Home&Garden</a></li>
+                <li><a href="#">Sport</a></li>
+                <li><a href="#">Rtv</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Supplier
+                <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Apple</a></li>
+                <li><a href="#">Alfa</a></li>
+                <li><a href="#">Giant</a></li>
+                <li><a href="#">H&M</a></li>
+                <li><a href="#">Ikea</a></li>
+                <li><a href="#">Nike</a></li>
+              </ul>
+            </li>
+            <form class="navbar-form navbar-left">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="search product">
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+            <li><a href="#">Your Basket</a></li>
+            <li><a href="#">Login</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

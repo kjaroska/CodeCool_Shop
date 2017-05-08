@@ -8,6 +8,7 @@ import static spark.Spark.staticFileLocation;
 
 import com.codecool.shop.controller.ProductCategoryController;
 import com.codecool.shop.controller.ProductController;
+import com.codecool.shop.controller.SupplierController;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -48,6 +49,16 @@ public class Application {
                 return new ThymeleafTemplateEngine()
                     .render(new ModelAndView(ProductController.renderProducts(
                         ProductCategoryController.showProductsFromCategory(req, res)),
+                        "product/index"));
+            }
+        });
+        get("/Supplier/:id", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                // process request
+                return new ThymeleafTemplateEngine()
+                    .render(new ModelAndView(ProductController.renderProducts(
+                        SupplierController.productBySuppliers(req, res)),
                         "product/index"));
             }
         });

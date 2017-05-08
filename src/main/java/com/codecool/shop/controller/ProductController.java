@@ -20,16 +20,9 @@ public abstract class ProductController {
         return new ProductIterator(productList).Iterator();
     }
 
-  public static ArrayList<Integer> showAvailableProducts() {
+  public static ArrayList<Product> showAvailableProducts() {
     ArrayList<Product> products = new ProductDaoImpl().getAll();
-    Iterator<Product> productIterator = ProductController.getIterator(products);
-    ArrayList<Integer> productsIDs = new ArrayList<>();
-    while (productIterator.hasNext()) {
-      Product product = productIterator.next();
-      Printer.printObject(product.toString());
-      productsIDs.add(product.getId());
-    }
-    return productsIDs;
+    return products;
   }
 
   public static ArrayList<Integer> showProductByName() {
@@ -46,11 +39,10 @@ public abstract class ProductController {
     return productsIDs;
   }
 
-  public static Object renderProducts(Request req, Response res) {
+  public static Map<String, ArrayList<Product>> renderProducts(List<Product> products) {
     Map<String, ArrayList<Product>> params = new HashMap<>();
-    List<Product> products = new ProductDaoImpl().getAll();
+
     params.put("products", (ArrayList<Product>) products);
-    ModelAndView modelAndView = new ModelAndView(params, "product/index");
-    return modelAndView;
+    return params;
   }
 }

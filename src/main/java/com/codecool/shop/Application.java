@@ -4,8 +4,10 @@ package com.codecool.shop;
 import static spark.Spark.exception;
 import static spark.Spark.get;
 import static spark.Spark.port;
+import static spark.Spark.post;
 import static spark.Spark.staticFileLocation;
 
+import com.codecool.shop.controller.BasketController;
 import com.codecool.shop.controller.ProductCategoryController;
 import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.controller.SupplierController;
@@ -13,8 +15,6 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Route;
-import spark.RouteImpl;
-import spark.route.Routes;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 /**
@@ -22,7 +22,9 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
  */
 public class Application {
 
+    BasketController basketController;
     public Application() {
+        this.basketController = new BasketController();
         run();
     }
 
@@ -42,6 +44,7 @@ public class Application {
                         "product/index"));
             }
         });
+
         get("/Category/:id", new Route() {
             @Override
             public Object handle(Request req, Response res) {
@@ -52,6 +55,7 @@ public class Application {
                         "product/index"));
             }
         });
+
         get("/Supplier/:id", new Route() {
             @Override
             public Object handle(Request req, Response res) {
@@ -60,6 +64,18 @@ public class Application {
                     .render(new ModelAndView(ProductController.renderProducts(
                         SupplierController.productBySuppliers(req, res)),
                         "product/index"));
+            }
+        });
+
+        post("/basket/add", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                Integer productId = Integer.parseInt(req.queryParams("productId"));
+                basketController.setBasket(
+                    basketController.addToBasket(basketController.getBasket(), productId));
+                System.out.println(basketController.getBasket().getItemList());
+                res.redirect("/product/all");
+                return "";
             }
         });
     }

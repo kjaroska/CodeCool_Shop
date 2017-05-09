@@ -4,10 +4,7 @@ import com.codecool.shop.dao.ProductDaoImpl;
 import com.codecool.shop.dao.SupplierDaoImpl;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Supplier;
-import com.codecool.shop.ui.InputGetter;
-import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
-import java.util.Iterator;
 import spark.Request;
 import spark.Response;
 

@@ -11,9 +11,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
 
 public abstract class ProductController {
 

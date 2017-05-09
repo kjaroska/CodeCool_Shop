@@ -66,6 +66,16 @@ public class Application {
                         "product/index"));
             }
         });
+        get("/basket", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                // process request
+                return new ThymeleafTemplateEngine()
+                    .render(new ModelAndView(basketController.renderProducts(
+                        basketController.getBasket()),
+                        "product/basket"));
+            }
+        });
 
         post("/basket/add", new Route() {
             @Override
@@ -73,7 +83,6 @@ public class Application {
                 Integer productId = Integer.parseInt(req.queryParams("productId"));
                 basketController.setBasket(
                     basketController.addToBasket(basketController.getBasket(), productId));
-                System.out.println(basketController.getBasket().getItemList());
                 res.redirect("/product/all");
                 return "";
             }

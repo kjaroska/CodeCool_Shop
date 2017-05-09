@@ -8,6 +8,8 @@ import com.codecool.shop.ui.InputGetter;
 import com.codecool.shop.view.Menu;
 import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class BasketController {
@@ -125,6 +127,13 @@ public class BasketController {
     }
     return basket;
   }
+
+    public static Map<String, ArrayList<Item>> renderProducts(Basket basket) {
+        Map<String, ArrayList<Item>> params = new HashMap<>();
+
+        params.put("basket", basket.getItemList());
+        return params;
+    }
 
     public Basket getBasket() {
         return basket;

@@ -91,5 +91,25 @@ public class Application {
                 return "";
             }
         });
+
+        post("/basket/remove", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                basketController.setBasket(
+                    basketController.removeFromBasket(basketController.getBasket(), req));
+                res.redirect("/basket");
+                return "";
+            }
+        });
+
+        post("/item/edit", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                basketController.setBasket(
+                    basketController.editBasket(basketController.getBasket(), req));
+                res.redirect("/basket");
+                return "";
+            }
+        });
     }
 }

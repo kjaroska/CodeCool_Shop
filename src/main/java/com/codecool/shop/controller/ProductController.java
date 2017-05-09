@@ -3,23 +3,19 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductDaoImpl;
 import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.ui.InputGetter;
-import com.codecool.shop.view.Printer;
-import spark.Request;
-import spark.Response;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import sun.misc.Request;
 
 public abstract class ProductController {
 
     private static java.util.Iterator<Product> getIterator(ArrayList<Product> productList) {
         return new ProductIterator(productList).Iterator();
     }
+
 
     public static ArrayList<Product> showAvailableProducts() {
         ArrayList<Product> products = new ProductDaoImpl().getAll();
@@ -31,6 +27,7 @@ public abstract class ProductController {
         System.out.println(productName);
         ArrayList<Product> products = new ProductDaoImpl().getByName(productName);
         return products;
+
     }
 
     public static Map<String, Object> renderProducts(List<Product> products) {

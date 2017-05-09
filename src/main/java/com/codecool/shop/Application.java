@@ -80,5 +80,15 @@ public class Application {
                 return "";
             }
         });
+
+        post("/item/edit", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                basketController.setBasket(
+                    basketController.editBasket(basketController.getBasket(), req));
+                res.redirect("/product/all");
+                return "";
+            }
+        });
     }
 }

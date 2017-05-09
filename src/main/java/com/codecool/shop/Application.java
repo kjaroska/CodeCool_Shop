@@ -87,7 +87,7 @@ public class Application {
             public Object handle(Request req, Response res) {
                 basketController.setBasket(
                     basketController.addToBasket(basketController.getBasket(), req));
-                res.redirect("/product/all");
+                res.redirect("/");
                 return "";
             }
         });

@@ -59,11 +59,11 @@
             <td th:text="${item.getProduct().getPrice()}"></td>
             <td>
               <form action="/item/edit" method="post">
-                <label for="quantity">Quantity</label>
+                <!--<label for="quantity">Quantity</label>-->
                 <input id="quantity" type="number" max="1000" min="1" name="quantity"
                        th:value="${item.getQuantity()}"/>
                 <input type="hidden" name="productId" th:value="${item.getId()}"/>
-                <input type="submit" class="btn btn-success" value="Change quantity"/>
+                <input type="submit" class="btn btn-success" value="ok"/>
               </form>
             </td>
             <td th:text="${item.getTotalPrice()}"></td>

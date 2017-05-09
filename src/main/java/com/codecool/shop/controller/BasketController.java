@@ -23,14 +23,13 @@ public class BasketController {
         while (true) {
             try {
                 product = new ProductDaoImpl().find(idToFind);
-                Printer.printObject("How many " + product.getName() + " do you want? ");
                 if (product != null) {
                     break;
                 }
             } catch (Exception e) {
             }
         }
-        Integer quantity = quantityCheck();
+        Integer quantity = 2;
         Boolean found = false;
         Item item = new Item(product, quantity, basket.getId());
         for (Item existingItem : basket.getItemList()) {

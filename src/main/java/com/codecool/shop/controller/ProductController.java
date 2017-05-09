@@ -3,6 +3,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductDaoImpl;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.ui.InputGetter;
 import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
@@ -39,10 +40,12 @@ public abstract class ProductController {
     return productsIDs;
   }
 
-  public static Map<String, ArrayList<Product>> renderProducts(List<Product> products) {
-    Map<String, ArrayList<Product>> params = new HashMap<>();
+  public static Map<String, Object> renderProducts(List<Product> products) {
+    Map<String, Object> params = new HashMap<>();
+    params.put("products", products);
+    params.put("categories", ProductCategoryController.showAvailableCategories());
+    params.put("suppliers", SupplierController.showAvailableSuppliers());
 
-    params.put("products", (ArrayList<Product>) products);
     return params;
   }
 }

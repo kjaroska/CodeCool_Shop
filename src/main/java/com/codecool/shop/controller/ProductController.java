@@ -5,10 +5,10 @@ import com.codecool.shop.dao.ProductDaoImpl;
 import com.codecool.shop.model.Product;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import sun.misc.Request;
+import spark.Response;
+import spark.Request;
 
 public abstract class ProductController {
 

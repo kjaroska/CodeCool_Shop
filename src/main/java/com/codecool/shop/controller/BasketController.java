@@ -5,7 +5,6 @@ import com.codecool.shop.model.Basket;
 import com.codecool.shop.model.Item;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.ui.InputGetter;
-import com.codecool.shop.view.Menu;
 import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,9 +61,7 @@ public class BasketController {
         return basket;
     }
 
-  private static Basket editBasket(Basket basket) {
-        Printer.printBasket(basket.getItemList());
-        Printer.printObject("Which product you want to edit? ");
+    private static Basket editBasket(Basket basket, Request req) {
         Integer itemId = InputGetter.getIntegerInput();
         java.util.Iterator<Item> itemIter = basket.getIterator();
         while (itemIter.hasNext()) {
@@ -103,32 +100,6 @@ public class BasketController {
         } while (!productFromCategoryIDs.contains(productId));
         return productId;
     }
-
-  public static Basket basketOptions(Basket basket, Menu menu) {
-    basketLoop:
-    //loop for basket menu
-    while (true) {
-      Printer.printBasket(basket.getItemList());
-      Printer.printMenu(menu.getBasketMenu());
-      Integer basketOption = InputGetter.getIntegerInput();
-      switch (basketOption) {
-        case 1:
-          basket = BasketController.removeFromBasket(basket);
-          continue;
-        case 2:
-          basket = BasketController.editBasket(basket);
-          continue;
-        case 3:
-          SummaryController.summary(basket);
-          continue;
-        case 0:
-          break basketLoop;
-        default:
-          System.out.println("Invalid input. Try again.");
-      }
-    }
-    return basket;
-  }
 
     public static Map<String, Object> renderProducts(Basket basket) {
         Map<String, Object> params = new HashMap<>();

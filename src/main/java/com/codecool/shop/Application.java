@@ -24,7 +24,7 @@ public class Application {
 
     BasketController basketController;
     public Application() {
-
+        this.basketController = new BasketController();
         run();
     }
 
@@ -71,7 +71,9 @@ public class Application {
             @Override
             public Object handle(Request req, Response res) {
                 Integer productId = Integer.parseInt(req.queryParams("productId"));
-                basketController.addToBasket(basketController.getBasket(), productId);
+                basketController.setBasket(
+                    basketController.addToBasket(basketController.getBasket(), productId));
+                System.out.println(basketController.getBasket().getItemList());
                 res.redirect("/product/all");
                 return "";
             }

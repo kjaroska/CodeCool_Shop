@@ -46,7 +46,7 @@ public class ProductCategoryDaoImpl implements ProductCategoryDao {
     @Override
     public ArrayList<ProductCategory> getAll() {
         ArrayList<ProductCategory> listCategories = new ArrayList<>();
-        String query = "SELECT * from ProductCategories";
+        String query = "SELECT * from ProductCategories ORDER BY name";
         ResultSet resultSet = Connector.getQueryResult(query);
         try {
             while (resultSet.next()) {

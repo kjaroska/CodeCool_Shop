@@ -57,11 +57,21 @@
           <tr th:each="item,iterStat : ${basket}">
             <td th:text="${item.getProduct().getName()}"></td>
             <td th:text="${item.getProduct().getPrice()}"></td>
-            <td th:text="${item.getQuantity()}"></td>
+            <td>
+              <form action="/item/edit" method="post">
+                <label for="quantity">Quantity</label>
+                <input id="quantity" type="number" max="1000" min="1" name="quantity"
+                       th:value="${item.getQuantity()}"/>
+                <input type="hidden" name="productId" th:value="${item.getId()}"/>
+                <input type="submit" class="btn btn-success" value="Change quantity"/>
+              </form>
+            </td>
             <td th:text="${item.getTotalPrice()}"></td>
             <td>
-              <a href="#" class="button"><span class="glyphicon glyphicon-zoom-in"/></a>
-              <a href="#" class="button"><span class="glyphicon glyphicon-trash"/></a>
+              <form action="basket/remove" method="post">
+                <input type="hidden" name="productId" th:value="${item.getId()}"/>
+                <input type="submit" value="Remove"/>
+              </form>
             </td>
           </tr>
         </table>

@@ -10,6 +10,7 @@ import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import spark.Request;
 
 
 public class BasketController {
@@ -20,18 +21,19 @@ public class BasketController {
         this.basket = new Basket(new ArrayList<Item>());
     }
 
-    public Basket addToBasket(Basket basket, Integer idToFind) {
+    public Basket addToBasket(Basket basket, Request req) {
         Product product;
+        Integer productId = Integer.parseInt(req.queryParams("productId"));
         while (true) {
             try {
-                product = new ProductDaoImpl().find(idToFind);
+                product = new ProductDaoImpl().find(productId);
                 if (product != null) {
                     break;
                 }
             } catch (Exception e) {
             }
         }
-        Integer quantity = 2;
+        Integer quantity = Integer.parseInt(req.queryParams("quantity"));
         Boolean found = false;
         Item item = new Item(product, quantity, basket.getId());
         for (Item existingItem : basket.getItemList()) {
@@ -128,8 +130,8 @@ public class BasketController {
     return basket;
   }
 
-    public static Map<String, ArrayList<Item>> renderProducts(Basket basket) {
-        Map<String, ArrayList<Item>> params = new HashMap<>();
+    public static Map<String, Object> renderProducts(Basket basket) {
+        Map<String, Object> params = new HashMap<>();
 
         params.put("basket", basket.getItemList());
         return params;

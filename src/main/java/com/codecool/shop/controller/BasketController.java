@@ -45,7 +45,7 @@ public class BasketController {
         return basket;
     }
 
-    private static Basket removeFromBasket(Basket basket, Request req) {
+    public static Basket removeFromBasket(Basket basket, Request req) {
         Integer itemId = Integer.parseInt(req.queryParams("productId"));
         java.util.Iterator<Item> itemIter = basket.getIterator();
         while (itemIter.hasNext()) {

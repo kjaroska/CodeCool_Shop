@@ -32,12 +32,23 @@ public class Application {
 
         port(8888);
 
-        get("/product/all", new Route() {
+        get("/", new Route() {
             @Override
             public Object handle(Request req, Response res) {
                 // process request
                 return renderingController.render(
                         ProductController.renderProducts(ProductController.showAvailableProducts()),
+                    "product/index");
+            }
+
+        });
+
+        get("/find", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                // process request
+                return renderingController.render(
+                        ProductController.renderProducts(ProductController.showProductByName(req, res)),
                     "product/index");
             }
         });
@@ -81,12 +92,22 @@ public class Application {
             }
         });
 
+        post("/basket/remove", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                basketController.setBasket(
+                    basketController.removeFromBasket(basketController.getBasket(), req));
+                res.redirect("/basket");
+                return "";
+            }
+        });
+
         post("/item/edit", new Route() {
             @Override
             public Object handle(Request req, Response res) {
                 basketController.setBasket(
                     basketController.editBasket(basketController.getBasket(), req));
-                res.redirect("/product/all");
+                res.redirect("/basket");
                 return "";
             }
         });

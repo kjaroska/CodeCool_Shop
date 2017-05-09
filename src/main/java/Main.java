@@ -1,4 +1,3 @@
-
 import com.codecool.shop.Application;
 
 /**

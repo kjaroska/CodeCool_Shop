@@ -1,32 +1,33 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.view.Menu;
 import com.codecool.shop.dao.ProductDaoImpl;
 import com.codecool.shop.model.Basket;
 import com.codecool.shop.model.Item;
 import com.codecool.shop.model.Product;
-import com.codecool.shop.view.Printer;
 import com.codecool.shop.ui.InputGetter;
+import com.codecool.shop.view.Menu;
+import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
 
 
-public abstract class BasketController {
+public class BasketController {
 
-    public static Basket addToBasket(Basket basket, ArrayList<Integer> productFromCategoryIDs) {
-      Printer.printObject("\nWhich product you want to add? ");
-        Integer productId = idValidation(productFromCategoryIDs);
+    Basket basket;
+
+    public BasketController() {
+        this.basket = new Basket(new ArrayList<Item>());
+    }
+
+    public Basket addToBasket(Basket basket, Integer idToFind) {
         Product product;
         while (true) {
             try {
-                product = new ProductDaoImpl().find(productId);
+                product = new ProductDaoImpl().find(idToFind);
                 Printer.printObject("How many " + product.getName() + " do you want? ");
                 if (product != null) {
                     break;
                 }
             } catch (Exception e) {
-                Printer.printObject(e + ", No product with given id");
-                Printer.printObject("Insert proper id: ");
-                productId = InputGetter.getIntegerInput();
             }
         }
         Integer quantity = quantityCheck();
@@ -100,15 +101,6 @@ public abstract class BasketController {
         return productId;
     }
 
-  public static Basket productExist(Basket basket, ArrayList<Integer> productByNameID) {
-    if (productByNameID.isEmpty()) {
-      System.out.println("No matches for your query");
-    } else {
-      basket = BasketController.addToBasket(basket, productByNameID);
-    }
-    return basket;
-  }
-
   public static Basket basketOptions(Basket basket, Menu menu) {
     basketLoop:
     //loop for basket menu
@@ -134,4 +126,12 @@ public abstract class BasketController {
     }
     return basket;
   }
+
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public void setBasket(Basket basket) {
+        this.basket = basket;
+    }
 }

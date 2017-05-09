@@ -4,9 +4,6 @@ import com.codecool.shop.model.Supplier;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-/**
- * Created by marek on 25.04.17.
- */
 public class SupplierDaoImpl implements SupplierDao {
 
     @Override
@@ -41,7 +38,7 @@ public class SupplierDaoImpl implements SupplierDao {
     @Override
     public ArrayList<Supplier> getAll() {
         ArrayList<Supplier> listSuppliers = new ArrayList<>();
-        String query = "SELECT * from Suppliers";
+        String query = "SELECT * from Suppliers ORDER BY name";
         ResultSet resultSet = Connector.getQueryResult(query);
         try {
             while (resultSet.next()) {

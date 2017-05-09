@@ -7,6 +7,8 @@ import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.ui.InputGetter;
 import com.codecool.shop.view.Printer;
 import java.util.ArrayList;
+import spark.Request;
+import spark.Response;
 
 
 public abstract class ProductCategoryController {
@@ -18,9 +20,8 @@ public abstract class ProductCategoryController {
         }
     }
 
-  public static ArrayList<Integer> showProductsFromCategory() {
-        Printer.printObject("Enter Product's Category ID:");
-        Integer categoryId = InputGetter.getIntegerInput();
+    public static ArrayList<Product> showProductsFromCategory(Request req, Response res) {
+        Integer categoryId = Integer.parseInt(req.params(":id"));
         ProductCategory productCategory;
         ArrayList<Product> productsFromCategory;
         while (true) {
@@ -31,19 +32,9 @@ public abstract class ProductCategoryController {
                     break;
                 }
             } catch (Exception e) {
-                Printer.printObject("No Product Category with given id");
-                Printer.printObject("Insert proper id: ");
-                categoryId = InputGetter.getIntegerInput();
             }
         }
-        java.util.Iterator<Product> iterProducts = new ProductIterator(productsFromCategory).Iterator();
-    ArrayList<Integer> productsIDs = new ArrayList<>();
-        while (iterProducts.hasNext()) {
-          Product singleProduct = iterProducts.next();
-          Printer.printObject(singleProduct.toString());
-          productsIDs.add(singleProduct.getId());
-        }
-    return productsIDs;
+        return productsFromCategory;
     }
 
 }

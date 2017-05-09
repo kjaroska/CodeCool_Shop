@@ -13,11 +13,9 @@ import spark.Response;
 
 public abstract class ProductCategoryController {
 
-    public static void showAvailableCategories() {
+    static ArrayList<ProductCategory> showAvailableCategories() {
         ArrayList<ProductCategory> productCategories = new ProductCategoryDaoImpl().getAll();
-        for (ProductCategory productCategory : productCategories) {
-            Printer.printObject(productCategory.toString());
-        }
+        return productCategories;
     }
 
     public static ArrayList<Product> showProductsFromCategory(Request req, Response res) {
@@ -32,9 +30,11 @@ public abstract class ProductCategoryController {
                     break;
                 }
             } catch (Exception e) {
+                System.out.println(e);
             }
         }
         return productsFromCategory;
     }
+
 
 }

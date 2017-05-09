@@ -7,35 +7,27 @@
       <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#"><i class="glyphicon glyphicon-grain"></i> CodecoolShop
+            <a class="navbar-brand" href="/product/all"><i class="glyphicon glyphicon-grain"></i> CodecoolShop
               <i class="glyphicon glyphicon-grain"></i> </a>
           </div>
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home <i class="glyphicon glyphicon-home"></i> </a></li>
+          <ul class="nav navbar-nav navbar-left">
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Category
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories
                 <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Agd</a></li>
-                <li><a href="#">Clothing</a></li>
-                <li><a href="#">Garden</a></li>
-                <li><a href="#">Sport</a></li>
-                <li><a href="#">Rtv</a></li>
+                <li th:each="cat : ${categories}"><a th:text="${cat.name}" th:href="${'/Category/'+ cat.getId()}">Category</a></li>
               </ul>
             </li>
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Supplier
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Suppliers
                 <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Apple</a></li>
-                <li><a href="#">Alfa</a></li>
-                <li><a href="#">Giant</a></li>
-                <li><a href="#">HM</a></li>
-                <li><a href="#">Ikea</a></li>
-                <li><a href="#">Nike</a></li>
+                <li th:each="sup : ${suppliers}><a th:text="${sup.name}" th:href="${'/Supplier/'+ sup.getId()}">Supplier</a></li>
               </ul>
             </li>
-            <form class="navbar-form navbar-left">
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><form class="navbar-form navbar-left">
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="search product"/>
                 <div class="input-group-btn">
@@ -44,8 +36,8 @@
                   </button>
                 </div>
               </div>
-            </form>
-            <li><a href="#">Basket <i class="glyphicon glyphicon-calendar"></i> </a></li>
+            </form></li>
+            <li><a href="#">Basket <i class="glyphicon glyphicon-shopping-cart"></i></a></li>
 
             <li><a href="#">Login <i class="glyphicon glyphicon-user"></i> </a></li>
           </ul>

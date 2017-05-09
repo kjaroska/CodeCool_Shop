@@ -13,11 +13,9 @@ import spark.Response;
 
 public abstract class SupplierController {
 
-    public static void showAvailableSuppliers() {
+    public static ArrayList<Supplier> showAvailableSuppliers() {
         ArrayList<Supplier> suppliers = new SupplierDaoImpl().getAll();
-        for (Supplier supplier : suppliers) {
-            Printer.printObject(supplier.toString());
-        }
+        return suppliers;
     }
 
     public static ArrayList<Product> productBySuppliers(Request req, Response res) {

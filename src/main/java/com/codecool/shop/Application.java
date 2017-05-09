@@ -32,12 +32,23 @@ public class Application {
 
         port(8888);
 
-        get("/product/all", new Route() {
+        get("/", new Route() {
             @Override
             public Object handle(Request req, Response res) {
                 // process request
                 return renderingController.render(
                         ProductController.renderProducts(ProductController.showAvailableProducts()),
+                    "product/index");
+            }
+
+        });
+
+        get("/find", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                // process request
+                return renderingController.render(
+                        ProductController.renderProducts(ProductController.showProductByName(req, res)),
                     "product/index");
             }
         });

@@ -10,21 +10,19 @@ import static spark.Spark.staticFileLocation;
 import com.codecool.shop.controller.BasketController;
 import com.codecool.shop.controller.ProductCategoryController;
 import com.codecool.shop.controller.ProductController;
+import com.codecool.shop.controller.RenderingController;
 import com.codecool.shop.controller.SupplierController;
-import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Route;
-import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
-/**
- * Created by marek on 08.05.17.
- */
 public class Application {
 
+    RenderingController renderingController;
     BasketController basketController;
     public Application() {
         this.basketController = new BasketController();
+        this.renderingController = new RenderingController();
         run();
     }
 
@@ -38,10 +36,9 @@ public class Application {
             @Override
             public Object handle(Request req, Response res) {
                 // process request
-                return new ThymeleafTemplateEngine()
-                    .render(new ModelAndView(
+                return renderingController.render(
                         ProductController.renderProducts(ProductController.showAvailableProducts()),
-                        "product/index"));
+                    "product/index");
             }
         });
 
@@ -49,10 +46,9 @@ public class Application {
             @Override
             public Object handle(Request req, Response res) {
                 // process request
-                return new ThymeleafTemplateEngine()
-                    .render(new ModelAndView(ProductController.renderProducts(
+                return renderingController.render(ProductController.renderProducts(
                         ProductCategoryController.showProductsFromCategory(req, res)),
-                        "product/index"));
+                    "product/index");
             }
         });
 
@@ -60,29 +56,26 @@ public class Application {
             @Override
             public Object handle(Request req, Response res) {
                 // process request
-                return new ThymeleafTemplateEngine()
-                    .render(new ModelAndView(ProductController.renderProducts(
+                return renderingController.render(ProductController.renderProducts(
                         SupplierController.productBySuppliers(req, res)),
-                        "product/index"));
+                    "product/index");
             }
         });
         get("/basket", new Route() {
             @Override
             public Object handle(Request req, Response res) {
                 // process request
-                return new ThymeleafTemplateEngine()
-                    .render(new ModelAndView(basketController.renderProducts(
+                return renderingController.render(basketController.renderProducts(
                         basketController.getBasket()),
-                        "product/basket"));
+                    "product/basket");
             }
         });
 
         post("/basket/add", new Route() {
             @Override
             public Object handle(Request req, Response res) {
-                Integer productId = Integer.parseInt(req.queryParams("productId"));
                 basketController.setBasket(
-                    basketController.addToBasket(basketController.getBasket(), productId));
+                    basketController.addToBasket(basketController.getBasket(), req));
                 res.redirect("/product/all");
                 return "";
             }

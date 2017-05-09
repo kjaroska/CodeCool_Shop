@@ -60,6 +60,9 @@
                         </div>
                         <div class="col-xs-12 col-md-6">
                           <form action="/basket/add" method="post">
+                            <label for="quantity">Quantity</label>
+                            <input id="quantity" type="number" max="1000" min="1" name="quantity"
+                                   value="1"/>
                             <input type="hidden" name="productId" th:value="${prod.id}"/>
                             <input type="submit" class="btn btn-success" value="Add to cart"/>
                           </form>

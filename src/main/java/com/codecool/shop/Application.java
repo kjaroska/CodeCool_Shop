@@ -145,8 +145,7 @@ public class Application {
         post("/product/new", new Route() {
             @Override
             public Object handle(Request req, Response res) {
-                basketController.setBasket(
-                    basketController.editBasket(basketController.getBasket(), req));
+                ProductController.addNewProduct(req, res);
                 res.redirect("/");
                 return "";
             }

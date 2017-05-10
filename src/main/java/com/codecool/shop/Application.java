@@ -124,6 +124,7 @@ public class Application {
                 return "";
             }
         });
+      
         get("/user", new Route() {
             @Override
             public Object handle(Request req, Response res) {
@@ -132,9 +133,25 @@ public class Application {
                     "user/userform");
             }
         });
-
-        get("/product/new", new Route() {
+      
+        get("/payment", new Route() {
+            return renderingController.render(basketController.renderProducts(
+                    basketController.getBasket()),
+                    "user/payment");
+            }
+        });
+        
+        get("/confirmation", new Route() {
             @Override
+            public Object handle(Request req, Response res) {
+                return renderingController.render(basketController.renderProducts(
+                    basketController.getBasket()),
+                    "user/confirmation");
+            }
+        });
+      
+        get("/product/new", new Route() {
+           @Override
             public Object handle(Request req, Response res) {
                 return renderingController.render(basketController.renderProducts(
                     basketController.getBasket()),

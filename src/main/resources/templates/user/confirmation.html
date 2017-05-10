@@ -38,25 +38,13 @@
 
 <div class="container">
   <div class="page-header">
-    <h1>Payment method <span class="glyphicon glyphicon-usd"></span></h1>
-    <p>fill in the form, please</p>
-  </div>
-  <div class="row">
-    <div class="col-md-6 col-sm-12 col-xs-12">
-
-      <form action="/user" method="post">
-        <table>
-          <tr>
-            <td>Card Number: <input type="text" name="cardNumber" class="form-control"/></td>
-          </tr>
-        </table>
-        <hr/>
-        <p><a href="/confirmation" class="btn btn-success"> SUBMIT PAYMENT </a></p>
-      </form>
-    </div>
+    <h1>Payment Confirmation <span class="glyphicon glyphicon-usd"></span></h1>
+    <p>Your payment was successfull. Thank you.</p>
   </div>
 
-<div th:replace="footer :: copy"></div>
+  <p><a href="/" class="btn btn-success"> BACK TO SHOP </a></p>
+  <hr/>
+  <div th:replace="footer :: copy"></div>
 </div>
 </body>
 </html>

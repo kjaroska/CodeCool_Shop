@@ -11,7 +11,7 @@ public class Connector {
 
     private static Connection connection = null;
 
-    private static Connection getConnection() {
+    public static Connection getConnection() {
 
         if (connection == null) {
             try {
@@ -25,7 +25,7 @@ public class Connector {
         return connection;
     }
 
-    private static Statement getStatement(Connection connection) {
+    public static Statement getStatement(Connection connection) {
         Statement stmt = null;
         try {
             stmt = connection.createStatement();

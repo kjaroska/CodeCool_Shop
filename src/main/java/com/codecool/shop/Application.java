@@ -31,6 +31,7 @@ public class Application {
     private Application() {
         this.basketController = new BasketController();
         this.renderingController = new RenderingController();
+        this.connection = null;
 
     }
 
@@ -38,7 +39,7 @@ public class Application {
         System.out.println("Applications starting...");
         try {
             System.out.println("Applications started succesfully....");
-            Application app = new Application();
+            app = new Application();
             app.connectToDb();
             app.routes();
         } catch (Exception e) {

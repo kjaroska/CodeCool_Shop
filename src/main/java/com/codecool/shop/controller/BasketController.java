@@ -75,6 +75,7 @@ public class BasketController {
         Map<String, Object> params = new HashMap<>();
 
         params.put("basket", basket.getItemList());
+        params.put("price", basket.getTotalPrice());
         params.put("categories", ProductCategoryController.showAvailableCategories());
         params.put("suppliers", SupplierController.showAvailableSuppliers());
         return params;

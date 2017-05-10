@@ -44,7 +44,7 @@ public abstract class ProductController {
     }
 
     public static void addNewProduct(Request req, Response res) {
-        String productName = req.queryParams("name");
+        String productName = req.queryParams("productName");
         String productDescription = req.queryParams("description");
         String productCategory = req.queryParams("category");
         String productSupplier = req.queryParams("supplier");

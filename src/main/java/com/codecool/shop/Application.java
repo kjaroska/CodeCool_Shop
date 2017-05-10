@@ -124,6 +124,14 @@ public class Application {
                 return "";
             }
         });
+        get("/payment", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                return renderingController.render(basketController.renderProducts(
+                    basketController.getBasket()),
+                    "user/userform");
+            }
+        });
     }
 
     public static Application getApp() {

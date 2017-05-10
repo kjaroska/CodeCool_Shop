@@ -135,7 +135,9 @@ public class Application {
         });
       
         get("/payment", new Route() {
-            return renderingController.render(basketController.renderProducts(
+            @Override
+            public Object handle(Request req, Response res) {
+                return renderingController.render(basketController.renderProducts(
                     basketController.getBasket()),
                     "user/payment");
             }

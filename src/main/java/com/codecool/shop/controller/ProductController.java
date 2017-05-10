@@ -1,7 +1,9 @@
 package com.codecool.shop.controller;
 
 
+import com.codecool.shop.dao.ProductCategoryDaoImpl;
 import com.codecool.shop.dao.ProductDaoImpl;
+import com.codecool.shop.dao.SupplierDaoImpl;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -51,8 +53,16 @@ public abstract class ProductController {
         String categoryDepartment = req.queryParams("categoryDepartment");
         Float productPrice = Float.parseFloat(req.queryParams("price"));
         Supplier supplier = new Supplier(productSupplier, supplierDescription);
+        new SupplierDaoImpl().add(supplier);
+        Integer supplierId = new SupplierDaoImpl().findId(supplier);
+        System.out.println(supplierId);
+        supplier.setId(supplierId);
+        System.out.println(supplier.getId());
         ProductCategory category = new ProductCategory(productCategory, categoryDepartment,
             categoryDescription);
+        new ProductCategoryDaoImpl().add(category);
+        Integer categoryId = new ProductCategoryDaoImpl().findId(category);
+        category.setId(categoryId);
         Product product = new Product(productName, productPrice, productDescription, "PLN",
             category, supplier);
         new ProductDaoImpl().add(product);

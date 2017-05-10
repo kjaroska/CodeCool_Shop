@@ -124,7 +124,7 @@ public class Application {
                 return "";
             }
         });
-
+      
         get("/user", new Route() {
             @Override
             public Object handle(Request req, Response res) {

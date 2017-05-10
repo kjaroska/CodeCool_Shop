@@ -35,6 +35,7 @@ public class Application {
             app.routes();
         } catch (Exception e) {
             System.out.println("There was an error " + e + " when running application.");
+            System.exit(0);
         }
     }
 

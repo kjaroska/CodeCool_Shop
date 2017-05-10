@@ -55,9 +55,7 @@ public abstract class ProductController {
         Supplier supplier = new Supplier(productSupplier, supplierDescription);
         new SupplierDaoImpl().add(supplier);
         Integer supplierId = new SupplierDaoImpl().findId(supplier);
-        System.out.println(supplierId);
         supplier.setId(supplierId);
-        System.out.println(supplier.getId());
         ProductCategory category = new ProductCategory(productCategory, categoryDepartment,
             categoryDescription);
         new ProductCategoryDaoImpl().add(category);

@@ -18,15 +18,27 @@ import spark.Route;
 
 public class Application {
 
+    private static Application app;
     RenderingController renderingController;
     BasketController basketController;
     public Application() {
         this.basketController = new BasketController();
         this.renderingController = new RenderingController();
-        run();
+
     }
 
-    public void run() {
+    public static void run() {
+        System.out.println("Applications starting...");
+        try {
+            System.out.println("Applications started succesfully....");
+            Application app = new Application();
+            app.routes();
+        } catch (Exception e) {
+            System.out.println("There was an error " + e + " when running application.");
+        }
+    }
+
+    public void routes() {
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
 
@@ -111,5 +123,9 @@ public class Application {
                 return "";
             }
         });
+    }
+
+    public static Application getApp() {
+        return app;
     }
 }

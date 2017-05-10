@@ -35,7 +35,6 @@ public class Basket {
         Float orderPrice = 0.0f;
         for (Item item : this.itemsList) {
             orderPrice = orderPrice + item.getTotalPrice();
-            System.out.println(item.getTotalPrice());
         }
 
         return orderPrice;

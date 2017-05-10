@@ -15,20 +15,16 @@ public class ProductCategoryDaoImpl implements ProductCategoryDao {
 
     @Override
     public void add(ProductCategory category) {
-        Statement stmt = Connector.getStatement(Connector.getConnection());
         String sql =
             "INSERT INTO ProductCategories (name, department, description) "
                 + "VALUES ('" + category.getName() + "','" + category
                 .getDepartment() + "','" + category.getDescription() + "');";
         try {
-            stmt.executeUpdate(sql);
+            connection.createStatement().executeUpdate(sql);
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + " in add category: " + e.getMessage());
-            System.exit(0);
         }
-
     }
-
 
     @Override
     public ProductCategory find(Integer idToFind) {
@@ -85,21 +81,14 @@ public class ProductCategoryDaoImpl implements ProductCategoryDao {
         String query =
             "SELECT id FROM ProductCategories WHERE name = '"
                 + category.getName() + "' AND description = '" + category.getDescription() + "'";
-        ResultSet resultSet = Connector.getQueryResult(query);
         Integer id = null;
-        try {
+        try (ResultSet resultSet = connection.createStatement().executeQuery(query)) {
             while (resultSet.next()) {
                 id = resultSet.getInt("id");
             }
         } catch (Exception e) {
             System.err.println(
                 e.getClass().getName() + " in product category Dao FindId :" + e.getMessage());
-            System.exit(0);
-        }
-        try {
-            resultSet.close();
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         return id;
     }

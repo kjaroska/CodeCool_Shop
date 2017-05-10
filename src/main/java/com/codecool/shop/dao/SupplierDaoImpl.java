@@ -14,13 +14,12 @@ public class SupplierDaoImpl implements SupplierDao {
 
     @Override
     public void add(Supplier supplier) {
-        Statement stmt = Connector.getStatement(Connector.getConnection());
         String sql =
             "INSERT INTO Suppliers (name, description) "
                 + "VALUES ('" + supplier.getName() + "','" + supplier
                 .getDescription() + "');";
         try {
-            stmt.executeUpdate(sql);
+            connection.createStatement().executeUpdate(sql);
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + " in addsupplier: " + e.getMessage());
             System.exit(0);
@@ -77,9 +76,8 @@ public class SupplierDaoImpl implements SupplierDao {
         String query =
             "SELECT id FROM Suppliers WHERE name = '" + supplier.getName() + "' AND description = '"
                 + supplier.getDescription() + "'";
-        ResultSet resultSet = Connector.getQueryResult(query);
         Integer id = null;
-        try {
+        try (ResultSet resultSet = connection.createStatement().executeQuery(query);) {
             while (resultSet.next()) {
                 id = resultSet.getInt("id");
             }

@@ -29,8 +29,9 @@
 
 <body>
 
-<div class="jumbotron text-center">
-    <h1>Codecool Shopp</h1>
+<div class="jumbotron text-center" style="background:lightgrey">
+  <h1><i class="glyphicon glyphicon-grain"></i>Codecool Shop<i
+      class="glyphicon glyphicon-grain"></i></h1>
 
 </div>
 <div th:replace="navbar :: navcopy"></div>
@@ -41,8 +42,10 @@
         <div class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="thumbnail">
                 <img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
-                     th:attr="src='/img/product_1.jpg'" alt=""/>
-                <div class="caption">
+                     th:attr="src='/img/product_' + ${prod.id} + '.jpg'" height="200" width="400"
+                     alt=""/>
+
+              <div class="caption">
                     <h4 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h4>
                     <p class="group inner list-group-item-text" th:text="${prod.description}">Product
                         description... </p>

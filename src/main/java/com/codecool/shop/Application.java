@@ -16,12 +16,19 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class Application {
 
     private static Application app;
-    RenderingController renderingController;
-    BasketController basketController;
-    public Application() {
+    private RenderingController renderingController;
+    private BasketController basketController;
+    private Connection connection;
+
+
+    private Application() {
         this.basketController = new BasketController();
         this.renderingController = new RenderingController();
 
@@ -32,13 +39,25 @@ public class Application {
         try {
             System.out.println("Applications started succesfully....");
             Application app = new Application();
+            app.connectToDb();
             app.routes();
         } catch (Exception e) {
             System.out.println("There was an error " + e + " when running application.");
         }
     }
 
-    public void routes() {
+    private void connectToDb() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+            this.connection = DriverManager.getConnection("jdbc:sqlite:shop.db");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void routes() {
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
 
@@ -127,5 +146,9 @@ public class Application {
 
     public static Application getApp() {
         return app;
+    }
+
+    public Connection getConnection() {
+        return this.connection;
     }
 }

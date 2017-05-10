@@ -1,24 +1,33 @@
 package com.codecool.shop.dao;
 
+import com.codecool.shop.Application;
 import com.codecool.shop.model.ProductCategory;
+
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ProductCategoryDaoImpl implements ProductCategoryDao {
 
+    private Connection connection = Application.getApp().getConnection();
+
     @Override
     public void add(ProductCategory category) {
-
     }
+
 
     @Override
     public ProductCategory find(Integer idToFind) {
         String query =
             "SELECT id, name, department, description FROM ProductCategories WHERE id = '"
                 + idToFind + "'";
-        ResultSet resultSet = Connector.getQueryResult(query);
         ProductCategory newProductCategory = null;
-        try {
+
+        try (Statement stmt = connection.createStatement();
+             ResultSet resultSet = stmt.executeQuery(query)) {
+
             while (resultSet.next()) {
                 Integer id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
@@ -28,27 +37,21 @@ public class ProductCategoryDaoImpl implements ProductCategoryDao {
             }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + " in productcategory :" + e.getMessage());
-            System.exit(0);
         }
-      try {
-        resultSet.close();
-      } catch (Exception e) {
-        System.err.println(e.getClass().getName() + ": " + e.getMessage());
-      }
         return newProductCategory;
     }
 
     @Override
     public void remove(int id) {
-
     }
 
     @Override
     public ArrayList<ProductCategory> getAll() {
         ArrayList<ProductCategory> listCategories = new ArrayList<>();
         String query = "SELECT * from ProductCategories ORDER BY name";
-        ResultSet resultSet = Connector.getQueryResult(query);
-        try {
+        try (Statement stmt = connection.createStatement();
+             ResultSet resultSet = stmt.executeQuery(query)) {
+
             while (resultSet.next()) {
                 Integer id = resultSet.getInt("id");
                 String name = resultSet.getString("name");

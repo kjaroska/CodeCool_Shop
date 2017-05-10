@@ -16,6 +16,18 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void add(Product product) {
+        Statement stmt = Connector.getStatement(Connector.getConnection());
+        String sql =
+            "INSERT INTO Products (name, price, description, currency, id_productCategory, id_supplier) "
+                + "VALUES ('" + product.getName() + "','" + product.getPrice() + "','" + product
+                .getDescription() + "','" + product.getDefaultCurrency() + "','" + product
+                .getProductCategory().getId() + "','" + product.getSupplier().getId() + "');";
+        try {
+            stmt.executeUpdate(sql);
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + " in addProduct: " + e.getMessage());
+            System.exit(0);
+        }
     }
 
     @Override

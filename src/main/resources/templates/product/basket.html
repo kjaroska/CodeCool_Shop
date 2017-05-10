@@ -74,14 +74,21 @@
                             </form>
                         </td>
                     </tr>
-
-
+                    <tr>
+                        <td>
+                            <p>TOTAL PRICE</p>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <p th:text="${price}"></p>
+                        </td>
+                    </tr>
                 </table>
                 <hr/>
-                <p><a href="/payment" class="btn btn-success"> BUY </a></p>
+              <p><a href="/user" class="btn btn-success"> BUY </a></p>
             </div>
         </div>
-
     </div>
 
     <div th:replace="footer :: copy"></div>

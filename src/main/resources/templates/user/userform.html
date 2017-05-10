@@ -39,7 +39,7 @@
 <div class="container">
   <div class="page-header">
     <h1>User Account <span class="glyphicon glyphicon-user"></span></h1>
-    <p>fill in the form, please</p>
+    <p>Fill in the form, please.</p>
   </div>
   <div class="row">
     <div class="col-md-6 col-sm-12 col-xs-12">
@@ -47,39 +47,37 @@
       <form action="/payment" method="post" class="form-horizontal">
         <table>
           <tr>
-            <td>First Name: <input type="text" name="userName" class="form-control"></td>
+            <td>First Name: <input type="text" name="userName" class="form-control"/></td>
           </tr>
           <tr>
-            <td>Last Name: <input type="text" name="userSurname" class="form-control"></td>
+            <td>Last Name: <input type="text" name="userSurname" class="form-control"/></td>
           </tr>
           <tr>
-            <td>Adress: <input type="text" name="userAdress" class="form-control"></td>
+            <td>Adress: <input type="text" name="userAdress" class="form-control"/></td>
           </tr>
           <tr>
-            <td>City: <input type="text" name="userCity" class="form-control"></td>
+            <td>City: <input type="text" name="userCity" class="form-control"/></td>
           </tr>
           <tr>
-            <td>Postal Code: <input type="text" name="userPostalCode" class="form-control"></td>
+            <td>Postal Code: <input type="text" name="userPostalCode" class="form-control"/></td>
           </tr>
           <tr>
-            <td>E-mail: <input type="text" name="userEmail" class="form-control"></td>
+            <td>E-mail: <input type="text" name="userEmail" class="form-control"/></td>
           </tr>
           <tr>
-            <td>Phone number: <input type="text" name="userPhone" class="form-control"></td>
+            <td>Phone number: <input type="text" name="userPhone" class="form-control"/></td>
           </tr>
           <tr>
             <td>Details: <textarea rows="5" cols="42" name="userDetails"
                                    class="form-control"></textarea></td>
           </tr>
         </table>
-        <hr>
-        <input type="submit" value="GO TO PAYMENT" class="btn btn-success"/>
+        <hr/>
+        <p><a href="/payment" class="btn btn-success"> GO TO PAYMENT </a></p>
       </form>
     </div>
   </div>
-</div>
-
-<div th:replace="footer :: copy"></div>
+  <div th:replace="footer :: copy"></div>
 </div>
 </body>
 </html>

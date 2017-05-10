@@ -44,6 +44,7 @@ public class Application {
             app.routes();
         } catch (Exception e) {
             System.out.println("There was an error " + e + " when running application.");
+            System.exit(0);
         }
     }
 
@@ -140,6 +141,51 @@ public class Application {
                 basketController.setBasket(
                     basketController.editBasket(basketController.getBasket(), req));
                 res.redirect("/basket");
+                return "";
+            }
+        });
+      
+        get("/user", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                return renderingController.render(basketController.renderProducts(
+                    basketController.getBasket()),
+                    "user/userform");
+            }
+        });
+      
+        get("/payment", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                return renderingController.render(basketController.renderProducts(
+                    basketController.getBasket()),
+                    "user/payment");
+            }
+        });
+        
+        get("/confirmation", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                return renderingController.render(basketController.renderProducts(
+                    basketController.getBasket()),
+                    "user/confirmation");
+            }
+        });
+      
+        get("/product/new", new Route() {
+           @Override
+            public Object handle(Request req, Response res) {
+                return renderingController.render(basketController.renderProducts(
+                    basketController.getBasket()),
+                    "product/new");
+            }
+        });
+
+        post("/product/new", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                ProductController.addNewProduct(req, res);
+                res.redirect("/");
                 return "";
             }
         });

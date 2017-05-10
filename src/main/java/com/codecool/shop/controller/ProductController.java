@@ -1,14 +1,18 @@
 package com.codecool.shop.controller;
 
 
+import com.codecool.shop.dao.ProductCategoryDaoImpl;
 import com.codecool.shop.dao.ProductDaoImpl;
+import com.codecool.shop.dao.SupplierDaoImpl;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import spark.Response;
 import spark.Request;
+import spark.Response;
 
 public abstract class ProductController {
 
@@ -37,5 +41,28 @@ public abstract class ProductController {
         params.put("suppliers", SupplierController.showAvailableSuppliers());
 
         return params;
+    }
+
+    public static void addNewProduct(Request req, Response res) {
+        String productName = req.queryParams("name");
+        String productDescription = req.queryParams("description");
+        String productCategory = req.queryParams("category");
+        String productSupplier = req.queryParams("supplier");
+        String supplierDescription = req.queryParams("supplierDescription");
+        String categoryDescription = req.queryParams("categoryDescription");
+        String categoryDepartment = req.queryParams("categoryDepartment");
+        Float productPrice = Float.parseFloat(req.queryParams("price"));
+        Supplier supplier = new Supplier(productSupplier, supplierDescription);
+        new SupplierDaoImpl().add(supplier);
+        Integer supplierId = new SupplierDaoImpl().findId(supplier);
+        supplier.setId(supplierId);
+        ProductCategory category = new ProductCategory(productCategory, categoryDepartment,
+            categoryDescription);
+        new ProductCategoryDaoImpl().add(category);
+        Integer categoryId = new ProductCategoryDaoImpl().findId(category);
+        category.setId(categoryId);
+        Product product = new Product(productName, productPrice, productDescription, "PLN",
+            category, supplier);
+        new ProductDaoImpl().add(product);
     }
 }

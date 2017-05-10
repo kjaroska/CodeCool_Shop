@@ -38,25 +38,49 @@
 
 <div class="container">
   <div class="page-header">
-    <h1>Payment method <span class="glyphicon glyphicon-usd"></span></h1>
-    <p>fill in the form, please</p>
+    <h1>New Product <span class="glyphicon glyphicon-user"></span></h1>
+    <p>Fill in the form, please</p>
   </div>
   <div class="row">
     <div class="col-md-6 col-sm-12 col-xs-12">
 
-      <form action="/user" method="post">
+      <form action="/product/new" method="post" class="form-horizontal">
         <table>
           <tr>
-            <td>Card Number: <input type="text" name="cardNumber" class="form-control"/></td>
+            <td>Name: <input type="text" name="productName" class="form-control"/></td>
+          </tr>
+          <tr>
+            <td>Description<input type="text" name="description" class="form-control"/></td>
+          </tr>
+          <tr>
+            <td>Supplier<input type="text" name="supplier" class="form-control"/></td>
+          </tr>
+          <tr>
+            <td>Supplier description<input type="text" name="supplierDescription"
+                                           class="form-control"/></td>
+          </tr>
+          <tr>
+            <td>Category<input type="text" name="category" class="form-control"/></td>
+          </tr>
+          <tr>
+            <td>Category description<input type="text" name="categoryDescription"
+                                           class="form-control"/></td>
+          </tr>
+          <tr>
+            <td>Category department<input type="text" name="categoryDepartment"
+                                          class="form-control"/></td>
+          </tr>
+          <tr>
+            <td>Price<input id="quantity" type="number" max="1000" min="1" name="price"
+                            value="0"/></td>
           </tr>
         </table>
-        <hr/>
-        <p><a href="/confirmation" class="btn btn-success"> SUBMIT PAYMENT </a></p>
+        <input type="submit" value="Add" class="btn btn-success"/>
       </form>
     </div>
   </div>
 
-<div th:replace="footer :: copy"></div>
+  <div th:replace="footer :: copy"></div>
 </div>
 </body>
 </html>

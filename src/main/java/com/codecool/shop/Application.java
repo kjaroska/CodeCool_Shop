@@ -132,6 +132,25 @@ public class Application {
                     "user/userform");
             }
         });
+
+        get("/product/new", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                return renderingController.render(basketController.renderProducts(
+                    basketController.getBasket()),
+                    "product/new");
+            }
+        });
+
+        post("/product/new", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                basketController.setBasket(
+                    basketController.editBasket(basketController.getBasket(), req));
+                res.redirect("/");
+                return "";
+            }
+        });
     }
 
     public static Application getApp() {

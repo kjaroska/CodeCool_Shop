@@ -47,15 +47,14 @@
       <form action="/user" method="post">
         <table>
           <tr>
-            <td>Card Number: <input type="text" name="cardNumber" class="form-control"></td>
+            <td>Card Number: <input type="text" name="cardNumber" class="form-control"/></td>
           </tr>
         </table>
-        <hr>
-        <input type="submit" value="SUBMIT PAYMENT" class="btn btn-success"/>
+        <hr/>
+        <p><a href="/confirmation" class="btn btn-success"> SUBMIT PAYMENT </a></p>
       </form>
     </div>
   </div>
-</div>
 
 <div th:replace="footer :: copy"></div>
 </div>

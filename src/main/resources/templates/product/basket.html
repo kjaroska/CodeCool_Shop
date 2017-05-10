@@ -74,8 +74,18 @@
                             </form>
                         </td>
                     </tr>
-
-
+                    <tfoot>
+                    <tr>
+                        <td>
+                            <p>TOTAL PRICE</p>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <p th:text="${price}"></p>
+                        </td>
+                    </tr>
+                    </tfoot>
                 </table>
                 <hr/>
                 <p><a href="/payment" class="btn btn-success"> BUY </a></p>

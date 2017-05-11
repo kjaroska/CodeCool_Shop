@@ -36,7 +36,7 @@
 
 <div th:replace="navbar :: navcopy"></div>
 
-<div class="container">
+<div th:if="${!basket.isEmpty()}" class="container">
     <div class="title">
         <h1>Your Basket</h1>
     </div>
@@ -91,7 +91,14 @@
         </div>
     </div>
 
-    <div th:replace="footer :: copy"></div>
 </div>
+<div th:unless="${!basket.isEmpty()}">
+    <div class="container">
+        <h1>Your Basket is Empty</h1>
+        <hr/>
+        <p><a href="/" class="btn btn-success"> Back To Shop </a></p>
+    </div>
+</div>
+<div th:replace="footer :: copy"></div>
 </body>
 </html>

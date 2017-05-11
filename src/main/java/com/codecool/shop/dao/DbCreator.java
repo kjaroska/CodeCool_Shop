@@ -11,7 +11,29 @@ import java.util.List;
 
 public abstract class DbCreator {
 
-    public static void create() throws IOException, SQLException {
+    public static void checkArguments(String[] args) {
+        for (String arg : args) {
+            if (arg.equals("--init-db")) {
+                try {
+                    DbCreator.create();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else if (arg.equals("--migrate-db")) {
+                try {
+                    DbCreator.migrate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private static void create() throws IOException, SQLException {
         Connection connection = null;
         boolean can = false;
         try {
@@ -79,7 +101,7 @@ public abstract class DbCreator {
         }
     }
 
-    public static void migrate() throws IOException, SQLException {
+    private static void migrate() throws IOException, SQLException {
         Connection connection = null;
         boolean can = false;
         try {

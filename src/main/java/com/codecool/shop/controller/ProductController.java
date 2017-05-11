@@ -52,6 +52,11 @@ public abstract class ProductController {
         String categoryDescription = req.queryParams("categoryDescription");
         String categoryDepartment = req.queryParams("categoryDepartment");
         Float productPrice = Float.parseFloat(req.queryParams("price"));
+        if (productPrice < 0) {
+            productPrice = productPrice * (-1);
+        } else if (productPrice == 0.0) {
+            productPrice += 10000000;
+        }
         Supplier supplier = new Supplier(productSupplier, supplierDescription);
         new SupplierDaoImpl().add(supplier);
         Integer supplierId = new SupplierDaoImpl().findId(supplier);

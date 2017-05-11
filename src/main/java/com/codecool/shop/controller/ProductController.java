@@ -54,6 +54,8 @@ public abstract class ProductController {
         Float productPrice = Float.parseFloat(req.queryParams("price"));
         if (productPrice < 0) {
             productPrice = productPrice * (-1);
+        } else if (productPrice.equals(0)) {
+            productPrice += 10000000;
         }
         Supplier supplier = new Supplier(productSupplier, supplierDescription);
         new SupplierDaoImpl().add(supplier);

@@ -13,6 +13,11 @@ public class BaseModel {
         this.name = name;
     }
 
+    public BaseModel(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     BaseModel(Integer id, String name, String description) {
         this.id = id;
         this.name = name;

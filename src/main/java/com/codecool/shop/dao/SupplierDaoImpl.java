@@ -2,13 +2,24 @@ package com.codecool.shop.dao;
 
 import com.codecool.shop.model.Supplier;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class SupplierDaoImpl implements SupplierDao {
 
     @Override
     public void add(Supplier supplier) {
-
+        Statement stmt = Connector.getStatement(Connector.getConnection());
+        String sql =
+            "INSERT INTO Suppliers (name, description) "
+                + "VALUES ('" + supplier.getName() + "','" + supplier
+                .getDescription() + "');";
+        try {
+            stmt.executeUpdate(sql);
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + " in addsupplier: " + e.getMessage());
+            System.exit(0);
+        }
     }
 
     @Override
@@ -55,4 +66,20 @@ public class SupplierDaoImpl implements SupplierDao {
         return listSuppliers;
     }
 
+    public Integer findId(Supplier supplier) {
+        String query =
+            "SELECT id FROM Suppliers WHERE name = '" + supplier.getName() + "' AND description = '"
+                + supplier.getDescription() + "'";
+        ResultSet resultSet = Connector.getQueryResult(query);
+        Integer id = null;
+        try {
+            while (resultSet.next()) {
+                id = resultSet.getInt("id");
+            }
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + " in supplierFindID :" + e.getMessage());
+            System.exit(0);
+        }
+        return id;
+    }
 }

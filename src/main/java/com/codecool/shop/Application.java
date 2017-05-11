@@ -133,7 +133,7 @@ public class Application {
                     "user/userform");
             }
         });
-
+      
         get("/payment", new Route() {
             @Override
             public Object handle(Request req, Response res) {
@@ -142,7 +142,7 @@ public class Application {
                     "user/payment");
             }
         });
-
+        
         get("/confirmation", new Route() {
             @Override
             public Object handle(Request req, Response res) {
@@ -151,7 +151,24 @@ public class Application {
                     "user/confirmation");
             }
         });
+      
+        get("/product/new", new Route() {
+           @Override
+            public Object handle(Request req, Response res) {
+                return renderingController.render(basketController.renderProducts(
+                    basketController.getBasket()),
+                    "product/new");
+            }
+        });
 
+        post("/product/new", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                ProductController.addNewProduct(req, res);
+                res.redirect("/");
+                return "";
+            }
+        });
     }
 
     public static Application getApp() {

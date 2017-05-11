@@ -45,10 +45,14 @@
     <div class="col-md-6 col-sm-12 col-xs-12">
 
       <form action="/user" method="post">
-        <table>
+        <table class="table table-striped table-bordered table-hover ">
+          <tr>
+            <td>TOTAL SUM: <span th:text="${price} + '0 PLN'"></span></td>
+          </tr>
           <tr>
             <td>Card Number: <input type="text" name="cardNumber" class="form-control"/></td>
           </tr>
+
         </table>
         <hr/>
         <p><a href="/confirmation" class="btn btn-success"> SUBMIT PAYMENT </a></p>

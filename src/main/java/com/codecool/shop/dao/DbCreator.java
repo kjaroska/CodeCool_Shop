@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DbCreator {
+public abstract class DbCreator {
 
     public static void create() throws IOException, SQLException {
         Connection connection = null;
@@ -28,13 +28,11 @@ public class DbCreator {
         if (can) {
             Statement statement = connection.createStatement();
             List<String> queries = new ArrayList<>();
-            queries.add("DROP TABLE Items");
-            queries.add("DROP TABLE Orders");
-            queries.add("DROP TABLE Products");
-            queries.add("DROP TABLE ProductCategories");
-            queries.add("DROP TABLE Suppliers");
-            queries.add("DROP TABLE sqlite_master");
-            queries.add("DROP TABLE sqlite_sequence");
+            queries.add("DROP TABLE Items;");
+            queries.add("DROP TABLE Orders;");
+            queries.add("DROP TABLE Products;");
+            queries.add("DROP TABLE ProductCategories;");
+            queries.add("DROP TABLE Suppliers;");
             queries.add("CREATE TABLE Items\n"
                 + "(\n"
                 + "    Id INTEGER NOT NULL,\n"
@@ -72,19 +70,6 @@ public class DbCreator {
                 + "    name TEXT,\n"
                 + "    description TEXT\n"
                 + ");\n");
-            queries.add("CREATE TABLE sqlite_master\n"
-                + "(\n"
-                + "    type TEXT,\n"
-                + "    name TEXT,\n"
-                + "    tbl_name TEXT,\n"
-                + "    rootpage INTEGER,\n"
-                + "    sql TEXT\n"
-                + ");\n");
-            queries.add("CREATE TABLE sqlite_sequence\n"
-                + "(\n"
-                + "    name ,\n"
-                + "    seq \n"
-                + ")");
             for (String query : queries) {
                 statement.addBatch(query);
             }

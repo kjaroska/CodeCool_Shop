@@ -21,3 +21,4 @@ hs_err_pid*
 *.db
 src/main/resources/lib/
 src/main/resources/production/
+/src/main/resources/shop.db

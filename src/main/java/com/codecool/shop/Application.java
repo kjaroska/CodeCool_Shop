@@ -12,26 +12,36 @@ import com.codecool.shop.controller.ProductCategoryController;
 import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.controller.RenderingController;
 import com.codecool.shop.controller.SupplierController;
+import org.omg.PortableServer.THREAD_POLICY_ID;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class Application {
 
     private static Application app;
-    RenderingController renderingController;
-    BasketController basketController;
-    public Application() {
+    private RenderingController renderingController;
+    private BasketController basketController;
+    private Connection connection;
+
+
+    private Application() {
         this.basketController = new BasketController();
         this.renderingController = new RenderingController();
+        this.connection = null;
 
     }
 
     public static void run() {
-        System.out.println("Applications starting...");
+        System.out.println("Application starting...");
         try {
-            System.out.println("Applications started succesfully....");
-            Application app = new Application();
+            System.out.println("Application started successfully.");
+            app = new Application();
+            app.connectToDb();
             app.routes();
         } catch (Exception e) {
             System.out.println("There was an error " + e + " when running application.");
@@ -39,7 +49,29 @@ public class Application {
         }
     }
 
-    public void routes() {
+    private void connectToDb() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+            this.connection = DriverManager.getConnection("jdbc:sqlite:shop.db");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void disconnectDb() {
+        if (this.connection != null) {
+            try {
+                this.connection.close();
+                this.connection = null;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void routes() {
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
 
@@ -173,5 +205,9 @@ public class Application {
 
     public static Application getApp() {
         return app;
+    }
+
+    public Connection getConnection() {
+        return this.connection;
     }
 }

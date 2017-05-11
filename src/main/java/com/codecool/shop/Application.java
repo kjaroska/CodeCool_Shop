@@ -12,6 +12,7 @@ import com.codecool.shop.controller.ProductCategoryController;
 import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.controller.RenderingController;
 import com.codecool.shop.controller.SupplierController;
+import org.omg.PortableServer.THREAD_POLICY_ID;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -36,9 +37,9 @@ public class Application {
     }
 
     public static void run() {
-        System.out.println("Applications starting...");
+        System.out.println("Application starting...");
         try {
-            System.out.println("Applications started succesfully....");
+            System.out.println("Application started successfully.");
             app = new Application();
             app.connectToDb();
             app.routes();
@@ -56,6 +57,17 @@ public class Application {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void disconnectDb() {
+        if (this.connection != null) {
+            try {
+                this.connection.close();
+                this.connection = null;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 

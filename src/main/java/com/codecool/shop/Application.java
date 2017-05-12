@@ -17,6 +17,7 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -39,9 +40,9 @@ public class Application {
     public static void run() {
         System.out.println("Application starting...");
         try {
-            System.out.println("Application started successfully.");
             app = new Application();
             app.connectToDb();
+            System.out.println("Application started successfully.");
             app.routes();
         } catch (Exception e) {
             System.out.println("There was an error " + e + " when running application.");
@@ -52,6 +53,7 @@ public class Application {
     private void connectToDb() {
         try {
             Class.forName("org.sqlite.JDBC");
+            if (!new File("shop.db").exists()) throw new SQLException("Database file no exist");
             this.connection = DriverManager.getConnection("jdbc:sqlite:shop.db");
         } catch (SQLException e) {
             e.printStackTrace();

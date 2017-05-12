@@ -6,22 +6,19 @@ import static spark.Spark.get;
 import static spark.Spark.port;
 import static spark.Spark.post;
 import static spark.Spark.staticFileLocation;
-import static spark.Spark.threadPool;
 
 import com.codecool.shop.controller.BasketController;
 import com.codecool.shop.controller.ProductCategoryController;
 import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.controller.RenderingController;
 import com.codecool.shop.controller.SupplierController;
-import org.omg.PortableServer.THREAD_POLICY_ID;
-import spark.Request;
-import spark.Response;
-import spark.Route;
-
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import spark.Request;
+import spark.Response;
+import spark.Route;
 
 public class Application {
 
@@ -31,6 +28,7 @@ public class Application {
     private Connection connection;
     private ProductCategoryController productCategoryController;
     private ProductController productController;
+    private SupplierController supplierController;
 
 
     private Application() {
@@ -38,6 +36,7 @@ public class Application {
         this.renderingController = new RenderingController();
         this.productCategoryController = new ProductCategoryController();
         this.productController = new ProductController();
+        this.supplierController = new SupplierController();
         this.connection = null;
 
     }
@@ -118,7 +117,7 @@ public class Application {
             public Object handle(Request req, Response res) {
                 // process request
                 return renderingController.render(productController.renderProducts(
-                        SupplierController.productBySuppliers(req, res)),
+                    supplierController.productBySuppliers(req, res)),
                     "product/index");
             }
         });

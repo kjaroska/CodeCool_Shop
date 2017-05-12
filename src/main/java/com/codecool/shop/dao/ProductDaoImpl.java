@@ -18,7 +18,7 @@ public class ProductDaoImpl implements ProductDao {
     public void add(Product product) {
         String sql =
             "INSERT INTO Products (name, price, description, currency, id_productCategory, id_supplier) "
-                + "VALUES ('" + product.getName() + "','" + product.getPrice() + "','" + product
+                + "VALUES ('" + product.getName() + "','" + product.getPriceValue() + "','" + product
                 .getDescription() + "','" + product.getDefaultCurrency() + "','" + product
                 .getProductCategory().getId() + "','" + product.getSupplier().getId() + "');";
         try {

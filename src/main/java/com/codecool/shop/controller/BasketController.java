@@ -13,8 +13,10 @@ import spark.Request;
 public class BasketController {
 
     Basket basket;
+    private SupplierController supplierController;
 
     public BasketController() {
+        this.supplierController = new SupplierController();
         this.basket = new Basket(new ArrayList<Item>());
     }
 
@@ -71,13 +73,13 @@ public class BasketController {
         return basket;
     }
 
-    public static Map<String, Object> renderProducts(Basket basket) {
+    public Map<String, Object> renderProducts(Basket basket) {
         Map<String, Object> params = new HashMap<>();
 
         params.put("basket", basket.getItemList());
         params.put("price", basket.getTotalPrice());
         params.put("categories", ProductCategoryController.showAvailableCategories());
-        params.put("suppliers", SupplierController.showAvailableSuppliers());
+        params.put("suppliers", supplierController.showAvailableSuppliers());
         return params;
     }
 

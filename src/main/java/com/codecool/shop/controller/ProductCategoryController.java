@@ -9,14 +9,14 @@ import spark.Request;
 import spark.Response;
 
 
-public abstract class ProductCategoryController {
+public class ProductCategoryController {
 
     static ArrayList<ProductCategory> showAvailableCategories() {
         ArrayList<ProductCategory> productCategories = new ProductCategoryDaoImpl().getAll();
         return productCategories;
     }
 
-    public static ArrayList<Product> showProductsFromCategory(Request req, Response res) {
+    public ArrayList<Product> showProductsFromCategory(Request req, Response res) {
         Integer categoryId = Integer.parseInt(req.params(":id"));
         ProductCategory productCategory;
         ArrayList<Product> productsFromCategory;

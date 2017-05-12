@@ -42,21 +42,19 @@ public class Application {
         try {
             app = new Application();
             app.connectToDb();
-            System.out.println("Application started successfully.");
             app.routes();
         } catch (Exception e) {
             System.out.println("There was an error " + e + " when running application.");
             System.exit(0);
         }
+        System.out.println("Application started successfully.");
     }
 
-    private void connectToDb() {
+    private void connectToDb() throws SQLException {
+        if (!new File("shop.db").exists()) throw new SQLException("Database file no exist");
         try {
             Class.forName("org.sqlite.JDBC");
-            if (!new File("shop.db").exists()) throw new SQLException("Database file no exist");
             this.connection = DriverManager.getConnection("jdbc:sqlite:shop.db");
-        } catch (SQLException e) {
-            e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

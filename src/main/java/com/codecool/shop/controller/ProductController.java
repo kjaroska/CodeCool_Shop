@@ -14,19 +14,24 @@ import java.util.Map;
 import spark.Request;
 import spark.Response;
 
-public abstract class ProductController {
+public class ProductController {
+    private SupplierController supplierController;
+
+    public ProductController() {
+        this.supplierController = new SupplierController();
+    }
 
     private static java.util.Iterator<Product> getIterator(ArrayList<Product> productList) {
         return new ProductIterator(productList).Iterator();
     }
 
 
-    public static ArrayList<Product> showAvailableProducts() {
+    public ArrayList<Product> showAvailableProducts() {
         ArrayList<Product> products = new ProductDaoImpl().getAll();
         return products;
     }
 
-    public static ArrayList<Product> showProductByName(Request req, Response res) {
+    public ArrayList<Product> showProductByName(Request req, Response res) {
         String productName = req.queryParams("search");
         System.out.println(productName);
         ArrayList<Product> products = new ProductDaoImpl().getByName(productName);
@@ -34,16 +39,16 @@ public abstract class ProductController {
 
     }
 
-    public static Map<String, Object> renderProducts(List<Product> products) {
+    public Map<String, Object> renderProducts(List<Product> products) {
         Map<String, Object> params = new HashMap<>();
         params.put("products", products);
         params.put("categories", ProductCategoryController.showAvailableCategories());
-        params.put("suppliers", SupplierController.showAvailableSuppliers());
+        params.put("suppliers", supplierController.showAvailableSuppliers());
 
         return params;
     }
 
-    public static void addNewProduct(Request req, Response res) {
+    public void addNewProduct(Request req, Response res) {
         String productName = req.queryParams("productName");
         String productDescription = req.queryParams("description");
         String productCategory = req.queryParams("category");

@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import spark.Request;
 import spark.Response;
 
-public abstract class SupplierController {
+public class SupplierController {
 
-    public static ArrayList<Supplier> showAvailableSuppliers() {
+    public ArrayList<Supplier> showAvailableSuppliers() {
         ArrayList<Supplier> suppliers = new SupplierDaoImpl().getAll();
         return suppliers;
     }
 
-    public static ArrayList<Product> productBySuppliers(Request req, Response res) {
+    public ArrayList<Product> productBySuppliers(Request req, Response res) {
         Integer supplierId = Integer.parseInt(req.params(":id"));
         Supplier supplier;
         ArrayList<Product> productsFromSupplier;

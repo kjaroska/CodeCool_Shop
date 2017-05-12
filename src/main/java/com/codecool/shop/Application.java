@@ -6,6 +6,7 @@ import static spark.Spark.get;
 import static spark.Spark.port;
 import static spark.Spark.post;
 import static spark.Spark.staticFileLocation;
+import static spark.Spark.threadPool;
 
 import com.codecool.shop.controller.BasketController;
 import com.codecool.shop.controller.ProductCategoryController;
@@ -28,11 +29,15 @@ public class Application {
     private RenderingController renderingController;
     private BasketController basketController;
     private Connection connection;
+    private ProductCategoryController productCategoryController;
+    private ProductController productController;
 
 
     private Application() {
         this.basketController = new BasketController();
         this.renderingController = new RenderingController();
+        this.productCategoryController = new ProductCategoryController();
+        this.productController = new ProductController();
         this.connection = null;
 
     }
@@ -82,7 +87,7 @@ public class Application {
             public Object handle(Request req, Response res) {
                 // process request
                 return renderingController.render(
-                        ProductController.renderProducts(ProductController.showAvailableProducts()),
+                        productController.renderProducts(productController.showAvailableProducts()),
                     "product/index");
             }
 
@@ -93,7 +98,7 @@ public class Application {
             public Object handle(Request req, Response res) {
                 // process request
                 return renderingController.render(
-                        ProductController.renderProducts(ProductController.showProductByName(req, res)),
+                        productController.renderProducts(productController.showProductByName(req, res)),
                     "product/index");
             }
         });
@@ -102,8 +107,8 @@ public class Application {
             @Override
             public Object handle(Request req, Response res) {
                 // process request
-                return renderingController.render(ProductController.renderProducts(
-                        ProductCategoryController.showProductsFromCategory(req, res)),
+                return renderingController.render(productController.renderProducts(
+                        productCategoryController.showProductsFromCategory(req, res)),
                     "product/index");
             }
         });
@@ -112,7 +117,7 @@ public class Application {
             @Override
             public Object handle(Request req, Response res) {
                 // process request
-                return renderingController.render(ProductController.renderProducts(
+                return renderingController.render(productController.renderProducts(
                         SupplierController.productBySuppliers(req, res)),
                     "product/index");
             }
@@ -196,7 +201,7 @@ public class Application {
         post("/product/new", new Route() {
             @Override
             public Object handle(Request req, Response res) {
-                ProductController.addNewProduct(req, res);
+                productController.addNewProduct(req, res);
                 res.redirect("/");
                 return "";
             }

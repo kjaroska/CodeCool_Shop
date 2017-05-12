@@ -1,23 +1,31 @@
-
 import com.codecool.shop.Application;
-import com.codecool.shop.controller.BasketController;
-import com.codecool.shop.controller.ProductCategoryController;
-import com.codecool.shop.controller.ProductController;
-import com.codecool.shop.controller.SupplierController;
-import com.codecool.shop.dao.Connector;
-import com.codecool.shop.model.Basket;
-import com.codecool.shop.model.Item;
-import com.codecool.shop.ui.InputGetter;
-import com.codecool.shop.view.Menu;
-import com.codecool.shop.view.Printer;
-import java.util.ArrayList;
+import com.codecool.shop.DatabaseManager;
+
 
 /**
  * 'O for a muse of fire!'
  **/
 class Main {
-
-  public static void main(String[] args) {
-    Application application = new Application();
-  }
+    public static void main(String[] args) {
+        if (args.length != 0) {
+            DatabaseManager.run(args);
+        } else {
+            try {
+                Application.run();
+            } finally {
+                Thread mainThread = Thread.currentThread();
+                Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                    System.out.println("Closing database connection...");
+                    Application.getApp().disconnectDb();
+                    System.out.println("Connection successfully closed.");
+                    try {
+                        mainThread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }));
+            }
+        }
+    }
 }
+

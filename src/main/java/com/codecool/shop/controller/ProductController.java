@@ -1,56 +1,78 @@
 package com.codecool.shop.controller;
 
 
+import com.codecool.shop.dao.ProductCategoryDaoImpl;
 import com.codecool.shop.dao.ProductDaoImpl;
+import com.codecool.shop.dao.SupplierDaoImpl;
 import com.codecool.shop.model.Product;
-import com.codecool.shop.ui.InputGetter;
-import com.codecool.shop.view.Printer;
+import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public abstract class ProductController {
+public class ProductController {
+    private SupplierController supplierController;
 
-  private static java.util.Iterator<Product> getIterator(ArrayList<Product> productList) {
+    public ProductController() {
+        this.supplierController = new SupplierController();
+    }
+
+    private static java.util.Iterator<Product> getIterator(ArrayList<Product> productList) {
         return new ProductIterator(productList).Iterator();
     }
 
-  public static ArrayList<Integer> showAvailableProducts() {
-    ArrayList<Product> products = new ProductDaoImpl().getAll();
-    Iterator<Product> productIterator = ProductController.getIterator(products);
-    ArrayList<Integer> productsIDs = new ArrayList<>();
-    while (productIterator.hasNext()) {
-      Product product = productIterator.next();
-      Printer.printObject(product.toString());
-      productsIDs.add(product.getId());
-    }
-    return productsIDs;
-  }
 
-  public static ArrayList<Integer> showProductByName() {
-    Printer.printObject("Enter Product's name: ");
-    String productName = InputGetter.getStringInput();
-    ArrayList<Product> products = new ProductDaoImpl().getByName(productName);
-    Iterator<Product> productIterator = ProductController.getIterator(products);
-    ArrayList<Integer> productsIDs = new ArrayList<>();
-    while (productIterator.hasNext()) {
-      Product product = productIterator.next();
-      Printer.printObject(product.toString());
-      productsIDs.add(product.getId());
+    public ArrayList<Product> showAvailableProducts() {
+        ArrayList<Product> products = new ProductDaoImpl().getAll();
+        return products;
     }
-    return productsIDs;
-  }
 
-  public static Object renderProducts(Request req, Response res) {
-    Map<String, ArrayList<Product>> params = new HashMap<>();
-    List<Product> products = new ProductDaoImpl().getAll();
-    params.put("products", (ArrayList<Product>) products);
-    ModelAndView modelAndView = new ModelAndView(params, "product/index");
-    return modelAndView;
-  }
+    public ArrayList<Product> showProductByName(Request req, Response res) {
+        String productName = req.queryParams("search");
+        System.out.println(productName);
+        ArrayList<Product> products = new ProductDaoImpl().getByName(productName);
+        return products;
+
+    }
+
+    public Map<String, Object> renderProducts(List<Product> products) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("products", products);
+        params.put("categories", ProductCategoryController.showAvailableCategories());
+        params.put("suppliers", supplierController.showAvailableSuppliers());
+
+        return params;
+    }
+
+    public void addNewProduct(Request req, Response res) {
+        String productName = req.queryParams("productName");
+        String productDescription = req.queryParams("description");
+        String productCategory = req.queryParams("category");
+        String productSupplier = req.queryParams("supplier");
+        String supplierDescription = req.queryParams("supplierDescription");
+        String categoryDescription = req.queryParams("categoryDescription");
+        String categoryDepartment = req.queryParams("categoryDepartment");
+        Float productPrice = Float.parseFloat(req.queryParams("price"));
+        if (productPrice < 0) {
+            productPrice = productPrice * (-1);
+        } else if (productPrice == 0.0) {
+            productPrice += 10000000;
+        }
+        Supplier supplier = new Supplier(productSupplier, supplierDescription);
+        new SupplierDaoImpl().add(supplier);
+        Integer supplierId = new SupplierDaoImpl().findId(supplier);
+        supplier.setId(supplierId);
+        ProductCategory category = new ProductCategory(productCategory, categoryDepartment,
+            categoryDescription);
+        new ProductCategoryDaoImpl().add(category);
+        Integer categoryId = new ProductCategoryDaoImpl().findId(category);
+        category.setId(categoryId);
+        Product product = new Product(productName, productPrice, productDescription, "PLN",
+            category, supplier);
+        new ProductDaoImpl().add(product);
+    }
 }

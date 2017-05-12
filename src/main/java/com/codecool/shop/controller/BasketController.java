@@ -1,35 +1,38 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.view.Menu;
 import com.codecool.shop.dao.ProductDaoImpl;
 import com.codecool.shop.model.Basket;
 import com.codecool.shop.model.Item;
 import com.codecool.shop.model.Product;
-import com.codecool.shop.view.Printer;
-import com.codecool.shop.ui.InputGetter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import spark.Request;
 
 
-public abstract class BasketController {
+public class BasketController {
 
-    public static Basket addToBasket(Basket basket, ArrayList<Integer> productFromCategoryIDs) {
-      Printer.printObject("\nWhich product you want to add? ");
-        Integer productId = idValidation(productFromCategoryIDs);
+    Basket basket;
+    private SupplierController supplierController;
+
+    public BasketController() {
+        this.supplierController = new SupplierController();
+        this.basket = new Basket(new ArrayList<Item>());
+    }
+
+    public Basket addToBasket(Basket basket, Request req) {
         Product product;
+        Integer productId = Integer.parseInt(req.queryParams("productId"));
         while (true) {
             try {
                 product = new ProductDaoImpl().find(productId);
-                Printer.printObject("How many " + product.getName() + " do you want? ");
                 if (product != null) {
                     break;
                 }
             } catch (Exception e) {
-                Printer.printObject(e + ", No product with given id");
-                Printer.printObject("Insert proper id: ");
-                productId = InputGetter.getIntegerInput();
             }
         }
-        Integer quantity = quantityCheck();
+        Integer quantity = Integer.parseInt(req.queryParams("quantity"));
         Boolean found = false;
         Item item = new Item(product, quantity, basket.getId());
         for (Item existingItem : basket.getItemList()) {
@@ -44,10 +47,8 @@ public abstract class BasketController {
         return basket;
     }
 
-  private static Basket removeFromBasket(Basket basket) {
-        Printer.printBasket(basket.getItemList());
-        Printer.printObject("Which product you want to remove? ");
-        Integer itemId = InputGetter.getIntegerInput();
+    public static Basket removeFromBasket(Basket basket, Request req) {
+        Integer itemId = Integer.parseInt(req.queryParams("productId"));
         java.util.Iterator<Item> itemIter = basket.getIterator();
         while (itemIter.hasNext()) {
             Item item = itemIter.next();
@@ -58,80 +59,35 @@ public abstract class BasketController {
         return basket;
     }
 
-  private static Basket editBasket(Basket basket) {
-        Printer.printBasket(basket.getItemList());
-        Printer.printObject("Which product you want to edit? ");
-        Integer itemId = InputGetter.getIntegerInput();
+    public static Basket editBasket(Basket basket, Request req) {
+        Integer quantity = Integer.parseInt(req.queryParams("quantity"));
+        Integer itemId = Integer.parseInt(req.queryParams("productId"));
         java.util.Iterator<Item> itemIter = basket.getIterator();
         while (itemIter.hasNext()) {
             Item item = itemIter.next();
             if (item.getId().equals(itemId)) {
-                Printer.printObject("Insert new quantity of item in basket: ");
-                Integer newQuantity = quantityCheck();
-                item.setQuantity(newQuantity);
-                item.setTotalPrice(newQuantity * item.getProduct().getDefaultPrice());
+                item.setQuantity(quantity);
+                item.setTotalPrice(quantity * item.getProduct().getDefaultPrice());
             }
         }
         return basket;
     }
 
-    private static Integer quantityCheck() {
-        Integer newQuantity;
-        while (true) {
-            newQuantity = InputGetter.getIntegerInput();
-            if (newQuantity > 1000) {
-                Printer.printObject("You are asking for too much. Try again: ");
-            } else if (newQuantity <= 0) {
-                Printer.printObject("Quantity have to above 0");
-                Printer.printObject("Provide proper quantity of item: ");
-            } else {
-                break;
-            }
-        }
-        return newQuantity;
+    public Map<String, Object> renderProducts(Basket basket) {
+        Map<String, Object> params = new HashMap<>();
+
+        params.put("basket", basket.getItemList());
+        params.put("price", basket.getTotalPrice());
+        params.put("categories", ProductCategoryController.showAvailableCategories());
+        params.put("suppliers", supplierController.showAvailableSuppliers());
+        return params;
     }
 
-    private static Integer idValidation(ArrayList<Integer> productFromCategoryIDs) {
-        Integer productId;
-        do {
-            System.out.println("Make sure you enter id from the list above.");
-            productId = InputGetter.getIntegerInput();
-        } while (!productFromCategoryIDs.contains(productId));
-        return productId;
+    public Basket getBasket() {
+        return basket;
     }
 
-  public static Basket productExist(Basket basket, ArrayList<Integer> productByNameID) {
-    if (productByNameID.isEmpty()) {
-      System.out.println("No matches for your query");
-    } else {
-      basket = BasketController.addToBasket(basket, productByNameID);
+    public void setBasket(Basket basket) {
+        this.basket = basket;
     }
-    return basket;
-  }
-
-  public static Basket basketOptions(Basket basket, Menu menu) {
-    basketLoop:
-    //loop for basket menu
-    while (true) {
-      Printer.printBasket(basket.getItemList());
-      Printer.printMenu(menu.getBasketMenu());
-      Integer basketOption = InputGetter.getIntegerInput();
-      switch (basketOption) {
-        case 1:
-          basket = BasketController.removeFromBasket(basket);
-          continue;
-        case 2:
-          basket = BasketController.editBasket(basket);
-          continue;
-        case 3:
-          SummaryController.summary(basket);
-          continue;
-        case 0:
-          break basketLoop;
-        default:
-          System.out.println("Invalid input. Try again.");
-      }
-    }
-    return basket;
-  }
 }

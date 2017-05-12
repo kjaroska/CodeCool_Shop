@@ -15,7 +15,7 @@ public class Basket {
     public Basket(ArrayList<Item> items) {
         this.itemsList = items;
         this.id = Basket.nextId++;
-        this.totalPrice = setTotalPrice();
+        this.totalPrice = getTotalPrice();
     }
 
     public Basket(ArrayList<Item> items, Integer id) {
@@ -28,14 +28,13 @@ public class Basket {
     }
 
     public Float getTotalPrice() {
-        return this.totalPrice;
+        return setTotalPrice();
     }
 
     private Float setTotalPrice() {
         Float orderPrice = 0.0f;
         for (Item item : this.itemsList) {
             orderPrice = orderPrice + item.getTotalPrice();
-            System.out.println(item.getTotalPrice());
         }
 
         return orderPrice;

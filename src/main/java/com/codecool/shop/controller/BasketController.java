@@ -1,6 +1,5 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.dao.BasketDaoImpl;
 import com.codecool.shop.dao.ProductDaoImpl;
 import com.codecool.shop.model.Basket;
 import com.codecool.shop.model.Item;
@@ -13,7 +12,6 @@ import spark.Request;
 
 public class BasketController {
 
-    BasketDaoImpl basketDao = new BasketDaoImpl();
     Basket basket;
     private SupplierController supplierController;
 
@@ -83,10 +81,6 @@ public class BasketController {
         params.put("categories", ProductCategoryController.showAvailableCategories());
         params.put("suppliers", supplierController.showAvailableSuppliers());
         return params;
-    }
-
-    public void saveBasket(Request req) {
-        basketDao.add(this.getBasket(), req.queryParams("userName"), req.queryParams("userAdress"));
     }
 
     public Basket getBasket() {

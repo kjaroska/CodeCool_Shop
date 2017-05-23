@@ -16,10 +16,6 @@ public class Supplier extends BaseModel {
         super(name, description);
         this.products = new ArrayList<>();
     }
-
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
-    }
     public void addProduct(Product product) {
         this.products.add(product);
     }

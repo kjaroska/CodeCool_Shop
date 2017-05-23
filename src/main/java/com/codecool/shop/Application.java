@@ -211,6 +211,10 @@ public class Application {
         return app;
     }
 
+    public BasketController getBasketController() {
+        return basketController;
+    }
+
     public Connection getConnection() {
         return this.connection;
     }

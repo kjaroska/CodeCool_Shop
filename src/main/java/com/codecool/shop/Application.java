@@ -178,6 +178,15 @@ public class Application {
                     "user/payment");
             }
         });
+
+        post("/payment", new Route() {
+            @Override
+            public Object handle(Request req, Response res) {
+                basketController.saveBasket(req);
+                res.redirect("/confirmation");
+                return "";
+            }
+        });
         
         get("/confirmation", new Route() {
             @Override
@@ -209,6 +218,10 @@ public class Application {
 
     public static Application getApp() {
         return app;
+    }
+
+    public BasketController getBasketController() {
+        return basketController;
     }
 
     public Connection getConnection() {

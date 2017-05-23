@@ -20,11 +20,6 @@ public class Supplier extends BaseModel {
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
-
-    public ArrayList getProducts() {
-        return this.products;
-    }
-
     public void addProduct(Product product) {
         this.products.add(product);
     }

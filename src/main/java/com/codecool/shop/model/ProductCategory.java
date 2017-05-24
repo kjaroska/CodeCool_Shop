@@ -22,16 +22,10 @@ public class ProductCategory extends BaseModel {
         return department;
     }
 
-    public String getName() {return this.name;}
-
-    public void setDepartment(String department) {
-        this.department = department;
+    public String getName() {
+        return this.name;
     }
-
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
-    }
-
+    
     public ArrayList getProducts() {
         return this.products;
     }
@@ -40,15 +34,4 @@ public class ProductCategory extends BaseModel {
         this.products.add(product);
     }
 
-    public String toString() {
-        return String.format(
-                "id: %1$d," +
-                        "name: %2$s, " +
-                        "department: %3$s, " +
-                        "description: %4$s",
-                this.id,
-                this.name,
-                this.department,
-                this.description);
-    }
 }

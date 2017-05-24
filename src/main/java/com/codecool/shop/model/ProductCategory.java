@@ -25,7 +25,7 @@ public class ProductCategory extends BaseModel {
     public String getName() {
         return this.name;
     }
-    
+
     public ArrayList getProducts() {
         return this.products;
     }
@@ -33,5 +33,4 @@ public class ProductCategory extends BaseModel {
     public void addProduct(Product product) {
         this.products.add(product);
     }
-
 }

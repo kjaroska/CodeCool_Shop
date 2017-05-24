@@ -18,11 +18,6 @@ public class Basket {
         this.totalPrice = getTotalPrice();
     }
 
-    public Basket(ArrayList<Item> items, Integer id) {
-        this.itemsList = items;
-        this.id = id;
-    }
-
     public Integer getId() {
         return this.id;
     }

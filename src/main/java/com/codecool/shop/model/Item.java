@@ -17,10 +17,6 @@ public class Item {
         this.totalPrice = getTotalPrice();
     }
 
-    public Integer getIdBasket() {
-        return this.idBasket;
-    }
-
     public Product getProduct() {
         return this.product;
     }

@@ -40,10 +40,6 @@ public class Basket {
         return orderPrice;
     }
 
-    public void setTotalPrice(Float totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
     public ArrayList<Item> getItemList() {
         return this.itemsList;
     }

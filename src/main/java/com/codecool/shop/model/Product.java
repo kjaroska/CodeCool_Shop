@@ -3,7 +3,6 @@ package com.codecool.shop.model;
 import java.util.Currency;
 
 public class Product extends BaseModel {
-
     private Float defaultPrice;
     private Currency defaultCurrency;
     private ProductCategory productCategory;
@@ -29,24 +28,12 @@ public class Product extends BaseModel {
         return defaultPrice;
     }
 
-    public void setDefaultPrice(float defaultPrice) {
-        this.defaultPrice = defaultPrice;
-    }
-
     public Currency getDefaultCurrency() {
         return defaultCurrency;
     }
 
-    public void setDefaultCurrency(Currency defaultCurrency) {
-        this.defaultCurrency = defaultCurrency;
-    }
-
     public Float getPriceValue() {
         return this.defaultPrice;
-    }
-
-    public String getPrice() {
-        return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency.toString();
     }
 
     private void setPrice(float price, String currency) {

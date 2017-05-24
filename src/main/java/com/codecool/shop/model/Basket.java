@@ -10,17 +10,9 @@ public class Basket {
     private static Integer nextId = 1;
     private final Integer id;
 
-    private Float totalPrice;
-
     public Basket(ArrayList<Item> items) {
         this.itemsList = items;
         this.id = Basket.nextId++;
-        this.totalPrice = getTotalPrice();
-    }
-
-    public Basket(ArrayList<Item> items, Integer id) {
-        this.itemsList = items;
-        this.id = id;
     }
 
     public Integer getId() {
@@ -38,10 +30,6 @@ public class Basket {
         }
 
         return orderPrice;
-    }
-
-    public void setTotalPrice(Float totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public ArrayList<Item> getItemList() {

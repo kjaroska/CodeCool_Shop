@@ -44,15 +44,4 @@ public class Item {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
-
-
-    @Override
-    public String toString() {
-        return String.format("Item: " +
-                "id=%1$d" +
-                " product=%2$s" +
-                ", quantity=%3$d" +
-                ", totalPrice=%4$.2f ",
-            id, product.getName(), quantity, this.getTotalPrice());
-    }
 }

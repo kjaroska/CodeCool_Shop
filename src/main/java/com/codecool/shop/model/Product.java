@@ -69,5 +69,6 @@ public class Product extends BaseModel {
 
     private void setSupplier(Supplier supplier) {
         this.supplier = supplier;
+        this.supplier.addProduct(this);
     }
 }

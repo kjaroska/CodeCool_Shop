@@ -58,7 +58,7 @@
                                th:text="${'Supplier: ' + prod.supplier.getName()}"
                                th:href="${'/Supplier/'+prod.getSupplier().getId()}">Product
                                 Supplier.. </a>
-                            <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                            <p class="lead" th:text="${prod.getPriceValue()}">100 USD</p>
                         </div>
                         <div class="col-xs-12 col-md-6">
                             <form action="/basket/add" method="post">

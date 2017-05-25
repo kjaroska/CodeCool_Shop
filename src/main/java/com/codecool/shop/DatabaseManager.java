@@ -48,7 +48,7 @@ public class DatabaseManager {
         }
     }
 
-    private void executeStatements(List<String> statements) {
+    private void executeStatements(List<String> statements) throws SQLException, ClassNotFoundException  {
         dbManager.connectToDb();
         if (this.connection != null && statements != null) {
             try {

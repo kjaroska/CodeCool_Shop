@@ -1,8 +1,5 @@
 package com.codecool.shop.model;
 
-
-import java.lang.reflect.Field;
-
 abstract class BaseModel {
 
     Integer id;

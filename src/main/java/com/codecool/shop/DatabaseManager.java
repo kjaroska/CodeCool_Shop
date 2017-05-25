@@ -33,6 +33,9 @@ public class DatabaseManager {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    public static DatabaseManager getDbManager() {
+        return dbManager;
+    }
     }
 
     private void disconnectDb() {

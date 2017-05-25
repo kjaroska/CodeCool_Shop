@@ -9,10 +9,6 @@ abstract class BaseModel {
     String name;
     String description;
 
-    public BaseModel(String name) {
-        this.name = name;
-    }
-
     public BaseModel(String name, String description) {
         this.name = name;
         this.description = description;

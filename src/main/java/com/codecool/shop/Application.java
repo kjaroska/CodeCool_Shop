@@ -12,10 +12,9 @@ import com.codecool.shop.controller.ProductCategoryController;
 import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.controller.RenderingController;
 import com.codecool.shop.controller.SupplierController;
-import java.io.File;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -25,10 +24,10 @@ public class Application {
     private static Application app;
     private RenderingController renderingController;
     private BasketController basketController;
-    private Connection connection;
     private ProductCategoryController productCategoryController;
     private ProductController productController;
     private SupplierController supplierController;
+    private Connection connection;
 
 
     private Application() {
@@ -41,11 +40,15 @@ public class Application {
 
     }
 
-    public static void run() {
+    public static void run(String[] args) {
         System.out.println("Application starting...");
         try {
             app = new Application();
-            app.connectToDb();
+            if (args.length > 0) {
+                app.connectToDb(args[0]);
+            } else {
+                app.connectToDb("loadDatabase");
+            }
             app.routes();
         } catch (Exception e) {
             System.out.println("There was an error " + e + " when running application.");
@@ -54,13 +57,14 @@ public class Application {
         System.out.println("Application started successfully.");
     }
 
-    private void connectToDb() throws SQLException {
-        if (!new File("shop.db").exists()) throw new SQLException("Database file no exist");
+    private void connectToDb(String arg) {
         try {
-            Class.forName("org.sqlite.JDBC");
-            this.connection = DriverManager.getConnection("jdbc:sqlite:shop.db");
+            DatabaseManager.run(arg);
+            connection = DatabaseManager.getDbManager().getConnection();
+        } catch (SQLException e) {
+            System.out.println("there was an error:" + e);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("there was an error:" + e);
         }
     }
 

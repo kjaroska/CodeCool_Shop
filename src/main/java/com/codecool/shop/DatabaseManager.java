@@ -17,32 +17,20 @@ public class DatabaseManager {
     private Connection connection;
     private static DatabaseManager dbManager;
 
-
-    private void connectToDb() {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            this.connection = DriverManager.getConnection("jdbc:sqlite:shop.db");
-            if (this.connection != null) {
-                DatabaseMetaData meta = this.connection.getMetaData();
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+    public Connection getConnection() {
+        return connection;
     }
 
-    private void disconnectDb() {
-        if (this.connection != null) {
-            try {
-                this.connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+    public static DatabaseManager getDbManager() {
+        return dbManager;
     }
 
-    private void executeStatements(List<String> statements) {
+    public void connectToDb() throws SQLException, ClassNotFoundException {
+        Class.forName("org.sqlite.JDBC");
+        connection = DriverManager.getConnection("jdbc:sqlite:shop.db");
+    }
+
+    private void executeStatements(List<String> statements) throws SQLException, ClassNotFoundException  {
         dbManager.connectToDb();
         if (this.connection != null && statements != null) {
             try {
@@ -68,24 +56,18 @@ public class DatabaseManager {
         return statements;
     }
 
-    public static void run(String[] args) {
+    public static void run(String argument) throws SQLException, ClassNotFoundException {
         dbManager = new DatabaseManager();
-        switch (args[0]) {
+        dbManager.connectToDb();
+        switch (argument) {
             case "--init-db":
                 List<String> initStatements = dbManager.getStatements("init.sql");
                 dbManager.executeStatements(initStatements);
-                dbManager.disconnectDb();
                 System.out.println("Database successfully initialized.");
-                break;
             case "--migrate-db":
                 List<String> migrateStatements = dbManager.getStatements("migrate.sql");
                 dbManager.executeStatements(migrateStatements);
-                dbManager.disconnectDb();
                 System.out.println("Database successfully migrated");
-                break;
-            default:
-                System.out.println("Invalid parameter, please try again");
-                System.exit(0);
         }
     }
 }

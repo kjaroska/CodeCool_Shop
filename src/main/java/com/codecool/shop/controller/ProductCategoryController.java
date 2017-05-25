@@ -12,8 +12,7 @@ import spark.Response;
 public class ProductCategoryController {
 
     static ArrayList<ProductCategory> showAvailableCategories() {
-        ArrayList<ProductCategory> productCategories = new ProductCategoryDaoImpl().getAll();
-        return productCategories;
+        return new ProductCategoryDaoImpl().getAll();
     }
 
     public ArrayList<Product> showProductsFromCategory(Request req, Response res) {

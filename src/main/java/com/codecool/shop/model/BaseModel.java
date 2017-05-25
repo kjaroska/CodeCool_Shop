@@ -20,7 +20,6 @@ abstract class BaseModel {
         this.description = description;
     }
 
-
     public int getId() {
         return id;
     }
@@ -31,10 +30,6 @@ abstract class BaseModel {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {

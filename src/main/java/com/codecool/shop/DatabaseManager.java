@@ -21,21 +21,13 @@ public class DatabaseManager {
         return connection;
     }
 
-    private void connectToDb() {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            this.connection = DriverManager.getConnection("jdbc:sqlite:shop.db");
-            if (this.connection != null) {
-                DatabaseMetaData meta = this.connection.getMetaData();
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
     public static DatabaseManager getDbManager() {
         return dbManager;
     }
+
+    public void connectToDb() throws SQLException, ClassNotFoundException {
+        Class.forName("org.sqlite.JDBC");
+        connection = DriverManager.getConnection("jdbc:sqlite:shop.db");
     }
 
     private void disconnectDb() {

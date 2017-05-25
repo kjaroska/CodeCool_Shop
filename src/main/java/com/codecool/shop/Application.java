@@ -62,13 +62,14 @@ public class Application {
         System.out.println("Application started successfully.");
     }
 
-    private void connectToDb() throws SQLException {
-        if (!new File("shop.db").exists()) throw new SQLException("Database file no exist");
+    private void connectToDb(String arg) {
         try {
-            Class.forName("org.sqlite.JDBC");
-            this.connection = DriverManager.getConnection("jdbc:sqlite:shop.db");
+            DatabaseManager.run(arg);
+            connection = DatabaseManager.getDbManager().getConnection();
+        } catch (SQLException e) {
+            System.out.println("there was an error:" + e);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("there was an error:" + e);
         }
     }
 

@@ -25,10 +25,10 @@ public class Application {
     private static Application app;
     private RenderingController renderingController;
     private BasketController basketController;
-    private Connection connection;
     private ProductCategoryController productCategoryController;
     private ProductController productController;
     private SupplierController supplierController;
+    private Connection connection;
 
 
     private Application() {

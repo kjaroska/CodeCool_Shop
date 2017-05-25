@@ -17,6 +17,9 @@ public class DatabaseManager {
     private Connection connection;
     private static DatabaseManager dbManager;
 
+    public Connection getConnection() {
+        return connection;
+    }
 
     private void connectToDb() {
         try {

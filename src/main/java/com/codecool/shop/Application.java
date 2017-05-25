@@ -45,11 +45,15 @@ public class Application {
 
     }
 
-    public static void run() {
+    public static void run(String[] args) {
         System.out.println("Application starting...");
         try {
             app = new Application();
-            app.connectToDb();
+            if (args.length > 0) {
+                app.connectToDb(args[0]);
+            } else {
+                app.connectToDb("loadDatabase");
+            }
             app.routes();
         } catch (Exception e) {
             System.out.println("There was an error " + e + " when running application.");

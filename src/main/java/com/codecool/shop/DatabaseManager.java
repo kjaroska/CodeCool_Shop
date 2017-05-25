@@ -30,16 +30,6 @@ public class DatabaseManager {
         connection = DriverManager.getConnection("jdbc:sqlite:shop.db");
     }
 
-    private void disconnectDb() {
-        if (this.connection != null) {
-            try {
-                this.connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     private void executeStatements(List<String> statements) throws SQLException, ClassNotFoundException  {
         dbManager.connectToDb();
         if (this.connection != null && statements != null) {

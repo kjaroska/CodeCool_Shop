@@ -1,17 +1,16 @@
 import com.codecool.shop.Application;
 import com.codecool.shop.DatabaseManager;
 
+import java.sql.SQLException;
+
 
 /**
  * 'O for a muse of fire!'
  **/
 class Main {
     public static void main(String[] args) {
-        if (args.length != 0) {
-            DatabaseManager.run(args);
-        } else {
             try {
-                Application.run();
+                Application.run(args);
             } finally {
                 Thread mainThread = Thread.currentThread();
                 Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -26,6 +25,5 @@ class Main {
                 }));
             }
         }
-    }
 }
 

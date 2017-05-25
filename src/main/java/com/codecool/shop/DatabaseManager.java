@@ -74,24 +74,18 @@ public class DatabaseManager {
         return statements;
     }
 
-    public static void run(String[] args) {
+    public static void run(String argument) throws SQLException, ClassNotFoundException {
         dbManager = new DatabaseManager();
-        switch (args[0]) {
+        dbManager.connectToDb();
+        switch (argument) {
             case "--init-db":
                 List<String> initStatements = dbManager.getStatements("init.sql");
                 dbManager.executeStatements(initStatements);
-                dbManager.disconnectDb();
                 System.out.println("Database successfully initialized.");
-                break;
             case "--migrate-db":
                 List<String> migrateStatements = dbManager.getStatements("migrate.sql");
                 dbManager.executeStatements(migrateStatements);
-                dbManager.disconnectDb();
                 System.out.println("Database successfully migrated");
-                break;
-            default:
-                System.out.println("Invalid parameter, please try again");
-                System.exit(0);
         }
     }
 }
